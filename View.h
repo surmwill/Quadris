@@ -2,6 +2,7 @@
 #define VIEW_H 1
 
 #include "Observer.h"
+#include <vector>
 
 class SubscriptionType;
 
@@ -9,9 +10,10 @@ class View: public Observer {
  public:
   virtual void notify() = 0;
   virtual void display(Score &score) = 0;
-  virtual SubsciptionType subType() = 0;
+  virtual void display(Score &score, std::vector <std::vector <int>> coords) = 0;
   virtual ~View() = 0;
  protected:
+  SubscriptionType subType();
   View();
 };
 

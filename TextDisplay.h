@@ -4,7 +4,6 @@
 #include "View.h"
 #include <vector>
 
-class SubscriptionType;
 class Score;
 
 class TextDisplay: public View {
@@ -12,7 +11,7 @@ class TextDisplay: public View {
   TextDisplay(int rows = 18, int cols = 11);
   void notify() override;
   void display(Score &score) override;
-  void SubscriptionType subType() override;
+  void display(Score &score, vector <vector <int>> coords) override;
  private:
    std::vector <std::vector <char>> textGrid;
 };

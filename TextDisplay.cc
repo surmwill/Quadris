@@ -1,6 +1,7 @@
 #include "TextDisplay.h"
 #include "SubscriptionType.h"
 #include "Score.h"
+#include "View.h"
 
 using namespace std;
 
@@ -17,8 +18,3 @@ void TextDisplay::notify() {
 
 void TextDisplay::display(Score &score) {
 }
-
-void SubscriptionType subType() {
-  return SubscriptionType::View;
-}
-

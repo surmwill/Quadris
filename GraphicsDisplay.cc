@@ -1,6 +1,8 @@
 #include "SubscriptionType.h"
 #include "GraphicsDisplay.h"
 #include "Score.h"
+#include "View.h"
+#include <vector>
 
 using namespace std;
 
@@ -12,7 +14,5 @@ void GraphicsDisplay::notify() {
 void GraphicsDisplay::display(Score &score) {
 }
 
-void SubscriptionType subType() {
-  return SubscriptionType::View;
-}
-
+void GraphicsDisplay::display(Score &score, vector <vector <int>> coords) {
+} 
