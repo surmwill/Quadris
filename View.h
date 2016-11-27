@@ -12,3 +12,5 @@ class View {
  protected:
   View();
 };
+
+#endif

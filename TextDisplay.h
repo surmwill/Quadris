@@ -1,3 +1,6 @@
+#ifndef TEXT_H
+#define TEXT_H 1
+
 #include "View.h"
 #include "Observer.h"
 #include <vector>
@@ -13,3 +16,5 @@ class TextDisplay {
  private:
    std::vector <char> grid;
 };
+
+#endif

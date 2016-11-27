@@ -1,3 +1,6 @@
+#ifndef GRAPHICS_H
+#define GRAPHICS_H 1
+
 #include "View.h"
 #include "Observer.h"
 
@@ -11,3 +14,5 @@ class GraphicsDisplay {
   void SubscriptionType subType() override;
  private:
 };
+
+#endif
