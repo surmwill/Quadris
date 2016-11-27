@@ -16,3 +16,5 @@ class ViewController {
   Score score;
   std::vector <unique_ptr <View>> views; //ViewController is responsible for deleting views
 };
+
+#endif
