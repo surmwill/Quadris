@@ -3,9 +3,9 @@
 
 using namespace std;
 
-Grid::Grid() {
-  for(int i = 0; i < 18; i++) {
-    for(int j = 0; j < 11; j++) {
+Grid::Grid(int row, int cols) {
+  for(int i = 0; i < row; i++) {
+    for(int j = 0; j < col; j++) {
       grid[i].emplace_back(new Cell{});
     }
   }

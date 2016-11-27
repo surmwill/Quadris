@@ -5,7 +5,7 @@
 
 class Grid {
  public:
-  Grid();
+  Grid(int row = 18, int col = 11);
   Cell* getCell(int row, int col);
  private:
   std::vector grid <std::vector <Cell>>;
