@@ -5,10 +5,9 @@
 
 using namespace std;
 
-BlockController::BlockController(Level *level): level{level},
+BlockController::BlockController(Level *level, Grid *grid): level{level}, grid{grid},
   currBlock{new Block{level->genBlock()}}, nextBlock{new Block{level->genBlock()}} {
   //end of MIL
-  grid = new Grid{18, 11};
 
   for(int i = 0; i < 4; i++) {
     for(int j = 0; j < 4; j++) {
