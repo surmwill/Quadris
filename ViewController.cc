@@ -10,8 +10,12 @@ ViewController::ViewController(): score{new Score{0}} {
   views.emplace_back(new GraphicsDisplay{});
 }
 
-int Quadris::ViewController::getCurrentScore() {
+void ViewController::updateView() {
 }
 
-int Quadris::ViewController::getHighScore() {
+void ViewController::updateView(vector <vector <int>>) {
 }
+
+void ViewController::setScoreMultiplier(int multiplier) {
+}
+
