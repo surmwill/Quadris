@@ -9,12 +9,12 @@ class SubscriptionType;
 
 class TextDisplay {
  public:
-  TextDisplay();
+  TextDisplay(int rows = 18, int cols = 11);
   void notify() override;
   void display(int score, int highScore) override;
   void SubscriptionType subType() override;
  private:
-   std::vector <char> grid;
+   std::vector <std::vector <char>> textGrid;
 };
 
 #endif

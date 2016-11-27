@@ -2,7 +2,7 @@
 
 using namespace std;
 
-GraphicsDisplay::GraphicsDisplay() {}
+GraphicsDisplay::GraphicsDisplay(int rows, int cols) {}
 
 void GraphicsDisplay::notify() {
 }

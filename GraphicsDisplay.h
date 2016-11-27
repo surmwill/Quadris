@@ -8,7 +8,7 @@ class SubscriptionType;
 
 class GraphicsDisplay {
  public:
-  GraphicsDisplay();
+  GraphicsDisplay(int rows = 18, int cols = 11);
   void notify() override;
   void display(int score, int highScore) override;
   void SubscriptionType subType() override;

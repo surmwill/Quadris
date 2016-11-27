@@ -2,8 +2,12 @@
 
 using namespace std;
 
-TextDisplay::TextDisplay() {
-  for(auto n:grid) n = " ";
+TextDisplay::TextDisplay(int rows, int cols) {
+  for(int i = 0; i < rows; i++) {
+    for(int i = 0; i < cols; i++) {
+      textGrid[i].emplace_back(' ');
+    }
+  }
 }
 
 void TextDisplay::notify() {
