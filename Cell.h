@@ -10,14 +10,15 @@ class SubscriptionType;
 class Cell: public Observer, public Subject {
  public:
   Cell(char symbol = ' ', int blockSize = 16, int levelGenerated = -1);
-  void notify() override;
-  void setContent(Cell *otherCell) void;
-  void unsetContent();
-  void detachCellObserver(Cell *toRemove);
+  void notify(Subject &whoNotified) override;
   bool filled();
+  std::vector <int> getCoords();
   SubscriptionType subType();
  
  private:
+  void setContent(Cell *otherCell); //only called when notified
+  void detachCellObserver(Cell *toRemove); //only called when notified
+  void unsetContent(); //only called when notified
   std::vector <Observer*> observers;
   char symbol;
   int blockSize;
