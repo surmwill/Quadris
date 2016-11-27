@@ -8,7 +8,7 @@ class Grid {
   Grid();
   Cell* getCell(int row, int col);
  private:
-  std::vector grid <Cell>;
+  std::vector grid <std::vector <Cell>>;
 };
 
 #endif
