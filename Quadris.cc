@@ -3,14 +3,18 @@
 #include "ViewController.h"
 #include "HintEngine.h"
 #include "Quadris.h"
+#include "Grid.h"
 #include <string>
 
 using naemspace std;
 
 class Grid;
 
-Quadris::Quadris(int level): level{level} lc{new LevelController{level}}, bc{new BlockController{Grid *grid}},
-  vc{new ViewController{}}, hintEngine{new HintEngine{&bc}} {}
+Quadris::Quadris(int level): level{level} lc{new LevelController{level}}, vc{new ViewController{}}, hintEngine{new HintEngine{&bc}} {
+  Grid = new Grid{}; //attach view observers here to each grid cell
+  bc = new BlockController(&grid);
+  hintEngine = new HintEngine(&bc);
+}
 
 void Quadris::left() {
 }
