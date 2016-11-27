@@ -3,15 +3,18 @@
 
 #include <string>
 #include <vector>
+#include "BlockLib.h"
 
 class Level{
   private:
     std::string fileName;
     int levelNum;
+    BlockLib blockLib;	
 
   protected:
-    void setFilename(std::string fileName);
     Level();
+    void setFilename(std::string fileName);
+    BlockLib * getBlockLib(); 
 
   public:
     virtual std::vector<char> genBlock() = 0;
