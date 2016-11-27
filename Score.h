@@ -1,3 +1,6 @@
+#ifndef SCORE_H
+#define SCORE_H 1
+
 #include "Observer.h"
 #include "Subscription.h"
 
@@ -17,3 +20,4 @@ class Score {
   int rowsCleared;
 };
 
+#endif
