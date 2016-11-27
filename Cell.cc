@@ -8,7 +8,7 @@ using namespace std;
 Cell::Cell(char symbol, int blockSize, int levelGenerated): symbol{symbol}, blockSize{blockSize},
   levelGenerated{levelGenerated} {}
 
-void Cell::notify(Subject whoNotified) {
+void Cell::notify(Subject &whoNotified) {
 }
 
 bool Cell::filled() {
