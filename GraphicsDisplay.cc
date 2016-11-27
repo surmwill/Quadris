@@ -1,3 +1,4 @@
+#include "SubscriptionType.h"
 #include "GraphicsDisplay.h"
 
 using namespace std;

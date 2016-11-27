@@ -2,11 +2,10 @@
 #define GRAPHICS_H 1
 
 #include "View.h"
-#include "Observer.h"
 
 class SubscriptionType;
 
-class GraphicsDisplay {
+class GraphicsDisplay: public View {
  public:
   GraphicsDisplay(int rows = 18, int cols = 11);
   void notify() override;

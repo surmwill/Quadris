@@ -2,12 +2,11 @@
 #define TEXT_H 1
 
 #include "View.h"
-#include "Observer.h"
 #include <vector>
 
 class SubscriptionType;
 
-class TextDisplay {
+class TextDisplay: public View {
  public:
   TextDisplay(int rows = 18, int cols = 11);
   void notify() override;

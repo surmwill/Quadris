@@ -1,4 +1,5 @@
 #include "TextDisplay.h"
+#include "SubscriptionType.h"
 
 using namespace std;
 
