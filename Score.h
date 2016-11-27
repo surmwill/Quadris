@@ -6,7 +6,7 @@
 
 class SubscriptionType;
 
-class Score {
+class Score: public Observer {
  public: 
   Score(int intialScore = 0);
   void getCurrScore();

@@ -1,5 +1,6 @@
 #include "Score.h"
 #include "SubscriptionType.h"
+#include "Observer.h"
 
 using namespace std;
 
