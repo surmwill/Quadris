@@ -1,4 +1,5 @@
 #include "View.h"
+#include "Observer.h"
 #include <vector>
 
 class SubscriptionType;
