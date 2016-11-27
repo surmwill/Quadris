@@ -10,7 +10,7 @@ using naemspace std;
 
 class Grid;
 
-Quadris::Quadris(int level): level{level} lc{new LevelController{level}}, vc{new ViewController{}}, hintEngine{new HintEngine{&bc}} {
+Quadris::Quadris(int level): level{level} lc{new LevelController{level}}, vc{new ViewController{}} {
   Grid = new Grid{}; //attach view observers here to each grid cell
   bc = new BlockController(&grid);
   hintEngine = new HintEngine(&bc);
