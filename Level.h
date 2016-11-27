@@ -8,11 +8,11 @@ class Level{
   private:
     std::string fileName;
     int levelNum;
-  
+
   protected:
     void setFilename(std::string fileName);
     Level();
-  
+
   public:
     virtual std::vector<char> genBlock() = 0;
     virtual std::vector<char> genBlock() = 0;

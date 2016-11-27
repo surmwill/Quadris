@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Level::Level(): fileName{""}: 
+Level::Level(): fileName{""}:
 
 Level::~Level() {};
 
