@@ -17,5 +17,5 @@ void ViewController::updateView(vector <vector <int>>) {
 }
 
 void ViewController::setScoreMultiplier(int multiplier) {
+  score.setScoreMultiplier(multiplier);
 }
-
