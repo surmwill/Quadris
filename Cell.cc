@@ -47,6 +47,7 @@ void Cell::annihilate(bool echoRight){
   // recursively annihilate either left or right neighbours
   Cell * targetCell = (echoRight ? rightNeighbour: leftNeighbour);
   if (targetCell != nullptr){
+    notifyObservers(SubscriptionType::Annihilation);
     targetCell->annihilate(echoRight);
     targetCell->stealInfo();
   }
@@ -68,9 +69,11 @@ void Cell::setContent(Cell *otherCell) {
   symbol = otherCell->symbol;
   blockSize = otherCell->blockSize;
   levelGenerated = otherCell->levelGenerated;
+  notifyObservers(SubscriptionType::Display);
 }
 
 void Cell::unsetContent() {
   symbol = ' ';
+  notifyObservers(SubscriptionType::Display);
 }
 

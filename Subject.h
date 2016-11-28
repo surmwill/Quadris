@@ -6,13 +6,11 @@ class Observer;
 
 
 class Subject {
-/*
   std::vector<Observer*> observers;
  public:
-  void attach(Observer *o)=0;  
-  void notifyObservers(SubscriptionType t)=0;
+  void attach(Observer *o);
+  void notifyObservers(SubscriptionType t);
   virtual ~Subject() = 0;
-*/
 };
 
 #endif
