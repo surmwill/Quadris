@@ -7,7 +7,8 @@
 
 class Cell: public Subject {
  public:
-  Cell(char symbol, int blockSize, int levelGenerated, int row, int col, Cell * leftNeighbour, Cell * rightNeighbour, Cell * topNeighbour, Cell * bottomNeighbour);
+  Cell(char symbol, int blockSize, int levelGenerated, int row, int col);
+  void setNeighbours(Cell * left, Cell * right, Cell * top, Cell * bottom);
   bool filled();
   std::vector <int> getCoords();
 

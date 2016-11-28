@@ -6,8 +6,15 @@
 
 using namespace std;
 
-Cell::Cell(char symbol, int blockSize, int levelGenerated, int row, int col, Cell * leftNeighbour, Cell * rightNeighbour, Cell * topNeighbour, Cell * bottomNeighbour): symbol{symbol}, blockSize{blockSize},
-  levelGenerated{levelGenerated}, row{row}, col{col}, leftNeighbour{leftNeighbour}, rightNeighbour{rightNeighbour}, topNeighbour{topNeighbour}, bottomNeighbour{bottomNeighbour} {}
+Cell::Cell(char symbol, int blockSize, int levelGenerated, int row, int col): symbol{symbol}, blockSize{blockSize},
+  levelGenerated{levelGenerated}, row{row}, col{col} {}
+
+void setNeighbours(Cell * left, Cell * right, Cell * top, Cell * bottom){
+  leftNeighbour = left;
+  rightNeighbour = right;
+  topNeighbour = top;
+  bottomNeighbour = bottom;
+}
 
 bool Cell::filled() { return (symbol != ' '); }
 
