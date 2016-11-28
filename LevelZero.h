@@ -5,11 +5,13 @@
 #include <string>
 #include "Level.h"
 
+class Block;
+
 class LevelZero: public Level {  
   public:
     LevelZero(std::string filename);
-    std::vector<char> genBlock() override;
-    std::vector<char> genBlockWithType(char type) override;
+    Block* genBlock() override;
+    Block* genBlock(char type) override;
 };
 
 #endif

@@ -5,6 +5,8 @@
 #include <vector>
 #include "BlockLib.h"
 
+class Block;
+
 class Level{
   private:
     std::string fileName;
@@ -17,8 +19,8 @@ class Level{
     BlockLib * getBlockLib(); 
 
   public:
-    virtual std::vector<char> genBlock() = 0;
-    virtual std::vector<char> genBlock() = 0;
+    Block* genBlock() = 0;
+    Block* genBlock(char type) = 0;
     ~Level() = 0;
 };
 

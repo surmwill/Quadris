@@ -5,12 +5,14 @@
 #include <string>
 #include "Level.h"
 
+class Block;
+
 using namespace std;
 
 class LevelOne: public Level {  
   public:
-    std::vector<char> genBlock() override;
-    std::vector<char> genBlockWithType(char type) override;
+    Block* genBlock() override;
+    Block* genBlock(char type) override;
 };
 
 #endif

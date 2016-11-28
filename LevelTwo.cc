@@ -2,12 +2,13 @@
 #include "Level.h"
 #include <vector> 
 #include <string> 
+#include "Block.h"
 
 using namespace std;
 
-vector <char> LevelTwo::genBlock() {
+Block* LevelTwo::genBlock() {
 }
 
-vector <char> LevelTwo::genBlockWithType(char type) {
+Block* LevelTwo::genBlock(char type) {
 }
 
