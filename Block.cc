@@ -28,8 +28,12 @@ virtual void Block::rotatecw() {
 virtual void Block::rotatecc() {
 }
 
-virtual bool autoDrop() {
+virtual void Block::down() {
 }
 
-virtual bool down() {
+virtual bool Block::autoDrop() {
+}
+
+vector <Cell*>* Block::getBlockCells() {
+  return blockCells;
 }

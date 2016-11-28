@@ -16,6 +16,9 @@ class Block {
   virtual bool drop():
   virtual bool down();
 
+ protected:
+  std::vector <Cell*> *getBlockCells();
+ 
  private:
   std::vector <Cell*> blockCells;
 };
