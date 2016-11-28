@@ -17,9 +17,7 @@ class Block {
   virtual bool down();
 
  private:
-  static std::vector <Cell*> blockCells; //static variables do not need an instance of a class to intialize
-  //we can then delcare what these cells are in the BlockController constructor without actually constructing a block.
-  //otherwise we'd have to send 9 grid cells to Level
+  std::vector <Cell*> blockCells;
 };
 
 #endif 
