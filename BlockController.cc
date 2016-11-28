@@ -5,15 +5,17 @@
 
 using namespace std;
 
-BlockController::BlockController(Level *level, Grid *grid): level{level}, grid{grid},
-  currBlock{new Block{level->genBlock()}}, nextBlock{new Block{level->genBlock()}} {
-  //end of MIL
-
+BlockController::BlockController(Level *level, Grid *grid): level{level}, grid{grid} {
   for(int i = 0; i < 4; i++) {
     for(int j = 0; j < 4; j++) {
-      generatingArea.emplace_back(grid.getCell(i, j));
+      Block::blockCells.emplace_back(grid.getCell(i, j));
     }
   }
+ 
+  //note have to define the static varibale blockCells before constructing the object
+  currBlock = level->genBlock();
+  nextBlock = level->genBlock();
+  
 }
 
 void BlockController::left() {
