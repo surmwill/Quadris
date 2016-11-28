@@ -44,7 +44,7 @@ void parseArgument(std::string arg1, std::string arg2) {
   else if(arg1 == "-startlevel") {
    if(isNumber(arg2)) cmd.setLevel(std::stoi(arg2)); //check that we have a valid second argument
    else std::cerr << "not given a number for level, starting at level 0" << std::endl;
-  }  
+  }
 }
 
 int main(int argc, char *argv[]) {
