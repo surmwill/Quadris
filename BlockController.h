@@ -22,6 +22,7 @@ class BlockController {
    void attachCurrBlockToGrid();
 
    std::unique_ptr <Grid> grid; //Block Controller is reponsible for deleting grid
+   std::vector <Cell*> generatingArea;
    std::unique_ptr <Block> currBlock; //Block Controller is responsible for deleting currBlock
    std::unique_ptr <Block> nextBlock; //Block Controller is responsible for deleing nextBlock
    Level * level;
