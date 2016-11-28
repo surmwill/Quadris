@@ -15,7 +15,7 @@ void Score::getHighScore() {
 void Score::updateCurrScore() {
 } 
 
-void Score::notify() {
+void Score::notify(Subject &whoNotified) {
 }
 
 void Score::setMutliplier(int scoreMultiplier) {

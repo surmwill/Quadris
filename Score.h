@@ -12,7 +12,7 @@ class Score: public Observer {
   void getCurrScore();
   void getHighScore();
   void updateScore();
-  void notfiy() override;
+  void notify(Subject &whoNotified) override;
   void setMultiplier(int scoreMultiplier);
   SubscriptionType subType();
  private:
