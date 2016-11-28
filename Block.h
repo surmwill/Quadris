@@ -7,7 +7,7 @@ class Cell;
 
 class Block {
  public:
-  Block(std::vector <char> blockDesign, int levelGenerated, int blockSize);
+  Block(std::vector <char> blockDesign, int levelGenerated, int blockSize = 16);
   virtual void left();
   virtual void right();
   virtual void rotatecw();
