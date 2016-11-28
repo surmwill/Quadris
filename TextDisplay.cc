@@ -2,6 +2,7 @@
 #include "SubscriptionType.h"
 #include "Score.h"
 #include "View.h"
+#include "Subject.h"
 
 using namespace std;
 
@@ -13,7 +14,7 @@ TextDisplay::TextDisplay(int rows, int cols) {
   }
 }
 
-void TextDisplay::notify() {
+void TextDisplay::notify(Subject &whoNotified) {
 }
 
 void TextDisplay::display(Score &score) {

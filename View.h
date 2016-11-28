@@ -5,10 +5,11 @@
 #include <vector>
 
 class SubscriptionType;
+class Subject;
 
 class View: public Observer {
  public:
-  virtual void notify() = 0;
+  virtual void notify(Subject &whoNotified) = 0;
   virtual void display(Score &score) = 0;
   virtual void display(Score &score, std::vector <std::vector <int>> coords) = 0;
   virtual ~View() = 0;
