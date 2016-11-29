@@ -5,7 +5,7 @@
 
 using namespace std;
 
-ViewController::ViewController(): score{new Score{0}} { 
+ViewController::ViewController(): score{new Score{0}}, level{0} { 
   views.emplace_back(new TestDisplay{});
   views.emplace_back(new GraphicsDisplay{});
 }
@@ -24,6 +24,6 @@ void ViewController::updateView(const vector <vector <int>> & coords) {
   }
 }
 
-void ViewController::setScoreMultiplier(int multiplier) {
-  score.setScoreMultiplier(multiplier);
+void ViewController::setLevel(int level) {
+  score.setLevel(level);
 }

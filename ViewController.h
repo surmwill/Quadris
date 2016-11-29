@@ -11,7 +11,7 @@ class ViewController {
   ViewController();
   void updateView();
   void updateView(const std::vector <std::vector <int>> & coords);
-  void setScoreMultiplier(int multiplier);
+  void setLevel(int level);
  private:
   Score score;
   std::vector <unique_ptr <View>> views; //ViewController is responsible for deleting views
