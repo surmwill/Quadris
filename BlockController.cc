@@ -13,8 +13,6 @@ BlockController::BlockController(Level *level, Grid *grid): level{level}, grid{g
     }
   }
 }
-  
-}
 
 void BlockController::left() {
 }
@@ -38,4 +36,7 @@ void BlockController::genBlock() {
 }
 
 void BlockController::attachCurrBlockToGrid() {
+}
+
+void BlockController::setBlock(char type) {
 }

@@ -17,6 +17,7 @@ class BlockController {
    void rotatecw();
    void drop();
    void genBlock();
+   void setBlock(char type); //replaces the current block with block of type char
 
  private:
    void attachCurrBlockToGrid();
