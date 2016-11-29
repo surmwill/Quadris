@@ -10,7 +10,7 @@ class ViewController {
  public:
   ViewController();
   void updateView();
-  void updateView(std::vector <std::vector <int>>);
+  void updateView(std::vector <std::vector <int>> & coords);
   void setScoreMultiplier(int multiplier);
  private:
   Score score;

@@ -11,9 +11,15 @@ ViewController::ViewController(): score{new Score{0}} {
 }
 
 void ViewController::updateView() {
+  for(auto &n : views) {
+    n->updateView();
+  }
 }
 
-void ViewController::updateView(vector <vector <int>>) {
+void ViewController::updateView(vector <vector <int>> & coords) {
+  for(auto &n : views) {
+    n->updateView(coords);
+  }
 }
 
 void ViewController::setScoreMultiplier(int multiplier) {
