@@ -9,7 +9,7 @@ class SubscriptionType;
 
 class Score: public Observer {
  public:
-  Score(int intialScore = 0, int scoreMultiplier = 0, int minObserverSize = 2);
+  Score(int intialScore = 0, int scoreMultiplier = 0, int fullObserverSize = 16, int blockObs = 3);
   void getCurrScore();
   void getHighScore();
   void updateScore();
