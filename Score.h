@@ -3,6 +3,7 @@
 
 #include "Observer.h"
 #include "Subscription.h"
+#include <vector>
 
 class SubscriptionType;
 
@@ -19,8 +20,8 @@ class Score: public Observer {
  private:
   int highScore;
   int currScore;
-  int rowsCleared;
   int scoreMultiplier;
+  std::vector <int> rows;
 };
 
 #endif
