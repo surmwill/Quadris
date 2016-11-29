@@ -5,8 +5,7 @@
 
 using namespace std;
 
-Score::Score(int intialScore, int level, int fullObserverSize, int blockObs) currScore{intialScore}, level{level},
-  fullObserverSize{minObserverSize}, blockSize{blockObs} {}
+Score::Score(int intialScore, int level): currScore{intialScore}, level{level} {}
 
 //Returns the current score
 int Score::getCurrScore() {
@@ -26,16 +25,16 @@ void Score::updateCurrScore() {
 } 
 
 //Increases the rows cleared by 1 and checks for the entire block being cleared by comparing observers
-void Score::notify(Subject &whoNotified) {
+void Score::notify(const Subject &whoNotified) {
   //check for unique rows
   for(int i = 0; i < rows.size(); i++) {
     if(whoNotified.getCoords()[0] == rows[i]) break;
     else if(i == rows.size() - 1) rows.emplace_back(whoNotified.getCoords()[0]);
   }
   
-  //check observers (fullObserverSize - blockObs) = (16 - 3) by default
-  if(whoNotified.getObserverSize() == (fullObserverSize - blockObs)) {
-    currScore += (whoNotified.getLevelCreated() + 1) * (whoNotified.getLevelCreated() + 1) + 1;
+  //checks if we are delting an entire block
+  if(whoNotified.lastBlockCell()) {
+    currScore += (whoNotified.getLevelCreated() + 1) * (whoNotified.getLevelCreated() + 1);
   }
 }
 
