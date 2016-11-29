@@ -11,6 +11,8 @@ ViewController::ViewController(): score{new Score{0}} {
 }
 
 void ViewController::updateView() {
+  score.updateCurrScore();
+
   for(auto &n : views) {
     n->updateView(score);
   }
