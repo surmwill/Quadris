@@ -7,16 +7,25 @@ using namespace std;
 
 Score::Score(int intialScore, int scoreMultiplier) currScore{intialScore}, scoreMultiplier{scoreMultiplier} {}
 
-void Score::getCurrScore() {
+int Score::getCurrScore() {
+  return currScore;
 }
 
 void Score::getHighScore() {
+  return highScore;
 }
 
 void Score::updateCurrScore() {
 } 
 
 void Score::notify(Subject &whoNotified) {
+  int minObserverSize = 2;
+
+  
+  if(whoNotified.observerSize() == minObserverSize) {
+    score += (whoNotified.getLevelCreated() + 1) * (whoNotified.getLevelCreated() + 1) + 1;
+  }
+
 }
 
 void Score::setMutliplier(int scoreMultiplier) {
