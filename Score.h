@@ -15,6 +15,7 @@ class Score: public Observer {
   void notify(Subject &whoNotified) override;
   void setMultiplier(int scoreMultiplier);
   SubscriptionType subType();
+
  private:
   int highScore;
   int currScore;

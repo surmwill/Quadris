@@ -5,32 +5,40 @@
 
 using namespace std;
 
-Score::Score(int intialScore, int scoreMultiplier) currScore{intialScore}, scoreMultiplier{scoreMultiplier} {}
+Score::Score(int intialScore, int scoreMultiplier, int minObserverSize) currScore{intialScore}, scoreMultiplier{scoreMultiplier},
+  minObserverSize{minObserverSize} {}
 
+//Returns the current score
 int Score::getCurrScore() {
   return currScore;
 }
 
+//Returns the high score
 void Score::getHighScore() {
   return highScore;
 }
 
+//Updates the current score by adding the points from clearing rows
 void Score::updateCurrScore() {
+  currScore += (scoreMultiplier + rowsCleared) * (scoreMultiplier + rowsCleared);
+  rowsCleared = 0;
 } 
 
+//Increases the rows cleared by 1 and checks for the entire block being cleared by comparing observers
 void Score::notify(Subject &whoNotified) {
-  int minObserverSize = 2;
+  rowsCleared++;
 
   if(whoNotified.observerSize() == minObserverSize) {
-    score += (whoNotified.getLevelCreated() + 1) * (whoNotified.getLevelCreated() + 1) + 1;
+    currScore += (whoNotified.getLevelCreated() + 1) * (whoNotified.getLevelCreated() + 1) + 1;
   }
-
 }
 
+//A multiplier to the score that changes with level
 void Score::setMutliplier(int scoreMultiplier) {
   this->scoreMultiplier = scoreMultiplier;
 }
 
+//Only notified when a row gets cleared
 SubscriptionType Score::subType() {
-  return SubscriptionType::score;
+  return SubscriptionType::Annihilation;
 }
