@@ -9,7 +9,10 @@ class Cell: public Subject, public Observer {
  public:
   Cell(char symbol, int blockSize, int levelGenerated, int row = 0, int col = 0);
   void setNeighbours(Cell * left, Cell * right, Cell * top, Cell * bottom);
+
+  // Functions to acces properties of the cell
   bool filled();
+  bool lastBlockCell();
   std::vector <int> getCoords();
   int getBlockNum();
 
