@@ -26,7 +26,7 @@ void Score::updateCurrScore() {
 
 //Increases the rows cleared by 1 and checks for the entire block being cleared by comparing observers
 void Score::notify(Subject &whoNotified) {
-  rowsCleared++;
+  if(whoNotified.getCoords()[0] rowsCleared++;
 
   if(whoNotified.observerSize() == minObserverSize) {
     currScore += (whoNotified.getLevelCreated() + 1) * (whoNotified.getLevelCreated() + 1) + 1;
