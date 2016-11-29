@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Score::Score(int intialScore, int scoreMultiplier, int fullObserverSize, int blockObs) currScore{intialScore}, scoreMultiplier{scoreMultiplier},
+Score::Score(int intialScore, int level, int fullObserverSize, int blockObs) currScore{intialScore}, level{level},
   fullObserverSize{minObserverSize}, blockSize{blockObs} {}
 
 //Returns the current score
@@ -20,7 +20,7 @@ void Score::getHighScore() {
 
 //Updates the current score by adding the points from clearing rows
 void Score::updateCurrScore() {
-  currScore += (scoreMultiplier + rows.size()) * (scoreMultiplier + rows.size());
+  currScore += (level + rows.size()) * (level + rows.size());
   currScore > highScore ? highScore = currScore;
   rows.clear();
 } 
@@ -40,8 +40,13 @@ void Score::notify(Subject &whoNotified) {
 }
 
 //A multiplier to the score that changes with level
-void Score::setMutliplier(int scoreMultiplier) {
-  this->scoreMultiplier = scoreMultiplier;
+void Score::setLevel(int level) {
+  this->level = level;
+}
+
+//gives a way for the views to get the level number
+int Score::getLevel() {
+  return level;
 }
 
 //Only notified when a row gets cleared
