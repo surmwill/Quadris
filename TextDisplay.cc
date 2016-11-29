@@ -17,9 +17,9 @@ TextDisplay::TextDisplay(int rows, int cols) {
 void TextDisplay::notify(Subject &whoNotified) {
 }
 
-void TextDisplay::display(Score &score) {
+void TextDisplay::display(const Score &score) {
 }
 
-void TextDisplay::display(Score &score, const vector <vector <int>> &coords) {
+void TextDisplay::display(const Score &score, const vector <vector <int>> &coords) {
 }
 

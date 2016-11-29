@@ -11,8 +11,8 @@ class TextDisplay: public View {
  public:
   TextDisplay(int rows = 18, int cols = 11);
   void notify(Subject &whoNotified) override;
-  void display(Score &score) override;
-  void display(Score &score, const vector <vector <int>> & coords) override;
+  void display(const Score &score) override;
+  void display(const Score &score, const vector <vector <int>> & coords) override;
  private:
    std::vector <std::vector <char>> textGrid;
 };

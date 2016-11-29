@@ -10,8 +10,8 @@ class Subject;
 class View: public Observer {
  public:
   virtual void notify(Subject &whoNotified) = 0;
-  virtual void display(Score &score) = 0;
-  virtual void display(Score &score, const std::vector <std::vector <int>> & coords) = 0;
+  virtual void display(const Score &score) = 0;
+  virtual void display(const Score &score, const std::vector <std::vector <int>> & coords) = 0;
   virtual ~View() = 0;
  protected:
   SubscriptionType subType();
