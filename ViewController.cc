@@ -18,7 +18,7 @@ void ViewController::updateView() {
 
 void ViewController::updateView(const vector <vector <int>> & coords) {
   for(auto &n : views) {
-    n->updateView(coords);
+    n->updateView(score, coords);
   }
 }
 
