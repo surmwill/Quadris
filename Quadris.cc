@@ -55,8 +55,8 @@ void Quadris::setSequence(string filename) {
   levelController.setFileName(filename);
 }
 
-void Quadris::genBlockWithType(char type) {
-  bd.genBlockWithType(type);
+void Quadris::setBlock(char type) {
+  bd.setBlock(type);
 }
 
 void Quadris::hint() {

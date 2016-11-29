@@ -18,7 +18,7 @@ class Quadris {
    void levelup();
    void leveldown();
    void setSequence(std::string filename); //previosuly setFileName(string filename);
-   void genBlockWithType(char type);
+   void setBlock(char type);
    void hint();
    void restart();
 
