@@ -16,7 +16,7 @@ void ViewController::updateView() {
   }
 }
 
-void ViewController::updateView(vector <vector <int>> & coords) {
+void ViewController::updateView(const vector <vector <int>> & coords) {
   for(auto &n : views) {
     n->updateView(coords);
   }
