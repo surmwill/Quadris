@@ -4,5 +4,5 @@
 
 HintEngine::HintEngine(BlockController * bc): bc(bc) {}
 
-const vector <vector <int>> HintEngine::hint() {
+vector <vector <int>> HintEngine::hint() {
 }
