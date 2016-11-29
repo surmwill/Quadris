@@ -7,7 +7,13 @@
 using namespace std;
 
 Cell::Cell(char symbol, int blockSize, int levelGenerated, int row, int col): symbol{symbol}, blockSize{blockSize},
-  levelGenerated{levelGenerated}, row{row}, col{col} {}
+  levelGenerated{levelGenerated}, row{row}, col{col} {
+
+  leftNeighbour = nullptr;
+  rightNeighbour = nullptr;
+  topNeighbour = nullptr;
+  bottomNeighbour = nullptr;
+}
 
 void Cell::setNeighbours(Cell * left, Cell * right, Cell * top, Cell * bottom){
   leftNeighbour = left;
