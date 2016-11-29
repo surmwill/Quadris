@@ -6,6 +6,7 @@
 
 using namespace std;
 
+//The gris s intially empty
 TextDisplay::TextDisplay(int rows, int cols) {
   for(int i = 0; i < rows; i++) {
     for(int j = 0; j < cols; i++) {
@@ -15,7 +16,11 @@ TextDisplay::TextDisplay(int rows, int cols) {
 }
 
 //notifications of a cells states
-void TextDisplay::notify(Subject &whoNotified) {
+void TextDisplay::notify(const Subject &whoNotified) {
+  int row = whoNotified.getCoords()[0];
+  int col = whoNotified.getCoords()[1];
+
+  textGrid[row][col] = whoNotified.getSymbol();
 }
 
 //displays the board in text
@@ -36,17 +41,35 @@ void TextDisplay::display(const Score &score) {
   for(int i = 0; i < dashLength; i++) {
     cout << " " << endl;
   }
-
-  for(int i = 0; i < rows; i++) {
-    for(int j = 0; j < cols j++) {
-      cout << textGrod[i];
+  
+  //grid
+  for(auto &rows : textGrid) {
+    for(auto &cols : rows) {
+      cout << cols;
     }
     cout << "\n";
-   }
+  }
+  
+  //next block????
+}
+
+//colours the grid with a hint
+void TextDisplay::display(const Score &score, const vector <vector <int>> &coords) {
+  int row; 
+  int col;
+
+  for(auto &n : coords) {
+    row = n[0];
+    col = n[1];
+    textGrid[row][col] = '#'
   }
 }
 
-//displays the board with a hint
-void TextDisplay::display(const Score &score, const vector <vector <int>> &coords) {
+//clears the grid, but not anything else
+void TextDisplay::clear() {
+  for(auto &row : textGrid) {
+    for(auto &col : row) {
+      col = ' ';
+    }
+  }
 }
-

@@ -9,11 +9,14 @@ using namespace std;
 
 GraphicsDisplay::GraphicsDisplay(int rows, int cols) {}
 
-void GraphicsDisplay::notify(Subject &whoNotified) {
+void GraphicsDisplay::notify(const Subject &whoNotified) {
 }
 
 void GraphicsDisplay::display(const Score &score) {
 }
 
 void GraphicsDisplay::display(const Score &score, const vector <vector <int>> &coords) {
+}
+
+void GraphicsDisplay::clear() {
 } 
