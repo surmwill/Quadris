@@ -8,7 +8,7 @@ class BlockController;
 class HintEngine {
  public:
   HintEngine(BlockController *bc);
-  std::vector <std::vector <int>> hint();
+  const std::vector <std::vector <int>> hint();
  private:
   BlockController *bc;
 };
