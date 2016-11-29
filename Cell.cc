@@ -9,7 +9,7 @@ using namespace std;
 Cell::Cell(char symbol, int blockSize, int levelGenerated, int row, int col): symbol{symbol}, blockSize{blockSize},
   levelGenerated{levelGenerated}, row{row}, col{col} {}
 
-void setNeighbours(Cell * left, Cell * right, Cell * top, Cell * bottom){
+void Cell::setNeighbours(Cell * left, Cell * right, Cell * top, Cell * bottom){
   leftNeighbour = left;
   rightNeighbour = right;
   topNeighbour = top;
@@ -35,6 +35,14 @@ bool Cell::drop(){
   unsetContent();
 }
 
+SubscriptionType Cell::subType() const{
+  return SubscriptionType::Cell;
+}
+
+void Cell::notify(Subject &whoNotified){
+  blockSize--;
+}
+
 void Cell::maybeAnnihilateRow(){
   // if row is filled, annihilate
   if (checkFill(true) && checkFill(false)){
@@ -55,6 +63,7 @@ void Cell::annihilate(bool echoRight){
   Cell * targetCell = (echoRight ? rightNeighbour: leftNeighbour);
   if (targetCell != nullptr){
     notifyObservers(SubscriptionType::Annihilation);
+    notifyObservers(SubscriptionType::Cell);
     targetCell->annihilate(echoRight);
     targetCell->stealInfo();
   }
@@ -81,6 +90,25 @@ void Cell::setContent(Cell *otherCell) {
 
 void Cell::unsetContent() {
   symbol = ' ';
+  removeObservers(SubscriptionType::Cell);
   notifyObservers(SubscriptionType::Display);
+}
+
+void Cell::removeObservers(SubscriptionType t){
+  for (unsigned int i = 0; i < observers.size(); i++){
+    if (observers[i]->subType() == SubscriptionType::Cell){
+      observers.erase(observers.begin()+i);
+    }
+  }
+}
+
+void Cell::copyObservers(Cell * otherCell){
+  // clear current observers
+  observers.erase(observers.begin(), observers.end());
+
+  // take all otherCell's observers
+  for (Observer *o: observers){
+    attach(o);
+  }
 }
 

@@ -5,12 +5,13 @@
 #include "Subject.h"
 #include <vector>
 
-class Cell: public Subject {
+class Cell: public Subject, public Observer {
  public:
-  Cell(char symbol, int blockSize, int levelGenerated, int row, int col);
+  Cell(char symbol, int blockSize, int levelGenerated, int row = 0, int col = 0);
   void setNeighbours(Cell * left, Cell * right, Cell * top, Cell * bottom);
   bool filled();
   std::vector <int> getCoords();
+  int getBlockNum();
 
   // Functions for block info movement
   bool droppable();
@@ -18,6 +19,10 @@ class Cell: public Subject {
 
   // Function for possible row annihilation
   void maybeAnnihilateRow();
+
+  // Observer functions for block deletion
+  SubscriptionType subType() const override;
+  void notify(Subject &whoNotified) override;
  
  private:
   void setContent(Cell *otherCell);
@@ -31,7 +36,7 @@ class Cell: public Subject {
   // Observer list
   std::vector <Observer*> observers;
 
-  // Cell content data
+  // Cell data
   char symbol;
   int blockSize;
   int levelGenerated;
@@ -45,6 +50,10 @@ class Cell: public Subject {
   Cell * rightNeighbour;
   Cell * topNeighbour;
   Cell * bottomNeighbour;
+
+  // Block observer helper function
+  void removeObservers(SubscriptionType t);
+  void copyObservers(Cell * otherCell);
 };
 
 #endif

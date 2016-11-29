@@ -19,4 +19,6 @@ void Subject::notifyObservers(SubscriptionType t) {
   }
 }
 
-
+int Subject::getObserverSize() {
+  return observers.size();
+}
