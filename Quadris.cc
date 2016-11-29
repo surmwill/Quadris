@@ -17,35 +17,52 @@ Quadris::Quadris(int level): level{level} lc{new LevelController{level}}, vc{new
 }
 
 void Quadris::left() {
+  bc.left();
   vc.updateView();
 }
 
 void Quadris::right() {
+  bc.right();
+  vc.updateView();
 }
 
 void Quadris::down() {
+  bc.down();
+  vc.updateView();
 }
 
 void Quadris::rotatecc() {
+  bc.rotatecc();
+  vc.updateView();
 }
 
 void Quadris::rotatecw() {
+  bc.rotatecw();
+  vc.updateView();
 }
 
 void Quadris::levelup() {
+  level == 4 ? level = 0 : level++;
+  levelController.changeLevel(level);
 }
 
 void Quadris::leveldown() {
+  level == 0 ? level = 4 : level--;
+  levelController.changeLevel(level);
 }
 
 void Quadris::setSequence(string filename) {
+  levelController.setFileName(filename);
 }
 
-void Quadris::dropBlockWithType(char type) {
+void Quadris::genBlockWithType(char type) {
+  bd.genBlockWithType(type);
 }
 
 void Quadris::hint() {
+ vc.updateView(hintEngine.hint());
 }
 
 void Quadris::restart() {
+  vc.restart();
 }
