@@ -21,7 +21,6 @@ void Score::updateCurrScore() {
 void Score::notify(Subject &whoNotified) {
   int minObserverSize = 2;
 
-  
   if(whoNotified.observerSize() == minObserverSize) {
     score += (whoNotified.getLevelCreated() + 1) * (whoNotified.getLevelCreated() + 1) + 1;
   }
