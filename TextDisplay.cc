@@ -19,3 +19,7 @@ void TextDisplay::notify(Subject &whoNotified) {
 
 void TextDisplay::display(Score &score) {
 }
+
+void TextDisplay::display(Score &score, const vector <vector <int>> &coords) {
+}
+

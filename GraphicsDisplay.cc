@@ -15,5 +15,5 @@ void GraphicsDisplay::notify(Subject &whoNotified) {
 void GraphicsDisplay::display(Score &score) {
 }
 
-void GraphicsDisplay::display(Score &score, vector <vector <int>> coords) {
+void GraphicsDisplay::display(Score &score, const vector <vector <int>> &coords) {
 } 

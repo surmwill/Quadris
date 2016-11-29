@@ -12,7 +12,7 @@ class GraphicsDisplay: public View {
   GraphicsDisplay(int rows = 18, int cols = 11);
   void notify(Subject &whoNotified) override;
   void display(Score &score) override;
-  void display(Score &score, std::vector <std::vector <int>> coords) override;
+  void display(Score &score, std::vector <const std::vector <int>> & coords) override;
  private:
 };
 
