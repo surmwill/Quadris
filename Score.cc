@@ -28,7 +28,7 @@ void Score::updateCurrScore() {
 void Score::notify(Subject &whoNotified) {
   if(whoNotified.getCoords()[0] rowsCleared++;
 
-  if(whoNotified.observerSize() == minObserverSize) {
+  if(whoNotified.getObserverSize() == minObserverSize) {
     currScore += (whoNotified.getLevelCreated() + 1) * (whoNotified.getLevelCreated() + 1) + 1;
   }
 }
