@@ -4,6 +4,8 @@
 
 using namespace std;
 
+Block::blockNumber = 0;
+
 Block::Block(vector <char> blockDesign, int levelGenerated, int blockSize) {
   for(auto bd:blockDesign) {
     blockCells.emplace_back(new Cell{*bd, levelGenerated, blockSize);

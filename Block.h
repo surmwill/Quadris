@@ -15,6 +15,7 @@ class Block {
   virtual bool autoDrop(); 
   virtual bool drop():
   virtual bool down();
+  static int blockNumber;
 
  protected:
   std::vector <Cell*> *getBlockCells();
