@@ -17,6 +17,7 @@ Quadris::Quadris(int level): level{level} lc{new LevelController{level}}, vc{new
 }
 
 void Quadris::left() {
+  vc.updateView();
 }
 
 void Quadris::right() {
