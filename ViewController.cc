@@ -12,7 +12,7 @@ ViewController::ViewController(): score{new Score{0}} {
 
 void ViewController::updateView() {
   for(auto &n : views) {
-    n->updateView();
+    n->updateView(score);
   }
 }
 
