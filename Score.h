@@ -15,6 +15,7 @@ class Score: public Observer {
   void updateScore();
   void notify(const Subject &whoNotified) override;
   void setLevel(int level);
+  void clear();
   SubscriptionType subType();
 
  private:

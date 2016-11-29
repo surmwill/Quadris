@@ -48,6 +48,12 @@ int Score::getLevel() {
   return level;
 }
 
+//clears the current score and stored rows cleared if the board is reset
+void Score::clear() {
+  currScore = 0;
+  rows.clear();
+}
+
 //Only notified when a row gets cleared
 SubscriptionType Score::subType() {
   return SubscriptionType::Annihilation;
