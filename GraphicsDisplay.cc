@@ -28,21 +28,28 @@ GraphicsDisplay::GraphicsDisplay(int rows, int cols): rows{rows}, cols{cols}, to
 void GraphicsDisplay::notify(const Subject &whoNotified) {
   int row = whoNotified.getCoords()[0];
   int col = whoNotified.getCoords()[1];
+  bool specialCell = false;
+  char cellSymbol = whoNotified.getSymbol();
+  
+  //If the row and column of the cell are not initialized (coords are -1, -1) the special cell is notifying us of our next block
+  if(row == -1 && col == -1) specialCell = true;
 
-  //if the row and column are not intialized we have a spcial cell
-  if(row == -1 && col == -1) displayNextBlock(whoNotified.getSymbol(), 
-
-  fillCell(row, col, symbolToColour(whoNotified.getSymbol());
+  if(specialCell) drawNextBlock(blockLib.getBlockLayout(cellSymbol), symbolToColour(cellSymbol));
+  else fillCell(row, col, symbolToColour(whoNotified.getSymbol());
 }
 
 void GraphicsDisplay::display(const Score &score) {
   int ySpacing = 10; //Y spacing between the texts of level, score, highscore, and the top of the screen
   int xIndent = 5; //X indent from the left side of the screen for level, score, and highscore text
   int valuexIndent = 80; //Indent from each of the texts to their associated value (ex highscore:      10)
+  int nextBlockIndent = (totalLength / 2) - 50; //Indent specifically for next block, the next block is displayed in the top right of the screen
  
-  //Drawing text for score, highscore, and level
+  //Drawing text for score, highscore, level, and next block
   win.drawString(xIndent, ySpacing, "Level:");
   win.drawString(valuexIndent, ySpacing, to_string(score.getLevel());
+ 
+  //special placement of next score
+  win.drawString(nextBlockIndent, ySpacing, "Next:");
 
   ySpacing += ySpacing; //we are moving down a lone so double the spacing
   win.drawString(xIndent, ySpacing, "Score:");
@@ -51,8 +58,6 @@ void GraphicsDisplay::display(const Score &score) {
   ySpacing += ySpacing;
   win.drawString(xIndent, ySpacing, "Hi Score:");
   win.drawString(valuexIndent, ySpacing, to_string(Score.getHighScore());
-
-  //to do: draw next block somewhere
 }
 
 void GraphicsDisplay::display(const Score &score, const vector <vector <int>> &coords) {
@@ -73,7 +78,7 @@ void GraphicsDisplay::clear() {
 //returns the proper colour, or black otherwise
 Xwindow GraphicsDisplay::symbolToColour(char symbol) {
   auto iter = symToColour.find(symbol);
-  iter == symToColour.end()? return Xwindow::black : return iter->second;
+  iter == symToColour.end()? return Xwindow::White : return iter->second;
 }
 
 //Each Cell has a white border outline and a filled coloured center
@@ -89,3 +94,9 @@ void GraphicsDisplay::fillCell(int row, int col, Xwindow colour) {
   win.fillRectangle(coordX, coordY, fillWidth, fillHeight, colour); //draws the rectangle
 }
 
+void GraphicsDisplay::drawNextBlock(const vector <char> & layout, Xwindow colour) {
+  int rowRestriction = 2; //For each block layout the actual block shapes only takes up 2 rows, no need to print an extra 2 blank rows
+  int nextBlockAreaX = totalLength / 2;
+  int nextBlockAreaY = topSpace;
+  int nextCellWidth = nextBlockAreaX;
+}
