@@ -7,7 +7,8 @@
 
 using namespace std;
 
-GraphicsDisplay::GraphicsDisplay(int rows, int cols) {}
+GraphicsDisplay::GraphicsDisplay(int rows, int cols): rows{rows}, cols{cols}, cellWidth{40},
+  cellHeight{40}, topSpace{60} {}
 
 void GraphicsDisplay::notify(const Subject &whoNotified) {
 }
