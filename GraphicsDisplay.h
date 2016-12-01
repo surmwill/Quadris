@@ -32,6 +32,7 @@ class GraphicsDisplay: public View {
    
    Xwindow symbolToColour(char symbol); //Accesses the map with additional error checking
    void fillCell(int row, int col, Xwindow colour); //fills the cell at (row,col) with colour
+   void drawNextBlock(const std::vector <std::vector <char>> & layout, Xwindow colour); //draws the next block portion of our board
 };
 
 #endif

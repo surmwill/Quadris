@@ -94,7 +94,7 @@ void GraphicsDisplay::fillCell(int row, int col, Xwindow colour) {
   win.fillRectangle(coordX, coordY, fillWidth, fillHeight, colour); //draws the rectangle
 }
 
-void GraphicsDisplay::drawNextBlock(const vector <char> & layout, Xwindow colour) {
+void GraphicsDisplay::drawNextBlock(const vector <vector <char>> & layout, Xwindow colour) {
   int nextBlockAreaX = totalLength - (totalLength / 2); //X dimension of a "mini" grid in the top left of the corner used to display nextBlock
   int nextBlockAreaY = topSpace; //Y dimension of the "mini" grid
   int numCellsX = 4, int numCellsY = 2; //our mini grid of 4x2 cells. Note all block designs only use the first 2 rows so no point in printing 2 empty rows. Normally would be 4x4
@@ -102,4 +102,6 @@ void GraphicsDisplay::drawNextBlock(const vector <char> & layout, Xwindow colour
   int nextCellHeight = nextBlockAreaY - numCellsY; //The height of each cell
   int indent = 1; //smaller idnent for smaller cell sizes
   
+  
+
 }
