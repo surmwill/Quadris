@@ -3,6 +3,7 @@
 
 #include "View.h"
 #include "Window.h"
+#include "BlockLib.h"
 #include <vector>
 #include <map>
 
@@ -26,6 +27,7 @@ class GraphicsDisplay: public View {
    int totalLength; //the total length in pixels of the window
    int totalHeight; //the total height in pixels of the window
    Xwindow win; //the Xwindow object that allows us to display amd update graphics
+   BlockLib blockLib; //gives access to block designs for next block
    std::map <char, Xwindow> symToColour; //maps a char symbol key to an Xwindow::Color
    
    Xwindow symbolToColour(char symbol); //Accesses the map with additional error checking

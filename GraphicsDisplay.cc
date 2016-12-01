@@ -2,7 +2,9 @@
 #include "GraphicsDisplay.h"
 #include "Score.h"
 #include "View.h"
-#include "Subkect.h"
+#include "Subject.h"
+#include "Window.h"
+#include "BlockGen.h"
 #include <map>
 #include <vector>
 
@@ -10,13 +12,14 @@ using namespace std;
 
 GraphicsDisplay::GraphicsDisplay(int rows, int cols): rows{rows}, cols{cols}, totalLength{cols * cellWidth}, 
   totalHeight{(rows * cellHeight) + topSpace}, Xwindow{totalLength, totalHeight} {
-  symToColour.emplace_back("i", Xwindow::Magenta); 
-  symToColour.emplace_back("j", Xwindow::Red);
-  symToColour.emplace_back("l", Xwindow::Green);
-  symToColour.emplace_back("o", Xwindow::Cyan);
-  symToColour.emplace_back("s", Xwindow::Brown);
-  symToColour.emplace_back("z", Xwindow::Orange);
-  symToColour.emaplce_back("t", Xwindow::Blue);
+  symToColour.emplace_back(' ', Xwindow::White);
+  symToColour.emplace_back('I', Xwindow::Magenta); 
+  symToColour.emplace_back('J', Xwindow::Red);
+  symToColour.emplace_back('L', Xwindow::Green);
+  symToColour.emplace_back('O', Xwindow::Cyan);
+  symToColour.emplace_back('D', Xwindow::Brown);
+  symToColour.emplace_back('Z', Xwindow::Orange);
+  symToColour.emaplce_back('T', Xwindow::Blue);
 
   clear();
 }
@@ -26,7 +29,10 @@ void GraphicsDisplay::notify(const Subject &whoNotified) {
   int row = whoNotified.getCoords()[0];
   int col = whoNotified.getCoords()[1];
 
-  fillCell(row, col, symbolToColour(Subject.getSymbol());
+  //if the row and column are not intialized we have a spcial cell
+  if(row == -1 && col == -1) displayNextBlock(whoNotified.getSymbol(), 
+
+  fillCell(row, col, symbolToColour(whoNotified.getSymbol());
 }
 
 void GraphicsDisplay::display(const Score &score) {
@@ -66,7 +72,8 @@ void GraphicsDisplay::clear() {
 
 //returns the proper colour, or black otherwise
 Xwindow GraphicsDisplay::symbolToColour(char symbol) {
-  symToColour.find(symbol) == symToColour.end()? return Xwindow::Black : return symToColour.find(symbol)->second;
+  auto iter = symToColour.find(symbol);
+  iter == symToColour.end()? return Xwindow::black : return iter->second;
 }
 
 //Each Cell has a white border outline and a filled coloured center
