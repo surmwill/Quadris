@@ -14,7 +14,7 @@ class Cell: public Subject, public Observer {
   bool filled();
   bool lastBlockCell();
   std::vector <int> getCoords();
-  int getBlockNum();
+  char getSymbol();
 
   // Functions for block info movement
   bool droppable();

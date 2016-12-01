@@ -34,6 +34,11 @@ vector <int> Cell::getCoords() {
   return coords;
 }
 
+//Returns the cell's symbol. Need so that the graphisc know how to colour it's block
+char Cell::getSymbol() {
+  return symbol;
+}
+
 bool Cell::droppable(){
   return bottomNeighbour->filled();
 }
