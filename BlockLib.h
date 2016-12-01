@@ -7,19 +7,19 @@
 class BlockLib {
  public:
    BlockLib();
-   std::vector <char> getBlockLayout(char blockType); //returns the the desired block layout 
+   std::vector <std::vector <char>> getBlockLayout(char blockType); //returns the the desired block layout 
 
  private:
-   std::vector <char> iBlock();
-   std::vector <char> jBlock();
-   std::vector <char> lBlock();
-   std::vector <char> oBlock();
-   std::vector <char> sBlock();
-   std::vector <char> zBlock();
-   std::vector <char> tBlock();
+   std::vector <std::vector <char>> iBlock();
+   std::vector <std::vector <char>> jBlock();
+   std::vector <std::vector <char>> lBlock();
+   std::vector <std::vector <char>> oBlock();
+   std::vector <std::vector <char>> sBlock();
+   std::vector <std::vector <char>> zBlock();
+   std::vector <std::vector <char>> tBlock();
 
    //Function pointer with return type vec <char>, paramter char, and generalized name of BlockLayoutFn
-   typedef std::vector <char> (*BlockLayoutFn)(char);
+   typedef std::vector <std::vector <char>> (*BlockLayoutFn)(char);
    std::map <char, BlockLayoutFn> layoutMap; //allowed to do since every fn mapped has the same paramters and return type
 };
 
