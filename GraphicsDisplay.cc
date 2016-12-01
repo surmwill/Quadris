@@ -35,8 +35,9 @@ void GraphicsDisplay::display(const Score &score, const vector <vector <int>> &c
 void GraphicsDisplay::clear() {
 } 
 
+//returns the proper colour, or black otherwise
 Xwindow GraphicsDisplay::symbolToColour(char symbol) {
-  symToColour.find(symbol) == symToColour.end()? return Xwindow::Black : return symToColour->second;
+  symToColour.find(symbol) == symToColour.end()? return Xwindow::Black : return symToColour.find(symbol)->second;
 }
 
 //Each Cell has a white border outline and a filled coloured center
