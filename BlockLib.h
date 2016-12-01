@@ -7,7 +7,8 @@
 class BlockLib {
  public:
    BlockLib();
-   std::vector <char> getBlockLayout(char blockType);
+   std::vector <char> getBlockLayout(char blockType); //returns the the desired block layout 
+
  private:
    std::vector <char> iBlock();
    std::vector <char> jBlock();

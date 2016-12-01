@@ -13,9 +13,9 @@ BlockLib::BlockLib() {
   layoutMap.emplace("z", &zBlock);
 }
 
-vector <char> getBlockLayout(char blockType) {
+vector <char> BlockLib::getBlockLayout(char blockType) {
   auto iter = layoutMap.find(blockType);
-  return ((*iter)->second)();
+  return (iter->second)();
 }
 
 vector <char> BlockLib::iBlock() {
@@ -24,8 +24,8 @@ vector <char> BlockLib::iBlock() {
 
   for(i = 0; i < 4; i++) {design.emplace_back(' ');}
   for(i = 0; i < 4; i++) {design.emplace_back('I');}
-  for(i = 0; i < 4; i++) {design.emaplce_back(' ');}
-  for(i = 0; i < 4; i++) {design.emaplce_back(' ');}
+  for(i = 0; i < 4; i++) {design.emplace_back(' ');}
+  for(i = 0; i < 4; i++) {design.emplace_back(' ');}
 
   return design;
 }
@@ -40,7 +40,7 @@ vector <char> BlockLib::jBlock() {
   design.emplace_back(' '); //lines 1 and 2 completed
 
   for(i = 0; i < 4; i++) {design.emplace_back('I');}
-  for(i = 0; i < 4; i++) {design.emaplce_back(' ');}
+  for(i = 0; i < 4; i++) {design.emplace_back(' ');}
 
   return design;
 }
