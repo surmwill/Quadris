@@ -29,7 +29,6 @@ class GraphicsDisplay: public View {
    std::map <char, Xwindow> symToColour; //maps a char symbol key to an Xwindow::Color
    
    Xwindow symbolToColour(char symbol); //Accesses the map with additional error checking
-   void drawTop(int score, int highScore, int level); //displays, score, level, and next block
    void fillCell(int row, int col, Xwindow colour); //fills the cell at (row,col) with colour
 };
 

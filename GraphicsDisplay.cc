@@ -17,8 +17,11 @@ GraphicsDisplay::GraphicsDisplay(int rows, int cols): rows{rows}, cols{cols}, to
   symToColour.emplace_back("s", Xwindow::Brown);
   symToColour.emplace_back("z", Xwindow::Orange);
   symToColour.emaplce_back("t", Xwindow::Blue);
+
+  clear();
 }
 
+//Filled the cell which notified the display
 void GraphicsDisplay::notify(const Subject &whoNotified) {
   int row = whoNotified.getCoords()[0];
   int col = whoNotified.getCoords()[1];
@@ -27,12 +30,38 @@ void GraphicsDisplay::notify(const Subject &whoNotified) {
 }
 
 void GraphicsDisplay::display(const Score &score) {
+  int ySpacing = 10; //Y spacing between the texts of level, score, highscore, and the top of the screen
+  int xIndent = 5; //X indent from the left side of the screen for level, score, and highscore text
+  int valuexIndent = 80; //Indent from each of the texts to their associated value (ex highscore:      10)
+ 
+  //Drawing text for score, highscore, and level
+  win.drawString(xIndent, ySpacing, "Level:");
+  win.drawString(valuexIndent, ySpacing, to_string(score.getLevel());
+
+  ySpacing += ySpacing; //we are moving down a lone so double the spacing
+  win.drawString(xIndent, ySpacing, "Score:");
+  win.drawString(valuexIndent, ySpacing, to_string(score.getCurrScore());
+
+  ySpacing += ySpacing;
+  win.drawString(xIndent, ySpacing, "Hi Score:");
+  win.drawString(valuexIndent, ySpacing, to_string(Score.getHighScore());
+
+  //to do: draw next block somewhere
 }
 
 void GraphicsDisplay::display(const Score &score, const vector <vector <int>> &coords) {
 }
 
 void GraphicsDisplay::clear() {
+  //wipe the display
+  for(int i = 0; i < rows; i++) {
+    for(int j = 0; j < cols; j++) {
+      fillCell(i, j, Xwindow::White);
+    }
+  }
+  
+  //redraw everything
+  display();
 } 
 
 //returns the proper colour, or black otherwise
@@ -53,5 +82,3 @@ void GraphicsDisplay::fillCell(int row, int col, Xwindow colour) {
   win.fillRectangle(coordX, coordY, fillWidth, fillHeight, colour); //draws the rectangle
 }
 
-void GraphicsDisplay::drawTop(int score, int highScore, int level) {
-}
