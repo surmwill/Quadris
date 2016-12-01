@@ -19,7 +19,7 @@ GraphicsDisplay::GraphicsDisplay(int rows, int cols): rows{rows}, cols{cols}, to
   symToColour.emplace_back('O', Xwindow::Cyan);
   symToColour.emplace_back('D', Xwindow::Brown);
   symToColour.emplace_back('Z', Xwindow::Orange);
-  symToColour.emaplce_back('T', Xwindow::Blue);
+  symToColour.emplace_back('T', Xwindow::Blue);
 
   clear();
 }
@@ -95,8 +95,11 @@ void GraphicsDisplay::fillCell(int row, int col, Xwindow colour) {
 }
 
 void GraphicsDisplay::drawNextBlock(const vector <char> & layout, Xwindow colour) {
-  int rowRestriction = 2; //For each block layout the actual block shapes only takes up 2 rows, no need to print an extra 2 blank rows
-  int nextBlockAreaX = totalLength / 2;
-  int nextBlockAreaY = topSpace;
-  int nextCellWidth = nextBlockAreaX;
+  int nextBlockAreaX = totalLength - (totalLength / 2); //X dimension of a "mini" grid in the top left of the corner used to display nextBlock
+  int nextBlockAreaY = topSpace; //Y dimension of the "mini" grid
+  int numCellsX = 4, int numCellsY = 2; //our mini grid of 4x2 cells. Note all block designs only use the first 2 rows so no point in printing 2 empty rows. Normally would be 4x4
+  int nextCellWidth = nextBlockAreaX / numCellsX; //The width of each cell
+  int nextCellHeight = nextBlockAreaY - numCellsY; //The height of each cell
+  int indent = 1; //smaller idnent for smaller cell sizes
+  
 }
