@@ -28,7 +28,8 @@ void Score::updateCurrScore() {
 void Score::notify(const Subject &whoNotified) {
   //check for unique rows
   for(int i = 0; i < rows.size(); i++) {
-    if(whoNotified.getCoords()[0] == rows[i]) break;
+    int cellRow = whoNotified.getCoords()[0];
+    if(cellRow == rows[i]) break;
     else if(i == rows.size() - 1) rows.emplace_back(whoNotified.getCoords()[0]);
   }
   
