@@ -1,17 +1,24 @@
 #include "CmdInterpreter.h"
 #include <string>
 #include <iostream>
-#include <locale>
+#include <locale> //isdigit
+#include <cstdlib> //rand
 
 void parseArgument(std::string arg1, std::string arg2) {
-  if(arg == "-text") cmdInterpreter.textOnly();
-  else if(arg == "-seed") {
-    (arg2 != "")? cmdInterpreter.setSeed(std::stoi
+  if(arg1 == "-text") cmdInterpreter.textOnly();
+  else if(arg1 == "-seed") {
+    if(isNumber(arg2) cmdInterpreter.setSeed(std::stoi(arg2))
+    else  cmdInterpreter.setSeed(100);
+        
 }
 
-void checkIfNumber(std::string s) {
+bool isNumber(std::string s) {
+  if(s.length() < 1) return false;
+
   for(auto &n: s) {
-    if(!isdigit(
+    if(!isdigit(n)) return false;
+  }
+  return true;
 }
 
 int main(int argc, char *argv[]) {
