@@ -38,9 +38,8 @@ void TextDisplay::display(const Score &score) {
   cout << "Hi Score: ";
   cout << setw(spacing);
   cout << score.getHighScore();
-  for(int i = 0; i < dashLength; i++) {
-    cout << " " << endl;
-  }
+  printDashes(dashLength);
+ 
   
   //grid
   for(auto &rows : textGrid) {
@@ -72,4 +71,11 @@ void TextDisplay::clear() {
       col = ' ';
     }
   }
+}
+
+void TextDisplay::printDashes(int numDashes) {
+  for(int i = 0; i < numDashes; i++) {
+    cout << '-';
+  }
+  cout << "\n";
 }

@@ -15,7 +15,8 @@ class TextDisplay: public View {
   void display(const Score &score, const vector <vector <int>> & coords) override;
   void clear() override;
  private:
-   std::vector <std::vector <char>> textGrid;
+  void printDashes(int numDashes);
+  std::vector <std::vector <char>> textGrid;
 };
 
 #endif

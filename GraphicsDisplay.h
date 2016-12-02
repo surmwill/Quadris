@@ -26,6 +26,7 @@ class GraphicsDisplay: public View {
    int topSpace = 60; //space reserved for the drawTop() function
    int totalLength; //the total length in pixels of the window
    int totalHeight; //the total height in pixels of the window
+   Xwindow clearColour = Xwindow::White; //the colour of a clear portion of the board
    Xwindow win; //the Xwindow object that allows us to display amd update graphics
    BlockLib blockLib; //gives access to block designs for next block
    std::map <char, Xwindow> symToColour; //maps a char symbol key to an Xwindow::Color
