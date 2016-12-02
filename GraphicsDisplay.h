@@ -15,7 +15,7 @@ class GraphicsDisplay: public View {
   GraphicsDisplay(int rows = 18, int cols = 11);
   void notify(const Subject &whoNotified) override; //Cell's notify the board whenever they change state, so we can update the cells accordingly
   void display(const Score &score) override; //displays the board, calling both drawTop() and drawMiddle()
-  void display(const Score &score, const std::vector <const std::vector <int>> & coords) override; //displays the hint, only calling drawMiddle()
+  void showHint(const std::vector <const std::vector <int>> & coords) override; //draws the hint
   void clear() override; //clears the board and redraws the curr score
 
  private:

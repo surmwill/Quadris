@@ -61,8 +61,13 @@ void GraphicsDisplay::display(const Score &score) {
   win.drawString(valuexIndent, ySpacing, to_string(Score.getHighScore());
 }
 
-//displats the hint
-void GraphicsDisplay::display(const Score &score, const vector <vector <int>> &coords) {
+//draws the hint
+void GraphicsDisplay::showHint(const vector <vector <int>> &coords) {
+  for(auto &n : coords) {
+    row = coords[0];
+    col = coords[1];
+    fillCell(row, col, Xwindow::Black);
+  }
 }
 
 //clears the entire screen

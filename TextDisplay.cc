@@ -66,7 +66,7 @@ void TextDisplay::display(const Score &score) {
 }
 
 //colours the grid with a hint
-void TextDisplay::display(const Score &score, const vector <vector <int>> &coords) {
+void TextDisplay::showHint(const vector <vector <int>> &coords) {
   int row; 
   int col;
 

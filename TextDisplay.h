@@ -13,7 +13,7 @@ class TextDisplay: public View {
   TextDisplay(int rows = 18, int cols = 11);
   void notify(const Subject &whoNotified) override;
   void display(const Score &score) override;
-  void display(const Score &score, const vector <vector <int>> & coords) override;
+  void showHint(const vector <vector <int>> & coords) override;
   void clear() override;
 
  private:
