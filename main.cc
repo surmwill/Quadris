@@ -3,15 +3,10 @@
 #include <iostream>
 #include <locale> //isdigit
 #include <cstdlib> //rand
+#include <ctime> //time
+#include <fstream>
 
-void parseArgument(std::string arg1, std::string arg2) {
-  if(arg1 == "-text") cmdInterpreter.textOnly();
-  else if(arg1 == "-seed") {
-    if(isNumber(arg2) cmdInterpreter.setSeed(std::stoi(arg2))
-    else  cmdInterpreter.setSeed(100);
-        
-}
-
+//checks if string s is a valid number
 bool isNumber(std::string s) {
   if(s.length() < 1) return false;
 
@@ -21,7 +16,41 @@ bool isNumber(std::string s) {
   return true;
 }
 
+//checks if filename can be opened
+bool goodFile(std::string filename) {
+  if(filename.length() < 1) retrurn false;
+
+  std::ofstream myfile{filename};
+  myfile.open()? return true : return false;
+}
+
+//parses the command line arguments
+void parseArgument(std::string arg1, std::string arg2) {
+  if(arg1 == "-text") cmd.textOnly();
+  else if(arg1 == "-seed") {
+    if(isNumber(arg2) cmd.setSeed(std::stoi(arg2))
+    else {
+      //randomly give them a seed
+      std::cerr << "not given a number for a seed, generating a seed for you" << std::endl;
+      std::srand(std::time(0));
+      int rand = std::rand() % 100000;
+      cmd.setSeed(std::stoi(rand));
+    }
+  }
+  else if(arg1 == "-scriptfile") {
+    if(goodFile(arg2)) cmd.setSequence(arg2);
+    else std::cerr << "could not read scriptfile" << std::endl;
+  }
+  else if(arg1 == "-startlevel") {
+   if(isNumber(arg2)) cmd.setLevel(std::stoi(arg2));
+   else std::cerr << "not given a number for level, starting at level 0" << std::endl;
+  }  
+}
+
 int main(int argc, char *argv[]) {
+  CmdInterpreter cmd;
+
+  //parse the command line arguments
   if(argc > 1) {
     for(int i = 1; i < argv; i++) {
        std::string arg1{argv[i]};
@@ -29,6 +58,8 @@ int main(int argc, char *argv[]) {
        parseArgument(arg1, arg2);
     }
   }
+
+  cmd.startGame();
 }
 
 
