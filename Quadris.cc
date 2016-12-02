@@ -60,7 +60,7 @@ void Quadris::setBlock(char type) {
 }
 
 void Quadris::hint() {
- vc.updateView(hintEngine.hint());
+ vc.showHint(hintEngine.hint());
 }
 
 void Quadris::restart() {
