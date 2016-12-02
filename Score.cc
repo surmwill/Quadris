@@ -5,19 +5,15 @@
 
 using namespace std;
 
-Score::Score(int intialScore, int level): currScore{intialScore}, level{level} {}
-
-//Returns the current score
 int Score::getCurrScore() {
   return currScore;
 }
 
-//Returns the high score
 void Score::getHighScore() {
   return highScore;
 }
 
-//Updates the current score by adding the points from clearing rows
+/
 void Score::updateCurrScore() {
   currScore += (level + rows.size()) * (level + rows.size());
   currScore > highScore ? highScore = currScore;
