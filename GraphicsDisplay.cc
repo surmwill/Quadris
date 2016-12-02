@@ -118,4 +118,5 @@ void GraphicsDisplay::drawNextBlock(const vector <vector <char>> & layout, Xwind
         win.fillRectangle(coordX, coordY, fillWidth, fillHeight, colour);
       }
     }
+  }
 }
