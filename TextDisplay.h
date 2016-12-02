@@ -2,6 +2,7 @@
 #define TEXT_H 1
 
 #include "View.h"
+#include "BlockLib.h"
 #include <vector>
 
 class Score;
@@ -14,9 +15,12 @@ class TextDisplay: public View {
   void display(const Score &score) override;
   void display(const Score &score, const vector <vector <int>> & coords) override;
   void clear() override;
+
  private:
   void printDashes(int numDashes);
   std::vector <std::vector <char>> textGrid;
+  std::vector <std::vector <char>> nextBlock;
+  BlockLib blockLib;
 };
 
 #endif

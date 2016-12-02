@@ -3,6 +3,7 @@
 #include "Score.h"
 #include "View.h"
 #include "Subject.h"
+#include "BlockLib.h"
 
 using namespace std;
 
@@ -17,9 +18,13 @@ TextDisplay::TextDisplay(int rows, int cols) {
 
 //notifications of a cells states
 void TextDisplay::notify(const Subject &whoNotified) {
+  bool specialCell = false;
   int row = whoNotified.getCoords()[0];
   int col = whoNotified.getCoords()[1];
 
+  if(row == -1 && col == -1) specialCell = true;
+
+  if(specialCell) nextBlock = blockLib.getBlockLayout(whoNotified.getSymbol());
   textGrid[row][col] = whoNotified.getSymbol();
 }
 
@@ -40,7 +45,6 @@ void TextDisplay::display(const Score &score) {
   cout << score.getHighScore();
   printDashes(dashLength);
  
-  
   //grid
   for(auto &rows : textGrid) {
     for(auto &cols : rows) {
@@ -48,8 +52,17 @@ void TextDisplay::display(const Score &score) {
     }
     cout << "\n";
   }
+  printDashes(dashLength);
+
+  //next block
+  cout << "Next:";
+  for(auto &rows : nextBlock) {
+    for(auto &cols : rows) {
+      cout << cols;
+    }
+    cout << "\n";
+  }
   
-  //next block????
 }
 
 //colours the grid with a hint
@@ -60,7 +73,7 @@ void TextDisplay::display(const Score &score, const vector <vector <int>> &coord
   for(auto &n : coords) {
     row = n[0];
     col = n[1];
-    textGrid[row][col] = '#'
+    textGrid[row][col] = '?'
   }
 }
 
@@ -71,6 +84,7 @@ void TextDisplay::clear() {
       col = ' ';
     }
   }
+  nextBlock.clear();
 }
 
 void TextDisplay::printDashes(int numDashes) {
