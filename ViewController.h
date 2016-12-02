@@ -10,7 +10,7 @@ class ViewController {
  public:
   ViewController();
   void updateView();
-  void updateView(const std::vector <std::vector <int>> & coords);
+  void showHint(const std::vector <std::vector <int>> & coords);
   void setLevel(int level);
   void restart();
 

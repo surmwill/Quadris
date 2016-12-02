@@ -21,9 +21,9 @@ void ViewController::updateView() {
 }
 
 //updates the views with the added hint position coloured in
-void ViewController::updateView(const vector <vector <int>> & coords) {
+void ViewController::showHint(const vector <vector <int>> & coords) {
   for(auto &n : views) {
-    n->updateView(score, coords);
+    n->showHint(score, coords);
   }
 }
 
