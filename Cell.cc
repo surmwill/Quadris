@@ -25,7 +25,7 @@ void Cell::setNeighbours(Cell * left, Cell * right, Cell * top, Cell * bottom){
 bool Cell::filled() { return (symbol != ' '); }
 
 //To tell score that this is the last block of the Cell for extra points
-bool Cell::lastBlockCell() { return blockSize == 1;}
+bool Cell::lastBlockCell() const { return blockSize == 1;}
 
 vector <int> Cell::getCoords() const {
   vector <int> coords;
