@@ -1,5 +1,5 @@
 #include "Score.h"
-#include "SubscriptionType.h"
+#include "Subscriptions.h"
 #include "Observer.h"
 #include "Subject.h"
 
