@@ -20,12 +20,16 @@ class Block {
   vector<int> filledIndices;
 
  private:
+  enum class Direction { Left, Right, Down };
+
   std::vector <Cell*> blockCells;
-  bool autoDrop;
+  bool shouldDrop;
+  int blockLen;
 
   // helper functions
   bool memberCell(int index);
-  bool droppable(int index);
+  bool movable(int index, int cellsToCheck, Direction d);
+  bool canBeMoved(Direction d)
 };
 
 #endif 

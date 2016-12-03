@@ -6,6 +6,7 @@ using namespace std;
 
 Block::Block(vector <char> blockDesign, int levelGenerated, int blockSize) {
   blockNumber++;
+  blockLen = blockSize;
   for(auto bd:blockDesign) {
     blockCells.emplace_back(new Cell{*bd, levelGenerated, blockNumber, blockSize);
   }
@@ -18,8 +19,7 @@ Block::Block(vector <char> blockDesign, int levelGenerated, int blockSize) {
 }
 
 virtual bool autoDrop(){
-  // maybe rename the variable autoDrop so that it does not share a name with the function
-  return autoDrop;
+  return shouldDrop;
 }
 
 virtual void Block::rotate(bool cc) {
@@ -29,29 +29,28 @@ virtual void Block::rotate(bool cc) {
   // make a rotated block
   vector<Cell> rotatedBlock;
 
-  for (int i = 0; i < 4; i++){
-    for (int j = 0; j < 4; j++){
+  for (int i = 0; i < blockLen; i++){
+    for (int j = 0; j < blockLen; j++){
       // create new cell
       Cell newCell {' ', 0, -1}; // level set to -1, not a filled part of the block
 
-      // Find the index of the Cell who will replace the current cell
-      int oldLocation = ((13+i) - (4*j)) - 1;
-      if (cc){
-        oldLocation = (15 - oldLocation);
-      }
+      // Keep track of indices
+      int currentIndex = (blockLen*i) + j;
+      int oldLocation = (((blockLen*(blockLen - 1))+i) - (blockLen*j));
+      if (cc){ oldLocation = (((blockLen^2) - 1) - oldLocation); }
 
       // make sure that the rotation is valid
       if (memberCell(oldLocation)){
         // if the destination of the cell at oldLocation is blocked, cancel rotation
-        if (blockCells[((i*4) + j)].filled() && !memberCell((i*4)+j)){
+        if (blockCells[currentIndex].filled() && !memberCell(currentIndex)){
           return;
         }
 
         // add the current location as a filled cell
-        newMembers.push_back((i*4) + j);
+        newMembers.push_back(currentIndex);
 
         // set new cell content, fill current cell
-        Cell.setContent(blockCells[oldLocation]);
+        newCell.setContent(blockCells[oldLocation]);
       }
 
       // add the new cell to the rotated block
@@ -60,12 +59,14 @@ virtual void Block::rotate(bool cc) {
   }
 
   // set the block cells to their rotated configuration
-  for (int i = 0; i < 15; i++){
+  filledIndices = newMembers;
+  for (int i = 0; i < blockLen; i++){
     blockCells[i]->setContent(&rotatedBlock[i]);
   }
 }
 
 bool Block::memberCell(int index){
+  // check list of member indices
   for (int i: filledIndices){
     if (index == i){
       return true;
@@ -74,21 +75,20 @@ bool Block::memberCell(int index){
   return false;
 }
 
-virtual void Block::down() {
-  // if the cell can move down
-  if (droppable(12) && droppable(13) && droppable(14) && droppable(15)){
-    // drop all cells starting from the bottom right of the block
-    for (int i = 15; i > 0; i--){
+virtual void Block::down(){
+  if (canBeMoved(Direction::Down)){
+    for (int i = ((blockLen^2) - 1); i >; i--){
       blockCells[i]->drop()
     }
   } else {
+    // mark the block as having been placed
     autoDrop = true;
   }
 }
 
 virtual void Block::left() {
   // if the cell can move left
-  if (moveableLeft(0) && moveableLeft(4) && moveableLeft(8) && moveableLeft(12)){
+  if (canBeMoved(Direction::Left)){
     // move all cells starting from the top left of the block
     for (int i = 0; i < 15; i++){
       blockCells[i]->moveLeft()
@@ -98,7 +98,7 @@ virtual void Block::left() {
 
 virtual void Block::right() {
   // if the cell can move right
-  if (moveableRight(3) && moveableRight(7) && moveableRight(11) && moveableRight(15)){
+  if (canBeMoved(Direction::Right)){
     // move all cells starting from the bottom right of the block
     for (int i = 15; i > 0; i--){
       blockCells[i]->moveRight()
@@ -106,49 +106,67 @@ virtual void Block::right() {
   }
 }
 
-void Block::droppable(int index, int cellsToCheck){
-  // if there is no bottom filled cell in this column
-  if (cellsToCheck <= 0) {
-    return true;
+bool Block::canBeMoved(Block::Direction d) {
+  // get proper loop bounds to capture the right cells
+  int step;
+  int start;
+  int end;
+
+  switch(d) {
+    case (Direction::Down):
+      // all bottom cells
+      step = 1 ;
+      start = (blockLen*(blockLen-1));
+      end = blockLen^2;
+    case (Direction::Left):
+      // all leftmost cells
+      step = blockLen;
+      start = 0;
+      end = (blockLen*(blockLen-1));
+    case (Direction::Right):
+      // all rightmost cells
+      step = blockLen;
+      start = blockLen-1;
+      end = blockLen^2;
   }
 
-  // if this is the bottom filled cell in this column
-  if (blockCells[index]->filled()){
-    return blockCells[index]->droppable();
-  } else {
-    // find the bottom filled cell in the column
-    return droppable(index-4, cellsToCheck-1);
+  //check to see if the cells can move
+  bool canBeMoved = true;
+  for (int col = start; col < end; col += step){
+    canBeDropped = (canBeDropped && movable(col, blockLen, d));
   }
+
+  return canBeMoved;
 }
 
-void Block::moveableLeft(int index, int cellsToCheck){
-  // if there is no leftmost filled cell in this row
-  if (cellsToCheck <= 0) {
+bool Block::movable(int index, int cellsToCheck, Block::Direction d){
+  // set direction-specific parameters
+  int step;
+  bool (*movement);
+  switch(d){
+    case(Direction::Down):
+      step = -4;
+      movement = &blockCells[index]->droppable;
+    case(Direction::Left):
+      step = 1;
+      movement = &blockCells[index]->movableLeft();
+    case(Direction::Right):
+      step = -1;
+      movement = &blockCells[index]->movableRight();
+  }
+
+  // if there is no filled cell in this row or column
+  if (cellsToCheck <= 0){
     return true;
   }
 
-  // if this is the bottom filled cell in this column
-  if (blockCells[index]->filled()){
-    return blockCells[index]->moveableLeft();
+  // check movability
+  if (blockCells[index]->filled){
+    return movement();
   } else {
-    // find the bottom filled cell in the column
-    return droppable(index+1, cellsToCheck-1);
-  }
-}
-
-void Block::moveableRight(int index, cellsToCheck){
-  // if there is no bottom filled cell in this column
-  if (cellsToCheck <= 0) {
-    return true;
+    return moveable()index += step, cellsToCheck - 1;
   }
 
-  // if this is the bottom filled cell in this column
-  if (blockCells[index]->filled()){
-    return blockCells[index]->moveableRight();
-  } else {
-    // find the bottom filled cell in the column
-    return droppable(index-1, cellsToCheck-1);
-  }
 }
 
 virtual void Block::drop(){
