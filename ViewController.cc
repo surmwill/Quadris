@@ -5,13 +5,11 @@
 
 using namespace std;
 
-//Intrializes the score and creates a vector of displays to constantly update
-ViewController::ViewController(): score{new Score{0, 0}} { 
-  views.emplace_back(new TestDisplay{});
-  views.emplace_back(new GraphicsDisplay{});
+ViewController::ViewController(const bool textOnly) { 
+  views.emplace_back(new TextDisplay{});
+  if(!textOnly) views.emplace_back(new GraphicsDisplay{});
 }
 
-//updates the score and then the views, passing the score
 void ViewController::updateView() {
   score.updateCurrScore();
 
@@ -20,16 +18,18 @@ void ViewController::updateView() {
   }
 }
 
-//updates the views with the added hint position coloured in
 void ViewController::showHint(const vector <vector <int>> & coords) {
   for(auto &n : views) {
     n->showHint(score, coords);
   }
 }
 
-//sets the level for the score, the Views don't need to know the level if score does
-void ViewController::setLevel(int level) {
+void ViewController::setLevel(const int level) {
   score.setLevel(level);
+ 
+  for(auto &n : views) {
+    n->setLevel(level);
+  }
 }
 
 void ViewController::restart() {
