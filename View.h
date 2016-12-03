@@ -15,7 +15,7 @@ class View: public Observer {
   virtual void showHint(const std::vector <std::vector <int>> & coords) = 0; //draws the hint location by colouring in Cells with the given coordinates
   virtual void clear() = 0;  //clears the View's grid, but not the hi score
   void setLevel(const int level) = 0; //sets the level that the View is displaying
-  SubscriptionType subTye(); //the Views subscription type (View)
+  SubscriptionType subTye(); //the Views subscription type (Display)
   virtual ~View() = 0;
 
  protected:

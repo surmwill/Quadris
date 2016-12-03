@@ -7,7 +7,7 @@ View::View(int startLevel): level{startLevel} {}
 View::~View() {}
 
 SubscriptionType View::SubscriptionType subType() {
-  return SubscriptionType::View;
+  return SubscriptionType::Display;
 }
 
 void View::setLevel(const int level) {
