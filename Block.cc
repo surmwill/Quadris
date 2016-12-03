@@ -23,6 +23,10 @@ virtual void Block::left() {
 virtual void Block::right() {
 }
 
+virtual bool autoDrop(){
+  return autoDrop();
+}
+
 virtual void Block::rotate(bool cc) {
   // make a rotated block
   vector<Cell> rotatedBlock;

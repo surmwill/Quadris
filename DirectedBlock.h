@@ -7,13 +7,7 @@
 class DIRECTEDBlock: public Block {
  public:
   DirectedBlock(std::vector <char> blockDesign, int levelGenerated, int blockSize = 16);
-  void left() override;
-  void right() override;
-  void rotatecw() override;
-  void rotatecc() override;
   bool autoDrop() override; 
-  bool drop() override;
-  bool down() override;
 };
 
 #endif 

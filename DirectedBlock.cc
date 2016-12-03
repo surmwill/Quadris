@@ -7,24 +7,14 @@ using namespace std;
 DirectedBlock::DirectedBlock(vector <char> blockDesign, int levelGenerated, int blockSize):
   Block{blockDesign, levelGenerated, blockSize} {}
 
-void DirectedBlock::left() {
-}
-
-void DirectedBlock::right() {
-}
-
-void DirectedBlock::rotatecw() {
-}
-
-void DirectedBlock::rotatecc() {
-}
-
 bool DirectedBlock::autoDrop() {
-}
+  int moveNum = 5; // moves the block into the middle of the board
 
-bool DirectedBlock::drop() {
-}
+  for (int i = 0; i < moveNum; i++){
+    Block::left()
+  }
 
-bool DirectedBlock::down() {
+  Block::drop();
+  return true;
 }
 

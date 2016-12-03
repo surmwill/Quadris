@@ -13,7 +13,7 @@ class Block {
   virtual void rotate(bool cc);
   virtual bool drop():
   virtual bool down();
-  bool autoDrop();
+  virtual bool autoDrop();
 
  protected:
   std::vector <Cell*> *getBlockCells();
@@ -21,6 +21,7 @@ class Block {
 
  private:
   std::vector <Cell*> blockCells;
+  bool autoDrop;
 
   // helper functions
   bool memberCell(int index);
