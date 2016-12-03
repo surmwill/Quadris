@@ -7,8 +7,8 @@
 
 using namespace std;
 
-//The gris s intially empty
-TextDisplay::TextDisplay(int startLevel, int rows, int cols) View{startLevel} {
+TextDisplay::TextDisplay(const int startLevel, const int rows, const int cols) View{startLevel} {
+  //the grid is intially empty
   for(int i = 0; i < rows; i++) {
     for(int j = 0; j < cols; i++) {
       textGrid[i].emplace_back(' ');
@@ -16,7 +16,6 @@ TextDisplay::TextDisplay(int startLevel, int rows, int cols) View{startLevel} {
   }
 }
 
-//notifications of a cells states
 void TextDisplay::notify(const Subject &whoNotified) {
   bool specialCell = false;
   int row = whoNotified.getCoords()[0];
@@ -24,14 +23,13 @@ void TextDisplay::notify(const Subject &whoNotified) {
 
   if(row == -1 && col == -1) specialCell = true;
 
-  if(specialCell) nextBlock = blockLib.getBlockLayout(whoNotified.getSymbol());
+  if(specialCell) nextBlock = getBlockLib().getBlockLayout(whoNotified.getSymbol());
   textGrid[row][col] = whoNotified.getSymbol();
 }
 
-//displays the board in text
 void TextDisplay::display(const Score &score) {
-  int spacing = 4;
-  int dashLength = 15;
+  int spacing = 4; //number of digits reserved for displaying the score number, high score number, and level number
+  int dashLength = 15; //number of dashes to seperate the screen
 
   //Top of board
   cout << "Level: ";
@@ -65,7 +63,6 @@ void TextDisplay::display(const Score &score) {
   
 }
 
-//colours the grid with a hint
 void TextDisplay::showHint(const vector <vector <int>> &coords) {
   int row; 
   int col;
@@ -77,14 +74,13 @@ void TextDisplay::showHint(const vector <vector <int>> &coords) {
   }
 }
 
-//clears the grid, but not anything else
 void TextDisplay::clear() {
   for(auto &row : textGrid) {
     for(auto &col : row) {
       col = ' ';
     }
   }
-  nextBlock.clear();
+  nextBlock.clear(); //clears next block
 }
 
 void TextDisplay::printDashes(int numDashes) {
