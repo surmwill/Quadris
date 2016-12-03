@@ -15,43 +15,39 @@ void Score::getHighScore() {
 
 /
 void Score::updateCurrScore() {
-  currScore += (level + rows.size()) * (level + rows.size());
+  currScore += (level + rowsCleared.size()) * (level + rowsCleared.size());
   currScore > highScore ? highScore = currScore;
-  rows.clear();
+  rowsCleared.clear(); //clears the amount of rows cleared
 } 
 
-//Increases the rows cleared by 1 and checks for the entire block being cleared by comparing observers
 void Score::notify(const Subject &whoNotified) {
-  //check for unique rows
-  for(int i = 0; i < rows.size(); i++) {
+  //check for unique rows, increase the amount of rows cleared if a unqiue row is found
+  for(int i = 0; i < rowsCleared.size(); i++) {
     int cellRow = whoNotified.getCoords()[0];
+
     if(cellRow == rows[i]) break;
-    else if(i == rows.size() - 1) rows.emplace_back(whoNotified.getCoords()[0]);
+    else if(i == rows.size() - 1) rowsCleared.emplace_back(cellRow);
   }
   
-  //checks if we are delting an entire block
+  //checks if we are deleting an entire block
   if(whoNotified.lastBlockCell()) {
     currScore += (whoNotified.getLevelCreated() + 1) * (whoNotified.getLevelCreated() + 1);
   }
 }
 
-//A multiplier to the score that changes with level
 void Score::setLevel(int level) {
   this->level = level;
 }
 
-//gives a way for the views to get the level number
 int Score::getLevel() {
   return level;
 }
 
-//clears the current score and stored rows cleared if the board is reset
 void Score::clear() {
   currScore = 0;
-  rows.clear();
+  rowsCleared.clear(); //cleared as to not affect the next score update
 }
 
-//Only notified when a row gets cleared
 SubscriptionType Score::subType() {
   return SubscriptionType::Annihilation;
 }
