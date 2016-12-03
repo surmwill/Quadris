@@ -5,7 +5,7 @@
 
 using namespace std;
 
-ViewController::ViewController(int startLevel, const bool textOnly): score{startLevel} { 
+ViewController::ViewController(const int startLevel, const bool textOnly): score{startLevel} { 
   views.emplace_back(new TextDisplay{startLevel});
   if(!textOnly) views.emplace_back(new GraphicsDisplay{startLevel});
 }
