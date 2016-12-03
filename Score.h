@@ -2,7 +2,7 @@
 #define SCORE_H 1
 
 #include "Observer.h"
-#include "Subscription.h"
+#include "Subscriptions.h"
 #include <vector>
 
 class SubscriptionType;
