@@ -10,7 +10,7 @@ class Subject;
 
 class Score: public Observer {
  public:
-  Score(const int startLevel = 0);
+  Score(const int startLevel = 0); //intializes score with a given level
   int getCurrScore(); //returns the current score
   int getHighScore(); //returns the hi score
   void updateScore(); //updates the current and hi scores
