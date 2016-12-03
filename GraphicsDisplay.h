@@ -12,7 +12,7 @@ class Subject;
 
 class GraphicsDisplay: public View {
  public:
-  GraphicsDisplay(int level = 0; int rows = 18, int cols = 11);
+  GraphicsDisplay(int startLevel = 0; int rows = 18, int cols = 11);
   void notify(const Subject &whoNotified) override; //Cell's notify the board whenever they change state, so we can update the cells accordingly
   void display(const Score &score) override; //displays the board, calling both drawTop() and drawMiddle()
   void showHint(const std::vector <const std::vector <int>> & coords) override; //draws the hint

@@ -10,7 +10,7 @@
 
 using namespace std;
 
-GraphicsDisplay::GraphicsDisplay(int level, int rows, int cols, int level): level{level}, rows{rows}, cols{cols}, totalLength{cols * cellWidth}, 
+GraphicsDisplay::GraphicsDisplay(int startLevel, int rows, int cols, int level): level{startLevel}, rows{rows}, cols{cols}, totalLength{cols * cellWidth}, 
   totalHeight{(rows * cellHeight) + topSpace}, Xwindow{totalLength, totalHeight} {
   symToColour.emplace_back(' ', Xwindow::White);
   symToColour.emplace_back('I', Xwindow::Magenta); 

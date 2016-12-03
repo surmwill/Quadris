@@ -8,7 +8,7 @@
 using namespace std;
 
 //The gris s intially empty
-TextDisplay::TextDisplay(int level, int rows, int cols) level{level} {
+TextDisplay::TextDisplay(int startLevel, int rows, int cols) level{startLevel} {
   for(int i = 0; i < rows; i++) {
     for(int j = 0; j < cols; i++) {
       textGrid[i].emplace_back(' ');

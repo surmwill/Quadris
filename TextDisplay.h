@@ -10,7 +10,7 @@ class Subject;
 
 class TextDisplay: public View {
  public:
-  TextDisplay(int level = 0, int rows = 18, int cols = 11);
+  TextDisplay(int startLevel = 0, int rows = 18, int cols = 11);
   void notify(const Subject &whoNotified) override;
   void display(const Score &score) override;
   void showHint(const vector <vector <int>> & coords) override;
