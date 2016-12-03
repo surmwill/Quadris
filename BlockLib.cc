@@ -13,12 +13,12 @@ BlockLib::BlockLib() {
   layoutMap.emplace("z", &zBlock);
 }
 
-vector <vector <char>> BlockLib::getBlockLayout(char blockType) {
+vector <vector <char>> BlockLib::getBlockLayout(char blockType) const {
   auto iter = layoutMap.find(blockType);
   return (iter->second)();
-}
+} 
 
-vector <vector <char>> BlockLib::iBlock() {
+vector <vector <char>> BlockLib::iBlock() const {
   vector <vector <char>> design;
   vector <char> designRow;
   int i;
@@ -46,7 +46,7 @@ vector <vector <char>> BlockLib::iBlock() {
   return design;
 }
 
-vector <vector <<char> BlockLib::jBlock() {
+vector <vector <<char> BlockLib::jBlock() const {
   vector <vector <char>> design;
   vector <char> designRow;
   int i;
@@ -63,10 +63,12 @@ vector <vector <<char> BlockLib::jBlock() {
   design.emplace_back(designRow);
   designRow.clear();
 
+  // row 3
   for(i = 0; i < 4; i++) {designRow.emplace_back(' ');}
   design.emplace_back(designRow);
   designRow.clear();
 
+  // row 4
   for(i = 0; i < 4; i++) {designRow.emplace_back(' ');}
   design.emplace_back(designRow);
   designRow.clear();
@@ -74,7 +76,7 @@ vector <vector <<char> BlockLib::jBlock() {
   return design;
 }
 
-vector <vector <char>> BlockLib::lBlock() {
+vector <vector <char>> BlockLib::lBlock() const {
   vector <vector <char>> design;
   vector <char> designRow;
   int i = 0;
@@ -100,7 +102,7 @@ vector <vector <char>> BlockLib::lBlock() {
   return design;
 }
 
-vector <vector <char>> BlockLib::oBlock() {
+vector <vector <char>> BlockLib::oBlock() const {
   vector <vector <char>> design;
   vector <char> designRow;
 
@@ -128,7 +130,7 @@ vector <vector <char>> BlockLib::oBlock() {
 }
 
 
-vector <vector <char>> BlockLib::sBlock() {
+vector <vector <char>> BlockLib::sBlock() const {
   vector <vector <char>> design;
   vector <char> designRow;
 
@@ -156,7 +158,7 @@ vector <vector <char>> BlockLib::sBlock() {
   return design;
 }
 
-vector <vector <char>> BlockLib::zBlock() {
+vector <vector <char>> BlockLib::zBlock() const {
   vector <vector <char> design;
   vector <char> designRow;
 
@@ -183,7 +185,7 @@ vector <vector <char>> BlockLib::zBlock() {
   return design;
 }
 
-vector <vector <char>> BlockLib::tBlock() {
+vector <vector <char>> BlockLib::tBlock() const {
   vector vector <char>> design;
   vector <char> designRow;
 
