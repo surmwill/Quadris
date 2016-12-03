@@ -27,15 +27,15 @@ bool Cell::filled() { return (symbol != ' '); }
 //To tell score that this is the last block of the Cell for extra points
 bool Cell::lastBlockCell() { return blockSize == 1;}
 
-vector <int> Cell::getCoords() {
+vector <int> Cell::getCoords() const {
   vector <int> coords;
   coords.push_back(row);
   coords.push_back(col);
   return coords;
 }
 
-//Returns the cell's symbol. Need so that the graphisc know how to colour it's block
-char Cell::getSymbol() {
+//Returns the cell's symbol. Needed so that the graphisc know how to colour it's block
+char Cell::getSymbol() const {
   return symbol;
 }
 
