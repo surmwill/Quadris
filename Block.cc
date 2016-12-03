@@ -28,12 +28,16 @@ virtual bool autoDrop(){
 }
 
 virtual void Block::rotate(bool cc) {
+  // keep track of the new locations of filled cells
+  vector<int> newMembers;
+
   // make a rotated block
   vector<Cell> rotatedBlock;
+
   for (int i = 0; i < 3; i++){
     for (int j = 0; j < 3; j++){
       // create new cell
-      Cell newCell;
+      Cell newCell {' ', 0, -1}; // level set to -1, not a filled part of the block
 
       // Find the index of the Cell who will replace the current cell
       int oldLocation = ((13+i) - (4*j)) - 1;
@@ -41,16 +45,22 @@ virtual void Block::rotate(bool cc) {
         oldLocation = (15 - oldLocation);
       }
 
-      // make sure that the rotate is valid
-      if (!blockCells[oldLocation].filled() || memberCell(oldLocation)){
+      // make sure that the rotation is valid
+      if (memberCell(oldLocation)){
         // if the destination of the cell at oldLocation is blocked, cancel rotation
         if (blockCells[((i*4) + j)].filled() && !memberCell((i*4)+j)){
           return;
         }
 
-        // set new cell content
+        // add the current location as a filled cell
+        newMembers.push_back((i*4) + j);
+
+        // set new cell content, fill current cell
         Cell.setContent(blockCells[oldLocation]);
       }
+
+      // add the new cell to the rotated block
+      rotatedBlock.push_back(newCell);
     }
   }
 
