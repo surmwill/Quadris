@@ -10,13 +10,15 @@ class Subject;
 
 class TextDisplay: public View {
  public:
-  TextDisplay(int rows = 18, int cols = 11);
+  TextDisplay(int level = 0, int rows = 18, int cols = 11);
   void notify(const Subject &whoNotified) override;
   void display(const Score &score) override;
   void showHint(const vector <vector <int>> & coords) override;
   void clear() override;
+  void setLevel(const int level) override;
 
  private:
+  int level;
   void printDashes(int numDashes);
   std::vector <std::vector <char>> textGrid;
   std::vector <std::vector <char>> nextBlock;

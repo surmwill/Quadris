@@ -13,6 +13,7 @@ class View: public Observer {
   virtual void display(const Score &score) = 0;
   virtual void showHint(const std::vector <std::vector <int>> & coords) = 0;
   virtual void clear() = 0;
+  virtual void setLevel(const int level) = 0;
   virtual ~View() = 0;
  protected:
   SubscriptionType subType();

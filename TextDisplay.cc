@@ -8,7 +8,7 @@
 using namespace std;
 
 //The gris s intially empty
-TextDisplay::TextDisplay(int rows, int cols) {
+TextDisplay::TextDisplay(int level, int rows, int cols) level{level} {
   for(int i = 0; i < rows; i++) {
     for(int j = 0; j < cols; i++) {
       textGrid[i].emplace_back(' ');
@@ -36,7 +36,7 @@ void TextDisplay::display(const Score &score) {
   //Top of board
   cout << "Level: ";
   cout << setw(spacing);
-  cout << score->getLevel(); << endl;
+  cout << level; << endl;
   cout << "Score: ";
   cout << setw(spacing);
   cout << score.getCurrScore();
@@ -92,4 +92,8 @@ void TextDisplay::printDashes(int numDashes) {
     cout << '-';
   }
   cout << "\n";
+}
+
+void TextDisplay::setLevel(const int level) {
+  this->level = level;
 }
