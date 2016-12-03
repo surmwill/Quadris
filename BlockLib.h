@@ -7,20 +7,19 @@
 class BlockLib {
  public:
    BlockLib();
-   std::vector <std::vector <char>> getBlockLayout(char blockType); //returns the the desired block layout 
+   std::vector <std::vector <char>> getBlockLayout(char blockType) const; //returns the the desired block layout given a type of block
 
  private:
-   std::vector <std::vector <char>> iBlock();
-   std::vector <std::vector <char>> jBlock();
-   std::vector <std::vector <char>> lBlock();
-   std::vector <std::vector <char>> oBlock();
-   std::vector <std::vector <char>> sBlock();
-   std::vector <std::vector <char>> zBlock();
-   std::vector <std::vector <char>> tBlock();
+   std::vector <std::vector <char>> iBlock() const; //returns a 2D vector of 4x4 chars, that represents the design of an I block
+   std::vector <std::vector <char>> jBlock() const; //returns a 2D vector of 4x4 chars, that represents the design of an J block
+   std::vector <std::vector <char>> lBlock() const; //returns a 2D vector of 4x4 chars, that represents the design of an L block
+   std::vector <std::vector <char>> oBlock() const; //returns a 2D vector of 4x4 chars, that represents the design of an O block
+   std::vector <std::vector <char>> sBlock() const; //returns a 2D vector of 4x4 chars, that represents the design of an S block
+   std::vector <std::vector <char>> zBlock() const; //returns a 2D vector of 4x4 chars, that represents the design of an Z block
+   std::vector <std::vector <char>> tBlock() const; //returns a 2D vector of 4x4 chars, that represents the design of an T block
 
-   //Function pointer with return type vec <char>, paramter char, and generalized name of BlockLayoutFn
-   typedef std::vector <std::vector <char>> (*BlockLayoutFn)(char);
-   std::map <char, BlockLayoutFn> layoutMap; //allowed to do since every fn mapped has the same paramters and return type
+   typedef std::vector <std::vector <char>> (*BlockLayoutFn)(char); //Function pointer with return type <vector <vector <char>>, paramter char, and generalized name of BlockLayoutFn
+   std::map <char blockType, BlockLayoutFn> layoutMap; //Maps a function that returns a block design to a type of block
 };
 
 #endif
