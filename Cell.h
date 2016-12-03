@@ -11,8 +11,8 @@ class Cell: public Subject, public Observer {
   void setNeighbours(Cell * left, Cell * right, Cell * top, Cell * bottom);
 
   // Functions to acces properties of the cell
-  bool filled();
-  bool lastBlockCell();
+  bool filled(); //not needed by View or Score. needed elsewhere?
+  bool lastBlockCell() const;
   std::vector <int> getCoords() const;
   char getSymbol() const;
 
