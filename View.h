@@ -15,10 +15,10 @@ class View: public Observer {
   virtual void clear() = 0;
   virtual void setLevel(const int level) = 0;
   virtual ~View() = 0;
+  void setLevel(const int level);
 
  protected:
   SubscriptionType subType();
-  void setLevel();
   int getLevel();
   View(int startLevel = 0);
 

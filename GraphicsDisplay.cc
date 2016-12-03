@@ -10,7 +10,7 @@
 
 using namespace std;
 
-GraphicsDisplay::GraphicsDisplay(int startLevel, int rows, int cols, int level): level{startLevel}, rows{rows}, cols{cols}, totalLength{cols * cellWidth}, 
+GraphicsDisplay::GraphicsDisplay(int startLevel, int rows, int cols, int level): View{startLevel}, rows{rows}, cols{cols}, totalLength{cols * cellWidth}, 
   totalHeight{(rows * cellHeight) + topSpace}, Xwindow{totalLength, totalHeight} {
   symToColour.emplace_back(' ', Xwindow::White);
   symToColour.emplace_back('I', Xwindow::Magenta); 
@@ -47,7 +47,7 @@ void GraphicsDisplay::display(const Score &score) {
  
   //Drawing text for score, highscore, level, and next block
   win.drawString(xIndent, ySpacing, "Level:");
-  win.drawString(valuexIndent, ySpacing, to_string(level);
+  win.drawString(valuexIndent, ySpacing, to_string(getLevel());
  
   //special placement of next score
   win.drawString(nextBlockIndent, ySpacing, "Next:");
@@ -126,6 +126,3 @@ void GraphicsDisplay::drawNextBlock(const vector <vector <char>> & layout, Xwind
   }
 }
 
-void GraphicsDisplay::setLevel(const int level) {
-  this->level = level;
-}

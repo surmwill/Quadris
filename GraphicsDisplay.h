@@ -17,10 +17,8 @@ class GraphicsDisplay: public View {
   void display(const Score &score) override; //displays the board, calling both drawTop() and drawMiddle()
   void showHint(const std::vector <const std::vector <int>> & coords) override; //draws the hint
   void clear() override; //clears the board and redraws the curr score
-  void setLevel(const int level) override;
 
  private:
-   int level; //the level we are at
    int rows; //rows of cells we want
    int cols; //cols of cells we want
    int cellWidth = 40; //the width in pixels of a cell in the display
