@@ -39,13 +39,34 @@ char Cell::getSymbol() {
   return symbol;
 }
 
+bool Cell::moveableLeft(){
+  return leftNeighbour->filled();
+}
+
+bool Cell::moveableRight(){
+  return rightNeighbour->filled();
+}
+
 bool Cell::droppable(){
   return bottomNeighbour->filled();
 }
 
+// any idea why this is bool?
 bool Cell::drop(){
   //give the bottomNeighbour this cell's info. Unset this cell.
   bottomNeighbour->setContent(this);
+  unsetContent();
+}
+
+void Cell::moveLeft(){
+  //give the leftNeighbour this cell's info. Unset this cell.
+  leftNeighbour->setContent(this);
+  unsetContent();
+}
+
+void Cell::moveRight(){
+  //give the rightNeighbour this cell's info. Unset this cell.
+  rightNeighbour->setContent(this);
   unsetContent();
 }
 
@@ -53,7 +74,7 @@ SubscriptionType Cell::subType() const{
   return SubscriptionType::Cell;
 }
 
-void Cell::notify(Subject &whoNotified){
+void Cell::notify(const Subject &whoNotified){
   blockSize--;
 }
 

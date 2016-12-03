@@ -1,5 +1,5 @@
 #ifndef CELL_H
-#define CELL_H 1
+#define CELL_H
 
 #include "Observer.h"
 #include "Subject.h"
@@ -18,16 +18,21 @@ class Cell: public Subject, public Observer {
 
   // Functions for block info movement
   bool droppable();
+  bool moveableLeft();
+  bool moveableRight();
   bool drop();
+  void moveLeft();
+  void moveRight();
 
   // Function for possible row annihilation
   void maybeAnnihilateRow();
 
   // Observer functions for block deletion
   SubscriptionType subType() const override;
-  void notify(Subject &whoNotified) override;
+  void notify(const Subject &whoNotified) override;
  
  private:
+  //cell content management
   void setContent(Cell *otherCell);
   void unsetContent();
 
