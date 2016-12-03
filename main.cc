@@ -1,9 +1,9 @@
 #include "CmdInterpreter.h"
 #include <string>
 #include <iostream>
-#include <locale> //isdigit
-#include <cstdlib> //rand
-#include <ctime> //time
+#include <locale> //needed for isdigit()
+#include <cstdlib> //needed for rand()
+#include <ctime> //need for time(0)
 #include <fstream>
 
 //checks if string s is a valid number
@@ -16,7 +16,7 @@ bool isNumber(std::string s) {
   return true;
 }
 
-//checks if filename can be opened
+//checks if file with filename can be opened
 bool goodFile(std::string filename) {
   if(filename.length() < 1) retrurn false;
 
@@ -28,9 +28,9 @@ bool goodFile(std::string filename) {
 void parseArgument(std::string arg1, std::string arg2) {
   if(arg1 == "-text") cmd.textOnly();
   else if(arg1 == "-seed") {
-    if(isNumber(arg2) cmd.setSeed(std::stoi(arg2))
+    if(isNumber(arg2) cmd.setSeed(std::stoi(arg2)) //check that we have a valid second argument
     else {
-      //randomly give them a seed
+      //otherwise randomly give them a seed
       std::cerr << "not given a number for a seed, generating a seed for you" << std::endl;
       std::srand(std::time(0));
       int rand = std::rand() % 100000;
@@ -38,11 +38,11 @@ void parseArgument(std::string arg1, std::string arg2) {
     }
   }
   else if(arg1 == "-scriptfile") {
-    if(goodFile(arg2)) cmd.setSequence(arg2);
-    else std::cerr << "could not read scriptfile" << std::endl;
+    if(goodFile(arg2)) cmd.setSequence(arg2); //check that we have a valid second argument
+    else std::cerr << "could not read scriptfile" << std::endl; 
   }
   else if(arg1 == "-startlevel") {
-   if(isNumber(arg2)) cmd.setLevel(std::stoi(arg2));
+   if(isNumber(arg2)) cmd.setLevel(std::stoi(arg2)); //check that we have a valid second argument
    else std::cerr << "not given a number for level, starting at level 0" << std::endl;
   }  
 }
@@ -54,9 +54,9 @@ int main(int argc, char *argv[]) {
   //parse the command line arguments
   if(argc > 1) {
     for(int i = 1; i < argv; i++) {
-       std::string arg1{argv[i]};
-       i < (argv - 1)? std::string arg2{argv[i + 1]} : std::string arg2{""};
-       parseArgument(arg1, arg2);
+       std::string arg1{argv[i]}; //store the first argument in a string
+       i < (argv - 1)? std::string arg2{argv[i + 1]} : std::string arg2{""}; //if there is no second argument, set the second argument to "" to trigger invalid input
+       parseArgument(arg1, arg2); //parse the arguments
     }
   }
 
