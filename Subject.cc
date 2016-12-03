@@ -9,10 +9,10 @@ using namespace std;
 
 Subject::~Subject(){}
 
-void Subject::attach(Observer *o) { observers.push_back(o); }
+void Subject::attach(const Observer *const o) { observers.push_back(o); }
 
 void Subject::notifyObservers(SubscriptionType t) {
-  for (Observer * o: observers){
+  for (auto &o: observers){
     if (o->subType() == t){
       o->notify(*this);
     }
