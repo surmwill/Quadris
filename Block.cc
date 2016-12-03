@@ -29,8 +29,8 @@ virtual void Block::rotate(bool cc) {
   // make a rotated block
   vector<Cell> rotatedBlock;
 
-  for (int i = 0; i < 3; i++){
-    for (int j = 0; j < 3; j++){
+  for (int i = 0; i < 4; i++){
+    for (int j = 0; j < 4; j++){
       // create new cell
       Cell newCell {' ', 0, -1}; // level set to -1, not a filled part of the block
 
