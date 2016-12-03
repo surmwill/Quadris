@@ -21,7 +21,10 @@ class Block {
 
  private:
   std::vector <Cell*> blockCells;
+
+  // helper functions
   bool memberCell(int index);
+  bool droppable(int index);
 };
 
 #endif 

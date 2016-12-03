@@ -56,7 +56,7 @@ virtual void Block::rotate(bool cc) {
   }
 }
 
-bool memberCell(int index){
+bool Block::memberCell(int index){
   for (int i: filledIndices){
     if (index == i){
       return true;
@@ -77,7 +77,7 @@ virtual void Block::down() {
   }
 }
 
-void droppable(int index){
+void Block::droppable(int index){
   // if there is no bottom filled cell in this column
   if (index <= 0) {
     return true;
@@ -89,6 +89,12 @@ void droppable(int index){
   } else {
     // find the bottom filled cell in the column
     return droppable(index-4);
+  }
+}
+
+virtual void Block::drop(){
+  while (autoDrop){
+    down();
   }
 }
 
