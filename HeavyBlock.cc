@@ -11,22 +11,22 @@ HeavyBlock::HeavyBlock(vector <char> blockDesign, int levelGenerated, int blockS
 
 void HeavyBlock::left() {
   Block::left();
-  down();
+  Block::down();
 }
 
 void HeavyBlock::right() {
   Block::right();
-  down();
+  Block::down();
 }
 
 void HeavyBlock::rotatecw() {
   Block::rotatecw();
-  down();
+  Block::down();
 }
 
 void HeavyBlock::rotatecc() {
   Block::rotatecc();
-  down();
+  Block::down();
 }
 
 bool HeavyBlock::down() {

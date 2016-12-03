@@ -1,5 +1,5 @@
 #ifndef BLOCK_H
-#define BLOCK_H 1
+#define BLOCK_H
 
 #include <vector>
 
@@ -14,6 +14,8 @@ class Block {
   virtual bool drop():
   virtual bool down();
   virtual bool autoDrop();
+  virtual Cell * getCell(int row, int col);
+  int blockLen;
 
  protected:
   std::vector <Cell*> *getBlockCells();
@@ -24,7 +26,6 @@ class Block {
 
   std::vector <Cell*> blockCells;
   bool shouldDrop;
-  int blockLen;
 
   // helper functions
   bool memberCell(int index);

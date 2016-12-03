@@ -176,6 +176,11 @@ virtual void Block::drop(){
   }
 }
 
+Cell * getCell(int row, int col){
+  return blockCells[(blockLen*row) + col];
+}
+
+
 vector <Cell*>* Block::getBlockCells() {
   return blockCells;
 }
