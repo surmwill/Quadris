@@ -17,14 +17,9 @@ Block::Block(vector <char> blockDesign, int levelGenerated, int blockSize) {
   }
 }
 
-virtual void Block::left() {
-}
-
-virtual void Block::right() {
-}
-
 virtual bool autoDrop(){
-  return autoDrop();
+  // maybe rename the variable autoDrop so that it does not share a name with the function
+  return autoDrop;
 }
 
 virtual void Block::rotate(bool cc) {
@@ -80,7 +75,7 @@ bool Block::memberCell(int index){
 }
 
 virtual void Block::down() {
-  // if the cell can be dropped
+  // if the cell can move down
   if (droppable(12) && droppable(13) && droppable(14) && droppable(15)){
     // drop all cells starting from the bottom right of the block
     for (int i = 15; i > 0; i--){
@@ -91,9 +86,29 @@ virtual void Block::down() {
   }
 }
 
-void Block::droppable(int index){
+virtual void Block::left() {
+  // if the cell can move left
+  if (moveableLeft(0) && moveableLeft(4) && moveableLeft(8) && moveableLeft(12)){
+    // move all cells starting from the top left of the block
+    for (int i = 0; i < 15; i++){
+      blockCells[i]->moveLeft()
+    }
+  }
+}
+
+virtual void Block::right() {
+  // if the cell can move right
+  if (moveableRight(3) && moveableRight(7) && moveableRight(11) && moveableRight(15)){
+    // move all cells starting from the bottom right of the block
+    for (int i = 15; i > 0; i--){
+      blockCells[i]->moveRight()
+    }
+  }
+}
+
+void Block::droppable(int index, int cellsToCheck){
   // if there is no bottom filled cell in this column
-  if (index <= 0) {
+  if (cellsToCheck <= 0) {
     return true;
   }
 
@@ -102,12 +117,43 @@ void Block::droppable(int index){
     return blockCells[index]->droppable();
   } else {
     // find the bottom filled cell in the column
-    return droppable(index-4);
+    return droppable(index-4, cellsToCheck-1);
+  }
+}
+
+void Block::moveableLeft(int index, int cellsToCheck){
+  // if there is no leftmost filled cell in this row
+  if (cellsToCheck <= 0) {
+    return true;
+  }
+
+  // if this is the bottom filled cell in this column
+  if (blockCells[index]->filled()){
+    return blockCells[index]->moveableLeft();
+  } else {
+    // find the bottom filled cell in the column
+    return droppable(index+1, cellsToCheck-1);
+  }
+}
+
+void Block::moveableRight(int index, cellsToCheck){
+  // if there is no bottom filled cell in this column
+  if (cellsToCheck <= 0) {
+    return true;
+  }
+
+  // if this is the bottom filled cell in this column
+  if (blockCells[index]->filled()){
+    return blockCells[index]->moveableRight();
+  } else {
+    // find the bottom filled cell in the column
+    return droppable(index-1, cellsToCheck-1);
   }
 }
 
 virtual void Block::drop(){
-  while (autoDrop){
+  // move down until you can no longer
+  while (autoDrop()){
     down();
   }
 }
