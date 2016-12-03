@@ -7,6 +7,8 @@ using namespace std;
 HeavyBlock::HeavyBlock(vector <char> blockDesign, int levelGenerated, int blockSize):
   Block{blockDesign, levelGenerated, blockSize} {}
 
+// The below functions do not account for the command multiplier
+
 void HeavyBlock::left() {
   Block::left();
   down();
@@ -27,12 +29,8 @@ void HeavyBlock::rotatecc() {
   down();
 }
 
-bool HeavyBlock::autoDrop() {
-}
-
-bool HeavyBlock::drop() {
-}
-
 bool HeavyBlock::down() {
+  Block::down();
+  Block::down();
 }
 

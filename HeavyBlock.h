@@ -11,8 +11,6 @@ class HeavyBlock: public Block {
   void right() override;
   void rotatecw() override;
   void rotatecc() override;
-  bool autoDrop() override; 
-  bool drop() override;
   bool down() override;
 };
 
