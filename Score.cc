@@ -5,6 +5,8 @@
 
 using namespace std;
 
+Score::Ssore(const int startLevel): level{startLevel} {}
+
 int Score::getCurrScore() {
   return currScore;
 }
