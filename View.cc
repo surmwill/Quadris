@@ -1,5 +1,5 @@
 #include "View.h"
-#include "SubscriptionType.h"
+#include "Subscriptions.h"
 #include "BlockLib.h"
 
 View::View(int startLevel): level{startLevel} {}
