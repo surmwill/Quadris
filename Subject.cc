@@ -7,7 +7,7 @@ using namespace std;
 
 Subject::~Subject();
 
-void Subject::attach(Observer *o) {
+void Subject::attach(const Observer *const o) {
   observers.emplace_back(o);
 }
 
