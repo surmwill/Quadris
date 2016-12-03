@@ -38,10 +38,6 @@ void Score::setLevel(const int level) {
   this->level = level;
 }
 
-int Score::getLevel() {
-  return level;
-}
-
 void Score::clear() {
   currScore = 0;
   rowsCleared.clear(); //cleared as to not affect the next score update
