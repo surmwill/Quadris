@@ -39,11 +39,11 @@ char Cell::getSymbol() {
   return symbol;
 }
 
-bool Cell::moveableLeft(){
+bool Cell::movableLeft(){
   return leftNeighbour->filled();
 }
 
-bool Cell::moveableRight(){
+bool Cell::movableRight(){
   return rightNeighbour->filled();
 }
 

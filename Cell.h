@@ -18,8 +18,8 @@ class Cell: public Subject, public Observer {
 
   // Functions for block info movement
   bool droppable();
-  bool moveableLeft();
-  bool moveableRight();
+  bool movableLeft();
+  bool movableRight();
   bool drop();
   void moveLeft();
   void moveRight();
