@@ -25,7 +25,7 @@ class View: public Observer {
 
  private:
   int level;
-  BlockLib blockLib;
+  const BlockLib blockLib;
 };
 
 #endif
