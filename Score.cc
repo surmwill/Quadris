@@ -7,18 +7,18 @@ using namespace std;
 
 Score::Score(const int startLevel): level{startLevel} {}
 
-int Score::getCurrScore() {
+int Score::getCurrScore() const {
   return currScore;
 }
 
-void Score::getHighScore() {
+void Score::getHighScore() const {
   return highScore;
 }
 
 void Score::updateCurrScore() {
   currScore += (level + rowsCleared.size()) * (level + rowsCleared.size());
   currScore > highScore ? highScore = currScore;
-  rowsCleared.clear(); //clears the amount of rows cleared
+  rowsCleared.clear(); //resets the amount of rows cleared
 } 
 
 void Score::notify(const Subject &whoNotified) {

@@ -11,8 +11,8 @@ class Subject;
 class Score: public Observer {
  public:
   Score(const int startLevel = 0); //intializes score with a given level
-  int getCurrScore(); //returns the current score
-  int getHighScore(); //returns the hi score
+  int getCurrScore() const; //returns the current score
+  int getHighScore() const; //returns the hi score
   void updateScore(); //updates the current and hi scores
   void notify(const Subject &whoNotified) override; //called when a cell notifies us of it's deletion
   void setLevel(const int level); //sets the level so we can adjust the score multiplier accordingly
