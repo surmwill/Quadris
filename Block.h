@@ -7,7 +7,7 @@ class Cell;
 
 class Block {
  public:
-  Block(std::vector <char> blockDesign, int levelGenerated, int blockSize = 16);
+  Block(std::vector <char> blockDesign, int levelGenerated, int blockSize = 4);
   virtual void left();
   virtual void right();
   virtual void rotatecw();
@@ -15,7 +15,6 @@ class Block {
   virtual bool autoDrop(); 
   virtual bool drop():
   virtual bool down();
-  static int blockNumber;
 
  protected:
   std::vector <Cell*> *getBlockCells();

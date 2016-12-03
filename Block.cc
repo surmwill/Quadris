@@ -4,8 +4,6 @@
 
 using namespace std;
 
-Block::blockNumber = 0;
-
 Block::Block(vector <char> blockDesign, int levelGenerated, int blockSize) {
   blockNumber++;
   for(auto bd:blockDesign) {
@@ -26,9 +24,33 @@ virtual void Block::right() {
 }
 
 virtual void Block::rotatecw() {
+  vector<Cell*> newBlock;
+  int cellNum = 0;
+
+  for (int i = 0; i < 3; i++){
+    for (int j = 0; j < 3; j++){
+      if (n <= 15){
+        blockCells = newBlock;
+        return;
+      }
+      newBlocks.push_back(blockCells[((13 + i) - (4 * j))]);
+    }
+  }
 }
 
 virtual void Block::rotatecc() {
+  vector<Cell*> newBlock;
+  int cellNum = 0;
+
+  for (int i = 0; i < 3; i++){
+    for (int j = 0; j < 3; j++){
+      if (n <= 15){
+        blockCells = newBlock;
+        return;
+      }
+      newBlocks.push_back(blockCells[((4 * j) + (4 - i))]);
+    }
+  }
 }
 
 virtual void Block::down() {
