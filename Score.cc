@@ -11,7 +11,7 @@ int Score::getCurrScore() const {
   return currScore;
 }
 
-void Score::getHighScore() const {
+int Score::getHighScore() const {
   return highScore;
 }
 
