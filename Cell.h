@@ -13,8 +13,8 @@ class Cell: public Subject, public Observer {
   // Functions to acces properties of the cell
   bool filled();
   bool lastBlockCell();
-  std::vector <int> getCoords();
-  char getSymbol();
+  std::vector <int> getCoords() const;
+  char getSymbol() const;
 
   // Functions for block info movement
   bool droppable();
