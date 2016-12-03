@@ -12,7 +12,7 @@ void Subject::attach(Observer *o) {
 }
 
 void Subject::notifyObservers(SubscriptionType t) {
-  for(auto obs:observers) {
-    if((*obs[i])->subType() == t) (*obs[i])->notify(*this);
+  for(auto &obs : observers) {
+    if(obs[i]->subType() == t) obs[i]->notify(*this);
   }
 }
