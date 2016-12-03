@@ -13,7 +13,6 @@ void Score::getHighScore() {
   return highScore;
 }
 
-/
 void Score::updateCurrScore() {
   currScore += (level + rowsCleared.size()) * (level + rowsCleared.size());
   currScore > highScore ? highScore = currScore;
@@ -35,7 +34,7 @@ void Score::notify(const Subject &whoNotified) {
   }
 }
 
-void Score::setLevel(int level) {
+void Score::setLevel(const int level) {
   this->level = level;
 }
 

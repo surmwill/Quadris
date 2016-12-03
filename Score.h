@@ -14,7 +14,7 @@ class Score: public Observer {
   int getHighScore(); //returns the hi score
   void updateScore(); //updates the current and hi scores
   void notify(const Subject &whoNotified) override; //called when a cell notifies us of it's deletion
-  void setLevel(int level); //sets the level so we can adjust the score multiplier accordingly
+  void setLevel(const int level); //sets the level so we can adjust the score multiplier accordingly
   void getLevel(); //returns the current level, used to pass the level number to View
   void clear(); //resets the current score to 0, but leaves the hi score unchanged
   SubscriptionType subType(); //returns the observer type (CellAnnihilation)
