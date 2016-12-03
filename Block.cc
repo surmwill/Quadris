@@ -66,9 +66,30 @@ bool memberCell(int index){
 }
 
 virtual void Block::down() {
+  // if the cell can be dropped
+  if (droppable(12) && droppable(13) && droppable(14) && droppable(15)){
+    // drop all cells starting from the bottom right of the block
+    for (int i = 15; i > 0; i--){
+      blockCells[i]->drop()
+    }
+  } else {
+    autoDrop = true;
+  }
 }
 
-virtual bool Block::autoDrop() {
+void droppable(int index){
+  // if there is no bottom filled cell in this column
+  if (index <= 0) {
+    return true;
+  }
+
+  // if this is the bottom filled cell in this column
+  if (blockCells[index]->filled()){
+    return blockCells[index]->droppable();
+  } else {
+    // find the bottom filled cell in the column
+    return droppable(index-4);
+  }
 }
 
 vector <Cell*>* Block::getBlockCells() {

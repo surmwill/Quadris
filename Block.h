@@ -11,9 +11,9 @@ class Block {
   virtual void left();
   virtual void right();
   virtual void rotate(bool cc);
-  virtual bool autoDrop();
   virtual bool drop():
   virtual bool down();
+  bool autoDrop();
 
  protected:
   std::vector <Cell*> *getBlockCells();
