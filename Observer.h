@@ -8,8 +8,7 @@ class Cell;
 
 class Observer {
  public:
-  virtual void notify(const Subject &whoNotified) = 0;  // pass the Cell that called
-                                                  // the notify method
+  virtual void notify(const Subject &whoNotified) = 0;  // passes the Cell which called the notify method
   virtual SubscriptionType subType() = 0; //The subscription type of an observer
   virtual ~Observer() = default;
 };
