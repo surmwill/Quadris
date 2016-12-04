@@ -36,12 +36,12 @@ void CmdInterpreter::interpretCommand(string cmd){
     mController.levelDown();
   } else if (cmd == "norandom"){
     if (stream >> cmd){
-      mController.setFileName(cmd);
+      mController.setSequence(cmd);
     } else {
       // Failed to read in filename. Throw an error.
     }
   } else if (cmd == "random"){
-    mController.setFileName("");
+    mController.setSequence("");
   } else if (cmd == "sequence"){
     //This can allow for infinite looping if a file "f" calls "sequence f"
     if (*stream >> cmd){
@@ -87,23 +87,23 @@ void CmdInterpreter::startGame(){
 }
 
 void CmdInterpreter::parseArgument(std::string arg1, std::string arg2) {
-  if(arg1 == "-text") cmd.textOnly();
+  if(arg1 == "-text") textOnly = true;
   else if(arg1 == "-seed") {
-    if(isNumber(arg2) cmd.setSeed(std::stoi(arg2)) //check that we have a valid second argument
+    if(isNumber(arg2)) seed = std::stoi(arg2) //check that we have a valid second argument
     else {
       //otherwise randomly give them a seed
       std::cerr << "not given a number for a seed, generating a seed for you" << std::endl;
       std::srand(std::time(0));
       int rand = std::rand() % 100000;
-      cmd.setSeed(std::stoi(rand));
+      seed = std::stoi(rand);
     }
   }
   else if(arg1 == "-scriptfile") {
-    if(goodFile(arg2)) cmd.setSequence(arg2); //check that we have a valid second argument
+    if(goodFile(arg2)) startingSequence = arg2; //check that we have a valid second argument
     else std::cerr << "could not read scriptfile" << std::endl;
   }
   else if(arg1 == "-startlevel") {
-    if(isNumber(arg2)) cmd.setLevel(std::stoi(arg2)); //check that we have a valid second argument
+    if(isNumber(arg2)) startingLevel = std::stoi(arg2); //check that we have a valid second argument
     else std::cerr << "not given a number for level, starting at level 0" << std::endl;
   }
 }

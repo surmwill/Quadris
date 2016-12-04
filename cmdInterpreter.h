@@ -6,6 +6,13 @@ class CmdInterpreter {
     Quadris mController; //Calls different parts of the program
     istream *stream; //The input stream
 
+    //These 4 values store command line arguments to pass to the Quadris constructor
+    bool textOnly = false; //Text only mode
+    int seed; //Seed for random number generation
+    std::string startingSequence = ""; //Intial file to read input from
+    int startingLevel = 0; //The starting level
+    
+
     void interpretCommand(std::string cmd); //Determines what part of the program to call with a given command
     void parseArguments(std::string arg1, std::string arg2); //Parses command line arguments
     bool goodFile(std::string s); //checks if a file with name s can be opened
