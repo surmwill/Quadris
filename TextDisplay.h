@@ -9,7 +9,7 @@ class Subject;
 
 class TextDisplay: public View {
  public:
-  TextDisplay(const int startLevel = 0, cosnt int rows = 18, const int cols = 11); //intrializes the TextDisplay's grid with given dimensions, and its starting level
+  TextDisplay(const int startLevel = 0, const int rows = 18, const int cols = 11); //intrializes the TextDisplay's grid with given dimensions, and its starting level
   void notify(const Subject &whoNotified) override;
   void display(const Score &score) override;
   void showHint(const std::vector <std::vector <int>> & coords) override;
