@@ -20,6 +20,7 @@ CmdInterpreter::CmdInterpreter(istream * in, int argc, char *argv[]): stream{in}
       parseArgument(arg1, arg2); //parse the arguments
     }
   }
+  if(DEBUG) cout << "constructing Quadris" << endl;
   quadris = unique_ptr <Quadris> (new Quadris{textOnly, seed, startingSequence, startingLevel});
   if(DEBUG) cout << "CmdInterpreter::CmdInterpreter" << endl;
 }
