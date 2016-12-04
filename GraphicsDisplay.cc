@@ -115,8 +115,8 @@ void GraphicsDisplay::drawNextBlock(const vector <vector <char>> & layout, int c
   win.fillRectangle(nextBlockStartX, nextBlockStartY, nextBlockAreaLength, nextBlockAreaHeight, clearColour);
   
   //draws the layout of the next blockz. Currenently in the top left of the screen
-  for(unsigned int i = 0; i < numCellsX; i++) {
-    for(unsigned int j = 0; j < numCellsY; j++) {
+  for(int i = 0; i < numCellsX; i++) {
+    for(int j = 0; j < numCellsY; j++) {
       if(layout[i][j] != ' ') { 
         int startX = nextBlockStartX + (j * nextCellWidth) + border;
         int fillWidth = nextCellWidth - (border * 2);

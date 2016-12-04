@@ -9,8 +9,8 @@
 
 using namespace std;
 
-BlockController::BlockController(Level *const level, Grid *grid): level{level},
-  grid{grid},currBlock{level->genBlock()}, nextBlock{level->genBlock()} {
+BlockController::BlockController(Level *const level, Grid *grid): grid{grid},
+  level{level}, currBlock{level->genBlock()}, nextBlock{level->genBlock()} {
   for(int i = 0; i < 4; i++) {
     for(int j = 0; j < 4; j++) {
       generatingArea.emplace_back(grid->getCell(i, j));
