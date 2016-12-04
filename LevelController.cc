@@ -14,7 +14,7 @@ LevelController::LevelController(const int level) {;
 }
 
 void LevelController::changeLevel(const int levelNum) {
-  delete currentLevel;
+  if (currentLevel) delete currentLevel;
 
   switch(levelNum) {
     case 0: currentLevel = new LevelZero{"sequence.txt"};
