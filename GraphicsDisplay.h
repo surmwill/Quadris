@@ -14,7 +14,7 @@ class GraphicsDisplay: public View {
   GraphicsDisplay(const int startLevel = 0; const int rows = 18, const int cols = 11); //initializes the graphics display with a grid of size (row, col) and a starting level
   void notify(const Subject &whoNotified) override; 
   void display(const Score &score) override; 
-  void showHint(const std::vector <const std::vector <int>> & coords) override; 
+  void showHint(const std::vector <std::vector <int>> & coords) override; 
   void clear() override; 
 
  private:

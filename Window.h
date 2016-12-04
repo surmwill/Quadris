@@ -1,4 +1,4 @@
-fndef __WINDOW_H__
+#ifndef __WINDOW_H__
 #define __WINDOW_H__
 #include <X11/Xlib.h>
 #include <iostream>

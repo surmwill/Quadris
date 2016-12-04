@@ -1,4 +1,5 @@
 #include <vector>
+#include <memory>
 #include "Score.h"
 
 #ifndef ViewController_h
@@ -16,7 +17,7 @@ class ViewController {
 
  private:
   Score score; //information about various scores of the game, sent to both Views
-  std::vector <unique_ptr <View>> views; //An array of the various Views we have
+  std::vector <std::unique_ptr <View>> views; //An array of the various Views we have
 };
 
 #endif
