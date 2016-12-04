@@ -8,6 +8,9 @@
 #include "Info.h"
 #include <map>
 #include <vector>
+#include <iostream>
+
+#define DEBUG 1 
 
 using namespace std;
 
@@ -23,6 +26,8 @@ GraphicsDisplay::GraphicsDisplay(const int startLevel, const int rows, const int
   symToColour.emplace('T', Xwindow::Blue);
 
   clear();
+
+  if(DEBUG == 1) cout << "GraphicsDisplay::GraphicsDisplay()" << endl;
 }
 
 //Fill the cell that notified the display

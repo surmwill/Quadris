@@ -4,6 +4,9 @@
 #include "Subscriptions.h"
 #include "Cell.h"
 #include "Info.h"
+#include <iostream>
+
+#define DEBUG 1
 
 using namespace std;
 
@@ -12,6 +15,8 @@ Cell::Cell(char symbol, int blockSize, int levelGenerated, int row, int col): ce
   rightNeighbour = nullptr;
   topNeighbour = nullptr;
   bottomNeighbour = nullptr;
+
+  if(DEBUG == 1) cout << "Cell::Cell()" << endl;
 }
 
 void Cell::setNeighbours(Cell * left, Cell * right, Cell * top, Cell * bottom){

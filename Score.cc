@@ -4,10 +4,15 @@
 #include "Observer.h"
 #include "Subject.h"
 #include "Info.h"
+#include <iostream>
+
+#define DEBUG 1
 
 using namespace std;
 
-Score::Score(const int startLevel): level{startLevel} {}
+Score::Score(const int startLevel): level{startLevel} {
+  if(DEBUG == 1) cout << "Score::Score" << endl;
+}
 
 int Score::getCurrScore() const {
   return currScore;

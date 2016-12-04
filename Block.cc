@@ -1,6 +1,9 @@
 #include "Block.h"
 #include <vector>
 #include "Cell.h"
+#include <iostream>
+
+#define DEBUG 1
 
 using namespace std;
 
@@ -19,6 +22,7 @@ Block::Block(vector <char> blockDesign, int levelGenerated, int blockSize) {
       }
     }
   }
+  if(DEBUG == 1) cout << "Block::Block()" << endl;
 }
 
 bool Block::autoDrop(){

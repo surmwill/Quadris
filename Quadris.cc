@@ -10,6 +10,9 @@
 #include <string>
 #include <vector>
 #include <cstdlib>
+#include <iostream>
+
+#define DEBUG 1
 
 using namespace std;
 
@@ -38,6 +41,8 @@ Quadris::Quadris(int seed, bool textOnly, std::string startingSequence, int star
 
   //Sets the starting sequence if neccessary
   if(startingSequence.length() > 0) lc->setFilename(startingSequence);
+ 
+  if(DEBUG == 1) cout << "Quadris::Quadris()" << endl;
 }
 
 void Quadris::left() {
