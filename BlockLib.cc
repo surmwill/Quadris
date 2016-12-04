@@ -7,11 +7,11 @@ using namespace std;
 
 BlockLib::BlockLib() {
   layoutMap.emplace('I', &BlockLib::iBlock);
-/*  layoutMap.insert('J', &BlockLib::jBlock);
-  layoutMap.insert('L', &BlockLib::lBlock);
-  layoutMap.insert('O', &BlockLib::oBlock);
-  layoutMap.insert('S', &BlockLib::sBlock);
-  layoutMap.insert('Z', &BlockLib::zBlock); */
+  layoutMap.emplace('J', &BlockLib::jBlock);
+  layoutMap.emplace('L', &BlockLib::lBlock);
+  layoutMap.emplace('O', &BlockLib::oBlock);
+  layoutMap.emplace('S', &BlockLib::sBlock);
+  layoutMap.emplace('Z', &BlockLib::zBlock); 
 }
 
 vector <vector <char>> BlockLib::getBlockLayout(char blockType) const {

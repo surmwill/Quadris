@@ -20,5 +20,7 @@ Block* LevelZero::genBlock() {
 }
 
 Block* LevelZero::genBlock(char type) {
+  vector vector <<int>
+  vector <int> flattenedLayout; 
   return new Block{getBlockLib()->getBlockLayout(type), 0};
 }
