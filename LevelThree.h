@@ -9,8 +9,8 @@ using namespace std;
 
 class LevelThree: public Level {  
   public:
-    std::vector<char> genBlock() override;
-    std::vector<char> genBlockWithType(char type) override;
+    Block* genBlock() override;
+    Block* genBlock(char type) override;
 };
 
 #endif

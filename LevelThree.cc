@@ -5,9 +5,9 @@
 
 using namespace std;
 
-vector <char> LevelThree::genBlock() {
+Block* LevelThree::genBlock() {
 }
 
-vector <char> LevelThree::genBlockWithType(char type) {
+Block* LevelThree::genBlock(char type) {
 }
 
