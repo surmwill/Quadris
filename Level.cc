@@ -22,7 +22,7 @@ BlockLib * Level::getBlockLib() {
 bool Level::goodFile(const std::string filename) {
   if(filename.length() < 1) return false;
 
-  ofstream myfile{filename};
+  ifstream myfile{filename};
   if(myfile.is_open()) return true;
   else return false;
 }
