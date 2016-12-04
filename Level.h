@@ -10,7 +10,7 @@ class Block;
 
 class Level{
   private:
-    std::ofstream seqFile; //the file which contains the sequence of commands
+    std::ifstream seqFile; //the file which contains the sequence of commands
     int levelNum; // the level number
     BlockLib blockLib; //the block library
     
@@ -21,6 +21,7 @@ class Level{
     BlockLib * getBlockLib();  //returns the BlockLib
 
   public:
+    static int seed;
     virtual Block* genBlock() = 0; //generates a random block based on the rules of the level/game
     virtual Block* genBlock(char type) = 0; //generates a block with type char
     virtual ~Level() = 0; 

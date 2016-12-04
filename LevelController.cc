@@ -8,11 +8,12 @@
 
 using namespace std;
 
-LevelController::LevelController(int level) {
+LevelController::LevelController(const int level, const int seed) {
+  Level::seed = seed;
   changeLevel(level);  
 }
 
-void LevelController::changeLevel(int levelNum){
+void LevelController::changeLevel(const int levelNum){
   switch(levelNum) {
     case 0: currentLevel = new LevelZero{"sequence.txt"};
       break;
@@ -27,7 +28,7 @@ void LevelController::changeLevel(int levelNum){
   }
 }
 
-void LevelController::setFilename(std::string fileName){
+void LevelController::setFilename(const std::string fileName){
   currentLevel->setFilename(fileName);
 }
 
