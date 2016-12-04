@@ -5,7 +5,7 @@
 #include <string>
 #include <sstream>
 #include <unistd.h>
-#include "window.h"
+#include "Window.h"
 
 using namespace std;
 
