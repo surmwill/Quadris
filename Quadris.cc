@@ -9,13 +9,17 @@
 #include "TextDisplay.h"
 #include <string>
 #include <vector>
+#include <cstdlib>
 
 using namespace std;
 
 class Grid;
 
 Quadris::Quadris(int seed, bool textOnly, std::string startingSequence, int startLevel): level{startLevel}, 
-  lc{new LevelController{startLevel, seed}} { 
+  lc{new LevelController{startLevel}} { 
+ 
+  //sets the seed
+  srand(seed);
 
   //construct the views and view controller
   vector <View *> views;

@@ -5,11 +5,11 @@
 #include "LevelTwo.h"
 #include "LevelThree.h"
 #include "LevelFour.h"
+#include <cstdlib>
 
 using namespace std;
 
-LevelController::LevelController(const int level, const int seed) {
-  Level::seed = seed;
+LevelController::LevelController(const int level) {;
   changeLevel(level);  
 }
 
