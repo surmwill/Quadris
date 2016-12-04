@@ -19,17 +19,12 @@ void HeavyBlock::right() {
   Block::down();
 }
 
-void HeavyBlock::rotatecw() {
-  Block::rotatecw();
+void HeavyBlock::rotate(bool cc) {
+  Block::rotate(cc);
   Block::down();
 }
 
-void HeavyBlock::rotatecc() {
-  Block::rotatecc();
-  Block::down();
-}
-
-bool HeavyBlock::down() {
+void HeavyBlock::down() {
   Block::down();
   Block::down();
 }
