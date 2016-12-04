@@ -1,13 +1,44 @@
 #include "LevelThree.h"
 #include "Level.h"
+#include "HeavyBlock.h"
 #include <vector> 
 #include <string> 
 
 using namespace std;
 
 Block* LevelThree::genBlock() {
-}
+  // create a model for the probability breakdown
+  vector<char> symbolProbability;
+
+  // I block probability (1/9)
+  symbolProbability.push_back('I');
+
+  // J block probability (1/9)
+  symbolProbability.push_back('J');
+
+  // L block probability (1/9)
+  symbolProbability.push_back('L');
+
+  // O block probability (1/9)
+  symbolProbability.push_back('O');
+
+  // S block probability (2/9)
+  symbolProbability.push_back('S');
+  symbolProbability.push_back('S');
+
+  // Z block probability (2/9)
+  symbolProbability.push_back('Z');
+  symbolProbability.push_back('Z');
+
+  // O block probability (1/9)
+  symbolProbability.push_back('O');
+
+  int randInt = rand() % 9;
+
+  return genBlock(symbolProbability[randInt]);
+ }
 
 Block* LevelThree::genBlock(char type) {
+  HeavyBlock hBlock = new HeavyBlock((getBlockLib()->getBlockLayout(type)), 3);
 }
 
