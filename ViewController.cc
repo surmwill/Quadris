@@ -5,6 +5,9 @@
 #include "GraphicsDisplay.h"
 #include <vector>
 #include <memory>
+#include <iostream>
+
+#define DEBUG 1
 
 using namespace std;
 
@@ -12,6 +15,7 @@ ViewController::ViewController(const vector <View *> & viewsToAdd, const int sta
   for(auto &v: viewsToAdd) {
     views.emplace_back(unique_ptr <View> (v));
   }
+  if(DEBUG == 1) cout << "ViewController::ViewController()" << endl; 
 }
 
 void ViewController::updateView() {

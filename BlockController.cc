@@ -3,9 +3,9 @@
 #include "Level.h"
 #include "Grid.h"
 #include "Block.h"
-
-// Remove the below inclusion
 #include <iostream>
+
+#define DEBUG 1
 
 using namespace std;
 
@@ -16,6 +16,8 @@ BlockController::BlockController(Level *const level, Grid *grid): grid{grid},
       generatingArea.emplace_back(grid->getCell(i, j));
     }
   }
+  
+  if(DEBUG == 1) cout << "BlockController::BlockController()" << endl;
 }
 
 void BlockController::left() {

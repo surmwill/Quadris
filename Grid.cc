@@ -1,4 +1,7 @@
 #include "Grid.h"
+#include <iostream>
+
+#define DEBUG 1
 
 using namespace std;
 
@@ -44,6 +47,8 @@ Grid::Grid(const vector <View*> & views, int row, int col){
       }
     }
   }
+
+  if(DEBUG == 1) cout << "Grid::Grid()" << endl;
 }
 
 Cell * Grid::getCell(int row, int col){

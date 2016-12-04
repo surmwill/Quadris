@@ -8,6 +8,8 @@
 #include <iostream>
 #include <iomanip> //setw
 
+#define DEBUG 1
+
 using namespace std;
 
 TextDisplay::TextDisplay(const int startLevel, const int rows, const int cols): View{startLevel} {
@@ -17,6 +19,7 @@ TextDisplay::TextDisplay(const int startLevel, const int rows, const int cols): 
       textGrid[i].emplace_back(' ');
     }
   }
+  if(DEBUG == 1) cout << "TextDisplay::TextDisplay" << endl;
 }
 
 void TextDisplay::notify(const Subject &whoNotified) {
