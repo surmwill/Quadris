@@ -1,14 +1,16 @@
 #include "TextDisplay.h"
-#include "SubscriptionType.h"
+#include "Subscriptions.h"
 #include "Score.h"
 #include "View.h"
 #include "Subject.h"
 #include "BlockLib.h"
-#include "info.h"
+#include "Info.h"
+#include <iostream>
+#include <iomanip> //setw
 
 using namespace std;
 
-TextDisplay::TextDisplay(const int startLevel, const int rows, const int cols) View{startLevel} {
+TextDisplay::TextDisplay(const int startLevel, const int rows, const int cols): View{startLevel} {
   //the grid is intially empty
   for(int i = 0; i < rows; i++) {
     for(int j = 0; j < cols; i++) {
@@ -36,7 +38,7 @@ void TextDisplay::display(const Score &score) {
   //Top of board
   cout << "Level: ";
   cout << setw(spacing);
-  cout << level; << endl;
+  cout << getLevel() << endl;
   cout << "Score: ";
   cout << setw(spacing);
   cout << score.getCurrScore();
@@ -72,7 +74,7 @@ void TextDisplay::showHint(const vector <vector <int>> &coords) {
   for(auto &n : coords) {
     row = n[0];
     col = n[1];
-    textGrid[row][col] = '?'
+    textGrid[row][col] = '?';
   }
 }
 

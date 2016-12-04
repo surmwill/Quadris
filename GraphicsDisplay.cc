@@ -1,4 +1,4 @@
-#include "SubscriptionType.h"
+#include "Subscriptions.h"
 #include "GraphicsDisplay.h"
 #include "Score.h"
 #include "View.h"
@@ -11,24 +11,24 @@
 
 using namespace std;
 
-GraphicsDisplay::GraphicsDisplay(const int startLevel, const int rows, const int cols, const int level): View{startLevel}, rows{rows}, cols{cols}, totalLength{cols * cellWidth}, 
-  totalHeight{(rows * cellHeight) + topSpace}, Xwindow{totalLength, totalHeight} {
-  symToColour.emplace_back(' ', Xwindow::White);
-  symToColour.emplace_back('I', Xwindow::Magenta); 
-  symToColour.emplace_back('J', Xwindow::Red);
-  symToColour.emplace_back('L', Xwindow::Green);
-  symToColour.emplace_back('O', Xwindow::Cyan);
-  symToColour.emplace_back('D', Xwindow::Brown);
-  symToColour.emplace_back('Z', Xwindow::Orange);
-  symToColour.emplace_back('T', Xwindow::Blue);
+GraphicsDisplay::GraphicsDisplay(const int startLevel, const int rows, const int cols): View{startLevel}, rows{rows}, cols{cols}, totalLength{cols * cellWidth}, 
+  totalHeight{(rows * cellHeight) + topSpace}, win{totalLength, totalHeight} {
+  symToColour.emplace(' ', Xwindow::White);
+  symToColour.emplace('I', Xwindow::Magenta); 
+  symToColour.emplace('J', Xwindow::Red);
+  symToColour.emplace('L', Xwindow::Green);
+  symToColour.emplace('O', Xwindow::Cyan);
+  symToColour.emplace('D', Xwindow::Brown);
+  symToColour.emplace('Z', Xwindow::Orange);
+  symToColour.emplace('T', Xwindow::Blue);
 
   clear();
 }
 
 //Fill the cell that notified the display
 void GraphicsDisplay::notify(const Subject &whoNotified) {
-  int row = whoNotified.getInfo().getCoords[0];
-  int col = whoNotified.getInfo().getCoords[1];
+  int row = whoNotified.getInfo().coords[0];
+  int col = whoNotified.getInfo().coords[1];
   bool specialCell = false;
   
   //If the row and column of the cell are not initialized (coords are -1, -1) the special cell is notifying us of our next block
@@ -49,7 +49,7 @@ void GraphicsDisplay::display(const Score &score) {
  
   //Drawing text for score, highscore, level, and next block
   win.drawString(xIndent, ySpacing, "Level:");
-  win.drawString(valuexIndent, ySpacing, to_string(getLevel());
+  win.drawString(valuexIndent, ySpacing, to_string(getLevel()));
  
   //special placement of next score
   win.drawString(nextBlockIndent, ySpacing, "Next:");
@@ -57,36 +57,37 @@ void GraphicsDisplay::display(const Score &score) {
   //we are moving down a row so double the spacing
   ySpacing += ySpacing; 
   win.drawString(xIndent, ySpacing, "Score:");
-  win.drawString(valuexIndent, ySpacing, to_string(score.getCurrScore());
+  win.drawString(valuexIndent, ySpacing, to_string(score.getCurrScore()));
 
   //double the spacing
   ySpacing += ySpacing;
   win.drawString(xIndent, ySpacing, "Hi Score:");
-  win.drawString(valuexIndent, ySpacing, to_string(Score.getHighScore());
+  win.drawString(valuexIndent, ySpacing, to_string(score.getHighScore()));
 }
 
 //draws the hint
 void GraphicsDisplay::showHint(const vector <vector <int>> &coords) {
   for(auto &n : coords) {
-    row = coords[0];
-    col = coords[1];
+    int row = n[0];
+    int col = n[1];
     fillCell(row, col, Xwindow::Black);
   }
 }
 
 void GraphicsDisplay::clear() {
   //wipes the entire display
-  win.drawString(0, 0, totalWidth, totalHeight, clearColour);
+  win.fillRectangle(0, 0, totalLength, totalHeight, clearColour);
 } 
 
 //returns the proper colour, or black otherwise
-Xwindow GraphicsDisplay::symbolToColour(const char symbol) {
+int GraphicsDisplay::symbolToColour(const char symbol) {
   auto iter = symToColour.find(symbol);
-  iter == symToColour.end()? return Xwindow::White : return iter->second;
+  if(iter == symToColour.end()) return Xwindow::White;
+  else return iter->second;
 }
 
 //Each Cell has a white border outline and a filled coloured center
-void GraphicsDisplay::fillCell(const int row, const int col, Xwindow colour) {
+void GraphicsDisplay::fillCell(const int row, const int col, int colour) {
   int border = 3; //how thick the white border between cells are
 
   int startX = col * cellWidth + border; //the starting X pixel position for filling the cell
@@ -99,13 +100,13 @@ void GraphicsDisplay::fillCell(const int row, const int col, Xwindow colour) {
 }
 
 //Draws the next block. Imagine a mini grid in the top right of the window in which we draw the next block
-void GraphicsDisplay::drawNextBlock(const vector <vector <char>> & layout, Xwindow colour) {
+void GraphicsDisplay::drawNextBlock(const vector <vector <char>> & layout, int colour) {
   int nextBlockAreaLength = totalLength / 2; //The length of the top section of the mini grid
   int nextBlockStartX = totalLength / 2; //The starting X pixel position for drawing next block
   int nextBlockAreaHeight = topSpace; //Y dimension of the top section of the grid
   int nextBlockStartY = 0; //The starting Y pixel position for drawing next block
 
-  int numCellsX = 4, int numCellsY = 2; //Our mini grid of 4x2 cells. Note all block designs only use the first 2 rows so no point in drawing 2 empty rows. Normally would be 4x4
+  int numCellsX = 4, numCellsY = 2; //Our mini grid of 4x2 cells. Note all block designs only use the first 2 rows so no point in drawing 2 empty rows. Normally would be 4x4
   int nextCellWidth = nextBlockAreaLength / numCellsX; //The width of each cell in next block
   int nextCellHeight = nextBlockAreaHeight / numCellsY; //The height of each cell in next block
   int border = 1; //the border between cells. Smaller because next block is drawn smaller
