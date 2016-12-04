@@ -4,9 +4,9 @@
 #include "HintEngine.h"
 #include "Quadris.h"
 #include "Grid.h"
-#include "View"
-#include "GraphicsDisplay"
-#include "TextDisplay"
+#include "View.h"
+#include "GraphicsDisplay.h"
+#include "TextDisplay.h"
 #include <string>
 #include <vector>
 
@@ -14,72 +14,75 @@ using namespace std;
 
 class Grid;
 
-Quadris::Quadris(bool textOnly, int seed, std::string startingSequence = "", int startLevel = 0): level{startingLevel}, 
-  lc{new LevelController{startingLevel}} {
-  
+Quadris::Quadris(int seed, bool textOnly, std::string startingSequence, int startLevel): level{startLevel}, 
+  lc{new LevelController{startLevel}} { 
+
   //construct the views and view controller
   vector <View *> views;
   views.emplace_back(new TextDisplay{startLevel});
   if(!textOnly) views.emplace_back(new GraphicsDisplay{startLevel});
-  ViewController vc{views, startLevel};
+  vc = unique_ptr <ViewController> (new ViewController {views, startLevel});
    
   //constructs the grid
-  Grid = new Grid{views}; 
+  Grid * grid = new Grid{views}; 
 
   //constructs the block controller
-  bc = new BlockController(&grid);
+  bc = unique_ptr <BlockController> (new BlockController {lc->getLevel(), grid});
 
   //constructs the hint engine
-  hintEngine = new HintEngine(&bc);
+  hintEngine = unique_ptr <HintEngine> (new HintEngine{bc});
+
+  //Sets the starting sequence if neccessary
+  if(startingSequence.length() > 0) lc->setFileName(startingSequence);
 }
 
 void Quadris::left() {
-  bc.left();
-  vc.updateView();
+  bc->left();
+  vc->updateView();
 }
 
 void Quadris::right() {
-  bc.right();
-  vc.updateView();
+  bc->right();
+  vc->updateView();
 }
 
 void Quadris::down() {
-  bc.down();
-  vc.updateView();
+  bc->down();
+  vc->updateView();
 }
 
 void Quadris::rotatecc() {
-  bc.rotatecc();
-  vc.updateView();
+  bc->rotatecc();
+  vc->updateView();
 }
 
 void Quadris::rotatecw() {
-  bc.rotatecw();
-  vc.updateView();
+  bc->rotatecw();
+  vc->updateView();
 }
 
 void Quadris::levelup() {
   level == 4 ? level = 0 : level++;
-  levelController.changeLevel(level);
+  lc->changeLevel(level);
 }
 
 void Quadris::leveldown() {
   level == 0 ? level = 4 : level--;
-  levelController.changeLevel(level);
+  lc->changeLevel(level);
 }
 
 void Quadris::setSequence(string filename) {
-  levelController.setFileName(filename);
+  lc->setFileName(filename);
 }
 
 void Quadris::setBlock(char type) {
-  bd.setBlock(type);
+  bc->setBlock(type);
 }
 
 void Quadris::hint() {
- vc.showHint(hintEngine.hint());
+ vc->showHint(hintEngine->hint());
 }
 
 void Quadris::restart() {
-  vc.restart();
+  vc->restart();
 }

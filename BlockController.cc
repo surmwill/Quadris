@@ -9,7 +9,7 @@
 
 using namespace std;
 
-BlockController::BlockController(Level *level, Grid *grid): level{level},
+BlockController::BlockController(Level *const level, Grid *grid): level{level},
   grid{grid},currBlock{level->genBlock()}, nextBlock{level->genBlock()} {
   for(int i = 0; i < 4; i++) {
     for(int j = 0; j < 4; j++) {
