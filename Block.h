@@ -8,6 +8,7 @@ class Cell;
 class Block {
  public:
   Block(std::vector <char> blockDesign, int levelGenerated, int blockSize = 4);
+  virtual ~Block();
   virtual void left();
   virtual void right();
   virtual void rotate(bool cc);

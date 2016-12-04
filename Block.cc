@@ -21,6 +21,8 @@ Block::Block(vector <char> blockDesign, int levelGenerated, int blockSize) {
   }
 }
 
+Block::~Block(){}
+
 bool Block::autoDrop(){
   return shouldDrop;
 }
@@ -156,6 +158,9 @@ bool Block::movable(int index, int cellsToCheck, Block::Direction d){
       return blockCells[index]->movableLeft();
     } else if (d == Direction::Right){
       return blockCells[index]->movableRight();
+    } else {
+      //unknown direction
+      return false;
     }
   } else {
     // set the step of Cells in the block
