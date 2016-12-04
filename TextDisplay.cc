@@ -17,7 +17,7 @@ TextDisplay::TextDisplay(const int startLevel, const int rows, const int cols): 
   vector <char> charRow;
   //the grid is intially empty
   for(int i = 0; i < rows; i++) {
-    for(int j = 0; j < cols; i++) {
+    for(int j = 0; j < cols; j++) {
       charRow.emplace_back(' ');
     }
     textGrid.emplace_back(charRow);

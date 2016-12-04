@@ -29,7 +29,7 @@ Quadris::Quadris(int seed, bool textOnly, std::string startingSequence, int star
 
   //construct the views and view controller
   vector <View *> views;
-  views.emplace_back(new TextDisplay{startLevel});
+  views.emplace_back(new TextDisplay{startLevel, 18, 11});
   if(!textOnly) views.emplace_back(new GraphicsDisplay{startLevel});
 
   if(DEBUG == 1) cout << "constructing the view controller" << endl;
