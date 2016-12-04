@@ -6,8 +6,6 @@
 
 using namespace std;
 
-int Level::seed = 0;
-
 Level::~Level() {};
 
 void Level::setFilename(const string filename) {
