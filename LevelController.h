@@ -4,6 +4,11 @@
 #include <string>
 
 class Level;
+class LevelZero;
+class LevelOne;
+class LevelTwo;
+class LevelThree;
+class LevelFour;
 
 class LevelController{
   private:
