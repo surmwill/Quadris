@@ -11,8 +11,8 @@ class Block {
   virtual void left();
   virtual void right();
   virtual void rotate(bool cc);
-  virtual bool drop();
-  virtual bool down();
+  virtual void drop();
+  virtual void down();
   virtual bool autoDrop();
   virtual Cell * getCell(int row, int col);
   virtual void setCell(int row, int col, Cell * newCell);
