@@ -14,7 +14,9 @@ class Subject {
   void attach(Observer * o); //attaches observer o to the observer list
   void notifyObservers(SubscriptionType t); //notifies all observers in the list with SubscriptionType t
   int getObserverSize(); //returns the number of observers
-  virtual const Info & getInfo() const = 0; //returns information about the notifying observer
+  void removeObservers(SubscriptionType t); // remove observers of a specific subscription type
+  void copyObservers(Subject * otherSubject); // take the observers from another subject
+  virtual const Info & getInfo() const = 0; //returns information about the Subject
   virtual ~Subject() = 0;
 };
 

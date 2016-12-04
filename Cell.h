@@ -48,10 +48,6 @@ class Cell: public Subject, public Observer {
   Cell * rightNeighbour;
   Cell * topNeighbour;
   Cell * bottomNeighbour;
-
-  // Block observer helper function
-  void removeObservers(SubscriptionType t);
-  void copyObservers(Cell * otherCell);
 };
 
 #endif
