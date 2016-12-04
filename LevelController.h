@@ -17,7 +17,7 @@ class LevelController{
   public:
     LevelController(int level);
     void changeLevel(int levelNum);
-    void setFileName(std::string fileName);
+    void setFilename(std::string fileName);
     Level * const getLevel(); //2 consts: Won't modify where it's pointing and what it's pointing at
 };
 

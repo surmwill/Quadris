@@ -15,13 +15,13 @@ class Level{
 
   protected:
     Level();
-    void setFilename(std::string fileName);
     BlockLib * getBlockLib(); 
 
   public:
     virtual Block* genBlock() = 0;
     virtual Block* genBlock(char type) = 0;
     virtual ~Level() = 0;
+    void setFilename(std::string fileName);
 };
 
 #endif

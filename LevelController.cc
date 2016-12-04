@@ -27,8 +27,8 @@ void LevelController::changeLevel(int levelNum){
   }
 }
 
-void LevelController::setFileName(std::string fileName){
-  currentLevel->setFileName(fileName);
+void LevelController::setFilename(std::string fileName){
+  currentLevel->setFilename(fileName);
 }
 
 Level *const LevelController::getLevel(){
