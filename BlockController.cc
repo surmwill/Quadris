@@ -62,7 +62,7 @@ void BlockController::attachCurrBlockToGrid() {
         // replace this with something better
         // BlockController whould not output to the user
         cout << "GAME OVER" << endl;
-        exit;
+        exit(0);
       }
 
       // fill the grid cell and replace the block cell
