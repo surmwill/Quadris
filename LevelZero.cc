@@ -3,6 +3,7 @@
 #include <vector> 
 #include <string> 
 #include "Block.h"
+#include "BlockGen.h"
 
 using namespace std;
 

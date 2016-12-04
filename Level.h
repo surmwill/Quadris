@@ -3,23 +3,27 @@
 
 #include <string>
 #include <vector>
+#include <fstream>
 #include "BlockLib.h"
 
 class Block;
 
 class Level{
   private:
-    std::string fileName;
-    int levelNum;
-    BlockLib blockLib;	
-
+    std::ofstream seqFile; //the file which contains the sequence of commands
+    int levelNum; // the level number
+    BlockLib blockLib; //the block library
+    
+    bool goodFile(const std::string filename); //returns true if we can open the file for input
+ 	
   protected:
-    Level();
-    BlockLib * getBlockLib(); 
+    void setFilename(const std::string filename); //sets the seqFile to open the filename if the file can be opened
+    std::ofstream & getSeqFile(); //returns the seqFile
+    BlockLib * getBlockLib();  //returns the BlockLib
 
   public:
-    virtual Block* genBlock() = 0;
-    virtual Block* genBlock(char type) = 0;
+    virtual Block* genBlock() = 0; //generates a random block based on the rules of the level/game
+    virtual Block* genBlock(char type) = 0; //generates a block with type char
     virtual ~Level() = 0;
     void setFilename(std::string fileName);
 };
