@@ -1,26 +1,29 @@
 #include "ViewController.h"
 #include "View.h"
 #include "Score.h"
+#include "TextDisplay.h"
+#include "GraphicsDisplay.h"
 #include <vector>
+#include <memory>
 
 using namespace std;
 
 ViewController::ViewController(const int startLevel, const bool textOnly): score{startLevel} { 
-  views.emplace_back(new TextDisplay{startLevel});
-  if(!textOnly) views.emplace_back(new GraphicsDisplay{startLevel});
+  views.emplace_back(unique_ptr <View> (new TextDisplay{startLevel}));
+  if(!textOnly) views.emplace_back(unique_ptr <View> (new GraphicsDisplay{startLevel}));
 }
 
 void ViewController::updateView() {
   score.updateCurrScore();
 
   for(auto &n : views) {
-    n->updateView(score);
+    n->display(score);
   }
 }
 
 void ViewController::showHint(const vector <vector <int>> & coords) {
   for(auto &n : views) {
-    n->showHint(score, coords);
+    n->showHint(coords);
   }
 }
 
