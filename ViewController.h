@@ -1,6 +1,7 @@
 #include <vector>
 #include <memory>
 #include "Score.h"
+#include "View.h"
 
 #ifndef ViewController_h
 #define ViewController_h 1

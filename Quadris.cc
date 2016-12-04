@@ -51,6 +51,11 @@ void Quadris::down() {
   vc->updateView();
 }
 
+void Quadris::drop() {
+  bc->drop();
+  vc->updateView();
+}
+
 void Quadris::rotatecc() {
   bc->rotatecc();
   vc->updateView();
