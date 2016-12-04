@@ -7,17 +7,21 @@
 #include "Info.h"
 #include <iostream>
 #include <iomanip> //setw
+#include <vector>
 
 #define DEBUG 1
 
 using namespace std;
 
 TextDisplay::TextDisplay(const int startLevel, const int rows, const int cols): View{startLevel} {
+  vector <char> charRow;
   //the grid is intially empty
   for(int i = 0; i < rows; i++) {
     for(int j = 0; j < cols; i++) {
-      textGrid[i].emplace_back(' ');
+      charRow.emplace_back(' ');
     }
+    textGrid.emplace_back(charRow);
+    charRow.clear();
   }
   if(DEBUG == 1) cout << "TextDisplay::TextDisplay" << endl;
 }
