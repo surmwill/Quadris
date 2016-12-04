@@ -9,7 +9,7 @@ class View;
 
 class ViewController {
  public:
-  ViewController(const int startLevel = 0, const bool textOnly = false); //constructs a TextView and (optionally) GraphicsView
+  ViewController(const std::vector <View *> & viewsToAdd, const int startLevel = 0); //sets the views that the View controller will control
   void updateView(); //updates the views with the latest score and level information 
   void showHint(const std::vector <std::vector <int>> & coords); //sends grid coordinates to the Views in order to draw the hint loction
   void setLevel(const int level); //sets the level of the both views and the score

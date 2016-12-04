@@ -1,15 +1,25 @@
 #include <string>
+#include <iostream>
+#include <locale> //needed for isdigit()
+#include <cstdlib> //needed for rand()
+#include <ctime> //needed for time(0)
 #include "cmdInterpreter.h"
 
-class CmdInterpreter {
-  Quatris mController;
-  istream stream;
-  public:
+using namespace std;
 
-CmdInterpreter::CmdInterpreter(istream * in): stream{in}{}
+CmdInterpreter::CmdInterpreter(istream * in, int argc, char *argv[]): stream{in}{
+  if(argc > 1) {
+    for(int i = 1; i < argc; i++) {
+      string arg1{argv[i]}; //store the first argument in a string
+      i < (argv - 1)? std::string arg2{argv[i + 1]} : std::string arg2{""}; //if there is no second argument, set the second argument to "" to trigger invalid input
+      parseArgument(arg1, arg2); //parse the arguments
+    }
+  }
 
+  mController{textOnly, seed, startingSequence, startingLevel};
+}
 
-void interpretCommand(string cmd){
+void CmdInterpreter::interpretCommand(string cmd){
   if (cmd == "left"){
     mController.left();
   } else if (cmd == "right") {
@@ -28,15 +38,15 @@ void interpretCommand(string cmd){
     mController.levelDown();
   } else if (cmd == "norandom"){
     if (stream >> cmd){
-      mController.setFileName(cmd);
+      mController.setSequence(cmd);
     } else {
       // Failed to read in filename. Throw an error.
     }
   } else if (cmd == "random"){
-    mController.setFileName("");
+    mController.setSequence("");
   } else if (cmd == "sequence"){
     //This can allow for infinite looping if a file "f" calls "sequence f"
-    if (stream >> cmd){
+    if (*stream >> cmd){
       ifstream file(cmd);
       // maybe reuse cmd instead of making string fileCommand
       string fileCommand;
@@ -71,14 +81,47 @@ void interpretCommand(string cmd){
   }
 }
 
-void startGame(){
+void CmdInterpreter::startGame(){
   string cmd;
-  while (stream >> cmd){
+  while (*stream >> cmd){
     interpretCommand(cmd);
   }
 }
 
+void CmdInterpreter::parseArgument(std::string arg1, std::string arg2) {
+  if(arg1 == "-text") textOnly = true;
+  else if(arg1 == "-seed") {
+    if(isNumber(arg2)) seed = std::stoi(arg2) //check that we have a valid second argument
+    else {
+      //otherwise randomly give them a seed
+      std::cerr << "not given a number for a seed, generating a seed for you" << std::endl;
+      std::srand(std::time(0));
+      int rand = std::rand() % 100000;
+      seed = std::stoi(rand);
+    }
+  }
+  else if(arg1 == "-scriptfile") {
+    if(goodFile(arg2)) startingSequence = arg2; //check that we have a valid second argument
+    else std::cerr << "could not read scriptfile" << std::endl;
+  }
+  else if(arg1 == "-startlevel") {
+    if(isNumber(arg2)) startingLevel = std::stoi(arg2); //check that we have a valid second argument
+    else std::cerr << "not given a number for level, starting at level 0" << std::endl;
+  }
+}
 
+bool CmdInterpreter::goodFile(std::string filename) {
+  if(filename.length() < 1) return false;
 
+  std::ofstream myfile{filename};
+  myfile.open()? return true : return false;
+}
 
+bool CmdInterpreter::isNumber(std::string s) {
+  if(s.length() < 1) return false;
 
+  for(auto &n: s) {
+    if(!isdigit(n)) return false;
+  }
+  return true;
+}

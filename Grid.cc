@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Grid::Grid(int row, int col){
+Grid::Grid(const vector <View*> & views, int row, int col){
   // create Grid
   for (int r = 0; r < row; r++){
     vector<Cell> newRow;
@@ -39,6 +39,9 @@ Grid::Grid(int row, int col){
       }
 
       grid[i][j].setNeighbours(left, right, top, bottom);
+      for(auto &v : views) {
+        grid[i][j].attach(v);
+      }
     }
   }
 }
