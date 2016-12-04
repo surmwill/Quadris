@@ -39,8 +39,8 @@ Grid::Grid(const vector <View*> & views, int row, int col){
       }
 
       grid[i][j].setNeighbours(left, right, top, bottom);
-      for(auto &v views) {
-        grid[i][j].attachObserver(v);
+      for(auto &v : views) {
+        grid[i][j].attach(v);
       }
     }
   }
