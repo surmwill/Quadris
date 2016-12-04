@@ -5,6 +5,7 @@
 #include "Subject.h"
 #include "Window.h"
 #include "BlockLib.h"
+#include "Info.h"
 #include <map>
 #include <vector>
 
