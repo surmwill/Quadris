@@ -33,7 +33,7 @@ void Subject::copyObservers(Subject * otherSubject){
   observers.erase(observers.begin(), observers.end());
 
   // take all otherCell's observers
-  for (Observer *o: otherSubject.observers){
+  for (Observer *o: otherSubject->observers){
     attach(o);
   }
 }
