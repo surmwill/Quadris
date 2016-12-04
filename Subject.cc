@@ -19,3 +19,21 @@ void Subject::notifyObservers(SubscriptionType t) {
 int Subject::getObserverSize() {
   return observers.size();
 }
+
+void Subject::removeObservers(SubscriptionType t){
+  for (unsigned int i = 0; i < observers.size(); i++){
+    if (observers[i]->subType() == t){
+      observers.erase(observers.begin()+i);
+    }
+  }
+}
+
+void Subject::copyObservers(Subject * otherSubject){
+  // clear current observers
+  observers.erase(observers.begin(), observers.end());
+
+  // take all otherCell's observers
+  for (Observer *o: otherSubject.observers){
+    attach(o);
+  }
+}

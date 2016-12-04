@@ -116,22 +116,3 @@ void Cell::unsetContent() {
   removeObservers(SubscriptionType::Cell);
   notifyObservers(SubscriptionType::Display);
 }
-
-void Cell::removeObservers(SubscriptionType t){
-  for (unsigned int i = 0; i < observers.size(); i++){
-    if (observers[i]->subType() == SubscriptionType::Cell){
-      observers.erase(observers.begin()+i);
-    }
-  }
-}
-
-void Cell::copyObservers(Cell * otherCell){
-  // clear current observers
-  observers.erase(observers.begin(), observers.end());
-
-  // take all otherCell's observers
-  for (Observer *o: observers){
-    attach(o);
-  }
-}
-
