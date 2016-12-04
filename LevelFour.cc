@@ -34,7 +34,7 @@ Block* LevelFour::genBlock() {
   // T block probability (1/9)
   symbolProbability.push_back('T');
 
-  int randInt = rand() % 9;
+  int randInt = rand() % symbolProbability.size();
 
   return genBlock(symbolProbability[randInt]);
  }
