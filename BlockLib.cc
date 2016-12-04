@@ -1,21 +1,22 @@
 #include "BlockLib.h"
 #include <vector>
 #include <map>
+#include <utility>
 
 using namespace std;
 
 BlockLib::BlockLib() {
-  layoutMap.emplace("i", &iBlock);
-  layoutMap.emplace("j", &jBlock);
-  layoutMap.emplace("l", &lBlock);
-  layoutMap.emplace("o", &oBlock);
-  layoutMap.emplace("s", &sBlock);
-  layoutMap.emplace("z", &zBlock);
+  layoutMap.emplace('I', &BlockLib::iBlock);
+/*  layoutMap.insert('J', &BlockLib::jBlock);
+  layoutMap.insert('L', &BlockLib::lBlock);
+  layoutMap.insert('O', &BlockLib::oBlock);
+  layoutMap.insert('S', &BlockLib::sBlock);
+  layoutMap.insert('Z', &BlockLib::zBlock); */
 }
 
 vector <vector <char>> BlockLib::getBlockLayout(char blockType) const {
   auto iter = layoutMap.find(blockType);
-  return (iter->second)();
+  return (this->*iter->second)();
 } 
 
 vector <vector <char>> BlockLib::iBlock() const {
@@ -46,7 +47,7 @@ vector <vector <char>> BlockLib::iBlock() const {
   return design;
 }
 
-vector <vector <<char> BlockLib::jBlock() const {
+vector <vector <char>> BlockLib::jBlock() const {
   vector <vector <char>> design;
   vector <char> designRow;
   int i;
@@ -159,7 +160,7 @@ vector <vector <char>> BlockLib::sBlock() const {
 }
 
 vector <vector <char>> BlockLib::zBlock() const {
-  vector <vector <char> design;
+  vector <vector <char>> design;
   vector <char> designRow;
 
   int i = 0;
@@ -186,7 +187,7 @@ vector <vector <char>> BlockLib::zBlock() const {
 }
 
 vector <vector <char>> BlockLib::tBlock() const {
-  vector vector <char>> design;
+  vector <vector <char>> design;
   vector <char> designRow;
 
   int i = 0;
