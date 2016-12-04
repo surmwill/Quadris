@@ -15,6 +15,8 @@ CmdInterpreter::CmdInterpreter(istream * in, int argc, char *argv[]): stream{in}
       parseArgument(arg1, arg2); //parse the arguments
     }
   }
+
+  mController{textOnly, seed, startingSequence, startingLevel};
 }
 
 void CmdInterpreter::interpretCommand(string cmd){

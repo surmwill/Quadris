@@ -9,7 +9,7 @@
 
 class Quadris {
  public:
-   Quadris(int level = 0);
+   Quadris(bool textOnly = false, int seed, std::string startingSequence = "", int level = 0);
    void left();
    void right();
    void down();

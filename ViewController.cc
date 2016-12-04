@@ -8,9 +8,10 @@
 
 using namespace std;
 
-ViewController::ViewController(const int startLevel, const bool textOnly): score{startLevel} { 
-  views.emplace_back(unique_ptr <View> (new TextDisplay{startLevel}));
-  if(!textOnly) views.emplace_back(unique_ptr <View> (new GraphicsDisplay{startLevel}));
+ViewController::ViewController(const vector <View *> & viewsToAdd, const int startLevel): score{startLevel} { 
+  for(auto &v: viewsToAdd) {
+    views.emplace_back(unique_ptr <View> (v));
+  }
 }
 
 void ViewController::updateView() {

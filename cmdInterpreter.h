@@ -4,7 +4,7 @@
 class CmdInterpreter {
   private:
     Quadris mController; //Calls different parts of the program
-    istream *stream; //The input stream
+    std::istream *stream; //The input stream
 
     //These 4 values store command line arguments to pass to the Quadris constructor
     bool textOnly = false; //Text only mode
