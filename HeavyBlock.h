@@ -9,9 +9,8 @@ class HeavyBlock: public Block {
   HeavyBlock(std::vector <char> blockDesign, int levelGenerated, int blockSize = 16);
   void left() override;
   void right() override;
-  void rotatecw() override;
-  void rotatecc() override;
-  bool down() override;
+  void rotate(bool cc) override;
+  void down() override;
 };
 
 #endif 
