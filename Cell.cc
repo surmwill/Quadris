@@ -26,8 +26,8 @@ void Cell::setNeighbours(Cell * left, Cell * right, Cell * top, Cell * bottom){
 bool Cell::filled() {return symbol != ' ';}
 
 Info & Cell::getInfo() const {
-  cellInfo.coords.push_back(row);
-  cellInfo.coords.push_back(col);
+  cellInfo.coords[0] = row;
+  cellInfo.coords[1] = col;
   return &cellInfo;
 }
 

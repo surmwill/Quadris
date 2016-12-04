@@ -4,6 +4,7 @@
 #include "View.h"
 #include "Subject.h"
 #include "BlockLib.h"
+#include "info.h"
 
 using namespace std;
 

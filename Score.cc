@@ -1,7 +1,9 @@
+#include <cmath>
 #include "Score.h"
 #include "Subscriptions.h"
 #include "Observer.h"
 #include "Subject.h"
+#include "Info.h"
 
 using namespace std;
 
@@ -30,9 +32,9 @@ void Score::notify(const Subject &whoNotified) {
     else if(i == rows.size() - 1) rowsCleared.emplace_back(cellRow);
   }
   
-  //checks if we are deleting an entire block
-  if(whoNotified.lastBlockCell()) {
-    currScore += (whoNotified.getLevelCreated() + 1) * (whoNotified.getLevelCreated() + 1);
+  //checks if we are deleting the last Cell of a block
+  if(whoNotified.getInfo().blockSize == 1) {
+    currScore += pow((whoNotified.getInfo().levelGenerated + 1), 2);
   }
 }
 
