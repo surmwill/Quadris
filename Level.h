@@ -11,7 +11,7 @@ class Block;
 class Level{
   private:
     std::ofstream seqFile; //the file which contains the sequence of commands
-    int levelNum; //the level number
+    int levelNum; // the level number
     BlockLib blockLib; //the block library
     
     bool goodFile(const std::string filename); //returns true if we can open the file for input
