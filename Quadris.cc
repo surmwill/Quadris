@@ -15,7 +15,7 @@ using namespace std;
 class Grid;
 
 Quadris::Quadris(int seed, bool textOnly, std::string startingSequence, int startLevel): level{startLevel}, 
-  lc{new LevelController{startLevel}} { 
+  lc{new LevelController{startLevel, seed}} { 
 
   //construct the views and view controller
   vector <View *> views;
@@ -33,7 +33,7 @@ Quadris::Quadris(int seed, bool textOnly, std::string startingSequence, int star
   hintEngine = unique_ptr <HintEngine> (new HintEngine{bc});
 
   //Sets the starting sequence if neccessary
-  if(startingSequence.length() > 0) lc->setFileName(startingSequence);
+  if(startingSequence.length() > 0) lc->setFilename(startingSequence);
 }
 
 void Quadris::left() {
@@ -77,7 +77,7 @@ void Quadris::leveldown() {
 }
 
 void Quadris::setSequence(string filename) {
-  lc->setFileName(filename);
+  lc->setFilename(filename);
 }
 
 void Quadris::setBlock(char type) {
