@@ -3,6 +3,7 @@
 #include "Subject.h"
 #include "Subscriptions.h"
 #include "Cell.h"
+#include "Info.h"
 
 using namespace std;
 
@@ -22,21 +23,12 @@ void Cell::setNeighbours(Cell * left, Cell * right, Cell * top, Cell * bottom){
   bottomNeighbour = bottom;
 }
 
-bool Cell::filled() { return (symbol != ' '); }
+bool Cell::filled() {return symbol != ' ';}
 
-//To tell score that this is the last block of the Cell for extra points
-bool Cell::lastBlockCell() const { return blockSize == 1;}
-
-vector <int> Cell::getCoords() const {
-  vector <int> coords;
-  coords.push_back(row);
-  coords.push_back(col);
-  return coords;
-}
-
-//Returns the cell's symbol. Needed so that the graphisc know how to colour it's block
-char Cell::getSymbol() const {
-  return symbol;
+Info & Cell::getInfo() const {
+  cellInfo.coords.push_back(row);
+  cellInfo.coords.push_back(col);
+  return &cellInfo;
 }
 
 bool Cell::movableLeft(){
@@ -117,14 +109,14 @@ void Cell::stealInfo(){
 
 void Cell::setContent(Cell *otherCell) {
   // steal the content of otherCell
-  symbol = otherCell->symbol;
-  blockSize = otherCell->blockSize;
-  levelGenerated = otherCell->levelGenerated;
+  cellInfo.symbol = otherCell->symbol;
+  cellInfo.blockSize = otherCell->blockSize;
+  cellInfo.levelGenerated = otherCell->levelGenerated;
   notifyObservers(SubscriptionType::Display);
 }
 
 void Cell::unsetContent() {
-  symbol = ' ';
+  cellInfo.symbol = ' ';
   removeObservers(SubscriptionType::Cell);
   notifyObservers(SubscriptionType::Display);
 }

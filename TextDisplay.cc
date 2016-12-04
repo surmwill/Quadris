@@ -18,13 +18,14 @@ TextDisplay::TextDisplay(const int startLevel, const int rows, const int cols) V
 
 void TextDisplay::notify(const Subject &whoNotified) {
   bool specialCell = false;
-  int row = whoNotified.getCoords()[0];
-  int col = whoNotified.getCoords()[1];
+  int row = whoNotified.getInfo().coords[0];
+  int col = whoNotified.getInfo().coords[1];
+  char symbol = whoNotified.getInfo().symbol;
 
   if(row == -1 && col == -1) specialCell = true;
 
-  if(specialCell) nextBlock = getBlockLib().getBlockLayout(whoNotified.getSymbol());
-  textGrid[row][col] = whoNotified.getSymbol();
+  if(specialCell) nextBlock = getBlockLib().getBlockLayout(symbol);
+  textGrid[row][col] = symbol;
 }
 
 void TextDisplay::display(const Score &score) {

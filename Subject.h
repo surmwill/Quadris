@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "Subscriptions.h"
+#include "Info.h"
 
 class Observer;
 
@@ -13,6 +14,7 @@ class Subject {
   void attach(const Observer *const o); //attaches observer o to the observer list
   void notifyObservers(SubscriptionType t); //notifies all observers in the list with SubscriptionType t
   int getObserverSize(); //returns the number of observers
+  virtual Info & getInfo() const = 0; //returns information about the notifying observer
   virtual ~Subject() = 0;
 };
 

@@ -3,6 +3,7 @@
 
 #include "Observer.h"
 #include "Subject.h"
+#include "Info.h"
 #include <vector>
 
 class Cell: public Subject, public Observer {
@@ -12,9 +13,7 @@ class Cell: public Subject, public Observer {
 
   // Functions to acces properties of the cell
   bool filled(); //not needed by View or Score. needed elsewhere?
-  bool lastBlockCell() const;
-  std::vector <int> getCoords() const;
-  char getSymbol() const;
+  Info & getInfo() const override;
 
   // Functions for block info movement
   bool droppable();
@@ -32,6 +31,9 @@ class Cell: public Subject, public Observer {
   void notify(const Subject &whoNotified) override;
  
  private:
+  //stores information about the cells location, symbol, level generated, and block size
+  Info cellInfo;
+
   //cell content management
   void setContent(Cell *otherCell);
   void unsetContent();
@@ -40,9 +42,6 @@ class Cell: public Subject, public Observer {
   bool checkFill(bool echoRight);
   void annihilate(bool echoRight);
   void stealInfo();
-
-  // Observer list
-  std::vector <Observer*> observers;
 
   // Cell data
   char symbol;
