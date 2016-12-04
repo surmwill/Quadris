@@ -45,6 +45,8 @@ void BlockController::drop() {
 void BlockController::genBlock() {
   delete currBlock;
   currBlock = nextBlock;
+
+  if(nextBlock == nullptr) return; 
   nextBlock = level->genBlock();
   attachCurrBlockToGrid();
 }
