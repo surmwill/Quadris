@@ -17,15 +17,14 @@ class Level{
     bool goodFile(const std::string filename); //returns true if we can open the file for input
  	
   protected:
-    void setFilename(const std::string filename); //sets the seqFile to open the filename if the file can be opened
-    std::ofstream & getSeqFile(); //returns the seqFile
+    std::ifstream & getSeqFile(); //returns the seqFile
     BlockLib * getBlockLib();  //returns the BlockLib
 
   public:
     virtual Block* genBlock() = 0; //generates a random block based on the rules of the level/game
     virtual Block* genBlock(char type) = 0; //generates a block with type char
-    virtual ~Level() = 0;
-    void setFilename(std::string fileName);
+    virtual ~Level() = 0; 
+    void setFilename(const std::string fileName); //sets the seqFile to open the filename if the file can be opened
 };
 
 #endif
