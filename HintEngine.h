@@ -2,15 +2,16 @@
 #define HINT_ENGINE_H 1
 
 #include <vector>
+#include <memory>
 
 class BlockController;
 
 class HintEngine {
  public:
-  HintEngine(BlockController *bc);
+  HintEngine(std::shared_ptr <BlockController> bc);
   std::vector <std::vector <int>> hint();
  private:
-  BlockController *bc;
+  std::shared_ptr <BlockController> bc;
 };
 
 #endif
