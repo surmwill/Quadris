@@ -31,8 +31,8 @@ Block* LevelFour::genBlock() {
   symbolProbability.push_back('Z');
   symbolProbability.push_back('Z');
 
-  // O block probability (1/9)
-  symbolProbability.push_back('O');
+  // T block probability (1/9)
+  symbolProbability.push_back('T');
 
   int randInt = rand() % 9;
 
