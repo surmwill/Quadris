@@ -1,8 +1,15 @@
 #include "View.h"
 #include "Subscriptions.h"
 #include "BlockLib.h"
+#include <iostream>
 
-View::View(int startLevel): level{startLevel} {}
+#define DEBUG 1
+
+using namespace std;
+
+View::View(int startLevel): level{startLevel} {
+  if(DEBUG == 1) cout << "View::View" << endl;
+}
 
 View::~View() {}
 
