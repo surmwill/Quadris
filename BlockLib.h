@@ -19,7 +19,7 @@ class BlockLib {
    std::vector <std::vector <char>> tBlock() const; //returns a 2D vector of 4x4 chars, that represents the design of an T block
 
    typedef std::vector <std::vector <char>> (*BlockLayoutFn)(char); //Function pointer with return type <vector <vector <char>>, paramter char, and generalized name of BlockLayoutFn
-   std::map <char blockType, BlockLayoutFn> layoutMap; //Maps a function that returns a block design to a type of block
+   std::map <char, BlockLayoutFn> layoutMap; //Maps a function that returns a block design to a type of block
 };
 
 #endif

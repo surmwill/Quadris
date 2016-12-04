@@ -6,7 +6,7 @@ View::View(int startLevel): level{startLevel} {}
 
 View::~View() {}
 
-SubscriptionType View::SubscriptionType subType() {
+SubscriptionType View::subType() {
   return SubscriptionType::Display;
 }
 
@@ -18,6 +18,6 @@ int View::getLevel() {
   return level;
 }
 
-BlockLib & getBlockLib() {
+const BlockLib & View::getBlockLib() {
   return blockLib;
 }
