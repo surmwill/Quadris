@@ -7,7 +7,8 @@
 class BlockLib {
  public:
    BlockLib();
-   std::vector <std::vector <char>> getBlockLayout(char blockType) const; //returns the the desired block layout given a type of block
+   std::vector <std::vector <char>> getBlockLayout(char blockType) const; //returns the desired block layout given a type of block
+   std::vector <char> getFlattenedBlockLayout(char blockType) const; //returns the desired block layout in a 1d vector
 
  private:
    std::vector <std::vector <char>> iBlock() const; //returns a 2D vector of 4x4 chars, that represents the design of an I block

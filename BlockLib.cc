@@ -19,6 +19,16 @@ vector <vector <char>> BlockLib::getBlockLayout(char blockType) const {
   return (this->*iter->second)();
 } 
 
+vector <char> BlockLib::getFlattenedBlockLayout(char blockType) const {
+  vector <char> design;
+  for(auto &row: getBlockLayout(blockType)) {
+    for(auto &col: row) {
+      design.emplace_back(col);
+    }
+  }
+  return design;
+}
+
 vector <vector <char>> BlockLib::iBlock() const {
   vector <vector <char>> design;
   vector <char> designRow;
