@@ -180,6 +180,10 @@ Cell * getCell(int row, int col){
   return blockCells[(blockLen*row) + col];
 }
 
+void setCell(int row, int col, Cell * newCell){
+  Cell * changeCell = blockCells[(blockLen*row) + col];
+  changeCell.setContent(newCell);
+}
 
 vector <Cell*>* Block::getBlockCells() {
   return blockCells;

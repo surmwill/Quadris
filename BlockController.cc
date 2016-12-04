@@ -43,7 +43,8 @@ void BlockController::drop() {
 }
 
 void BlockController::genBlock() {
-  currBlock = move(nextBlock);
+  delete currBlock;
+  currBlock = nextBlock;
   nextBlock = level->genBlock();
   attachCurrBlockToGrid();
 }
@@ -64,7 +65,7 @@ void BlockController::attachCurrBlockToGrid() {
 
       // fill the grid cell and replace the block cell
       gridCell->setContent(currBlock->getCell(i, j));
-      currBlock->getCell(i, j) = gridCell;
+      currBlock->setCell(i, j, gridCell);
     }
   }
 }

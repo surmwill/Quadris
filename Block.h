@@ -15,6 +15,7 @@ class Block {
   virtual bool down();
   virtual bool autoDrop();
   virtual Cell * getCell(int row, int col);
+  virtual void setCell(int row, int col, Cell * newCell);
   int blockLen;
 
  protected:
