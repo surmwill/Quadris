@@ -17,11 +17,9 @@ Block* LevelZero::genBlock() {
   string symbol;
   getSeqFile() >> symbol;
   if(symbol.length() > 1) return nullptr;
-  else return new Block(getBlockLib()->getBlockLayout(symbol[0]), 0); 
+  else return new Block{getBlockLib()->getFlattenedBlockLayout(symbol[0]), levelGenerated}; 
 }
 
-Block* LevelZero::genBlock(char type) {
-  vector vector <<int>
-  vector <int> flattenedLayout; 
-  return new Block{getBlockLib()->getBlockLayout(type), 0};
+Block* LevelZero::genBlock(const char type) {
+  return new Block{getBlockLib()->getFlattenedBlockLayout(type), levelGenerated};
 }

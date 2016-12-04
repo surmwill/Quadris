@@ -11,7 +11,10 @@ class LevelZero: public Level {
   public:
     LevelZero(std::string filename);
     Block* genBlock() override;
-    Block* genBlock(char type) override;
+    Block* genBlock(const char type) override;
+
+  private:
+    const int levelGenerated = 0;
 };
 
 #endif
