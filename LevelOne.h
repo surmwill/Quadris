@@ -12,7 +12,10 @@ using namespace std;
 class LevelOne: public Level {  
   public:
     Block* genBlock() override;
-    Block* genBlock(char type) override;
+    Block* genBlock(const char type) override;
+
+  private:
+    int levelGenerated = 1;
 };
 
 #endif
