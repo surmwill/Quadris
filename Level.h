@@ -22,7 +22,7 @@ class Level{
 
   public:
     virtual Block* genBlock() = 0; //generates a random block based on the rules of the level/game
-    virtual Block* genBlock(char type) = 0; //generates a block with type char
+    virtual Block* genBlock(const char type) = 0; //generates a block with type char
     virtual ~Level() = 0; 
     void setFilename(const std::string fileName); //sets the seqFile to open the filename if the file can be opened
 };
