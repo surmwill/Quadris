@@ -1,15 +1,17 @@
-#include <vector>
-
 #ifndef BLOCK_CONTROLLER_H
-#define BLOCK_CONTROLLER_H 1
+#define BLOCK_CONTROLLER_H
+
+#include <vector>
+#include <memory>
 
 class Level;
 class Grid;
 class Block;
+class Cell;
 
 class BlockController {
  public:
-   BlockController(Level *level, Grid *grid)
+   BlockController(Level *level, Grid *grid);
    void left();
    void right();
    void down();
@@ -21,7 +23,6 @@ class BlockController {
 
  private:
    void attachCurrBlockToGrid();
-
    std::unique_ptr <Grid> grid; //Block Controller is reponsible for deleting grid
    std::vector <Cell*> generatingArea;
    std::unique_ptr <Block> currBlock; //Block Controller is responsible for deleting currBlock
@@ -29,5 +30,5 @@ class BlockController {
    Level * level;
 };
 
-#ifndef
+#endif
 

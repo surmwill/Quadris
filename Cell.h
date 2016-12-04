@@ -38,6 +38,7 @@ class Cell: public Subject, public Observer {
   void setContent(Cell *otherCell);
   void unsetContent();
 
+ private:
   // Functions for row annihilation
   bool checkFill(bool echoRight);
   void annihilate(bool echoRight);
