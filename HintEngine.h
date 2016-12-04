@@ -10,6 +10,7 @@ class HintEngine {
  public:
   HintEngine(std::shared_ptr <BlockController> bc);
   std::vector <std::vector <int>> hint();
+
  private:
   std::shared_ptr <BlockController> bc;
 };
