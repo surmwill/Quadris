@@ -7,7 +7,7 @@
 using namespace std;
 
 LevelZero::LevelZero(std::string fileName) {
-  setFileName(fileName);
+  setFilename(fileName);
 }
 
 Block* LevelZero::genBlock() {
