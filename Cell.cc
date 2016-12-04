@@ -39,8 +39,7 @@ bool Cell::droppable(){
   return bottomNeighbour->filled();
 }
 
-// any idea why this is bool?
-bool Cell::drop(){
+void Cell::drop(){
   //give the bottomNeighbour this cell's info. Unset this cell.
   bottomNeighbour->setContent(this);
   unsetContent();

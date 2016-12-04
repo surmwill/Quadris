@@ -19,7 +19,7 @@ class Cell: public Subject, public Observer {
   bool droppable();
   bool movableLeft();
   bool movableRight();
-  bool drop();
+  void drop();
   void moveLeft();
   void moveRight();
 
