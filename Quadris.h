@@ -13,7 +13,8 @@ class Quadris {
    Quadris(int seed, bool textOnly = false, std::string startingSequence = "", int level = 0); //constructs all parts of the program wit the given command line arguments
    void left(); //calls BlockController's left fn
    void right(); //calls BlockController's right fn
-   void down(); //calls BlockController's rdown fn
+   void down(); //calls BlockController's down fn
+   void drop(); //calls BlockController's drop fn
    void rotatecc(); //calls BlockController's rotate counter clockwise fn
    void rotatecw(); //calls BlockController's clockwise fn
    void levelup(); //calls LevelController's level up fn
