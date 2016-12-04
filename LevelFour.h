@@ -10,6 +10,8 @@ class Block;
 using namespace std;
 
 class LevelFour: public Level {  
+    int blockNum = 0;
+
   public:
     Block* genBlock() override;
     Block* genBlock(char type) override;
