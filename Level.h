@@ -19,9 +19,9 @@ class Level{
     BlockLib * getBlockLib(); 
 
   public:
-    Block* genBlock() = 0;
-    Block* genBlock(char type) = 0;
-    ~Level() = 0;
+    virtual Block* genBlock() = 0;
+    virtual Block* genBlock(char type) = 0;
+    virtual ~Level() = 0;
 };
 
 #endif
