@@ -7,6 +7,8 @@
 #include <string>
 #include "cmdInterpreter.h"
 
+#define DEBUG 1
+
 using namespace std;
 
 CmdInterpreter::CmdInterpreter(istream * in, int argc, char *argv[]): stream{in}{
@@ -19,6 +21,7 @@ CmdInterpreter::CmdInterpreter(istream * in, int argc, char *argv[]): stream{in}
     }
   }
   quadris = unique_ptr <Quadris> (new Quadris{textOnly, seed, startingSequence, startingLevel});
+  if(DEBUG) cout << "CmdInterpreter::CmdInterpreter" << endl;
 }
 
 void CmdInterpreter::interpretCommand(string cmd) {
@@ -95,7 +98,7 @@ bool CmdInterpreter::isNumber(std::string s) {
   if(s.length() < 1) return false;
 
   for(auto &n: s) {
-    //if(!isdigit(n)) return false;
+    if(!isdigit(n)) return false;
   }
   return true;
 }

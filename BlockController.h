@@ -11,7 +11,7 @@ class Cell;
 
 class BlockController {
  public:
-   BlockController(Level *level, Grid *grid);
+   BlockController(Level *const level, Grid *grid);
    void left();
    void right();
    void down();
@@ -24,11 +24,10 @@ class BlockController {
  private:
    void attachCurrBlockToGrid();
    Grid * grid; //Block Controller is reponsible for deleting grid
+   Level * level; //the current level we are on
    Block * currBlock; //Block Controller is responsible for deleting currBlock
    Block * nextBlock; //Block Controller is responsible for deleing nextBlock
-   Level * level;
    std::vector <Cell*> generatingArea;
 };
 
 #endif
-

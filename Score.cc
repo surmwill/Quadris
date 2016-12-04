@@ -25,7 +25,7 @@ void Score::updateCurrScore() {
 
 void Score::notify(const Subject &whoNotified) {
   //check for unique rows, increase the amount of rows cleared if a unqiue row is found
-  for(int i = 0; i < rowsCleared.size(); i++) {
+  for(unsigned int i = 0; i < rowsCleared.size(); i++) {
     int cellRow = whoNotified.getInfo().coords[0];
 
     if(cellRow == rowsCleared[i]) return;
