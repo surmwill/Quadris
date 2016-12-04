@@ -39,7 +39,7 @@ Block* LevelFour::genBlock() {
   return genBlock(symbolProbability[randInt]);
  }
 
-Block* LevelFour::genBlock(char type) {
+Block* LevelFour::genBlock(const char type) {
   if ((blockNum % 5) == 0){
     DirectedBlock *dBlock = new DirectedBlock((getBlockLib()->getFlattenedBlockLayout(type)), 4);
     return dBlock;

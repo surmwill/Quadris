@@ -36,7 +36,7 @@ Block* LevelTwo::genBlock() {
   return genBlock(symbolProbability[randInt]);
  }
 
-Block* LevelTwo::genBlock(char type) {
+Block* LevelTwo::genBlock(const char type) {
   Block *block = new Block((getBlockLib()->getFlattenedBlockLayout(type)), 2);
   return block;
 }

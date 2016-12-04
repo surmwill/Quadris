@@ -38,7 +38,7 @@ Block* LevelThree::genBlock() {
   return genBlock(symbolProbability[randInt]);
  }
 
-Block* LevelThree::genBlock(char type) {
+Block* LevelThree::genBlock(const char type) {
   HeavyBlock *hBlock = new HeavyBlock((getBlockLib()->getFlattenedBlockLayout(type)), 3);
   return hBlock;
 }
