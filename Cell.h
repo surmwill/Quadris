@@ -13,7 +13,7 @@ class Cell: public Subject, public Observer {
 
   // Functions to acces properties of the cell
   bool filled(); //not needed by View or Score. needed elsewhere?
-  Info & getInfo() const override;
+  const Info & getInfo() const override;
 
   // Functions for block info movement
   bool droppable();
@@ -27,31 +27,21 @@ class Cell: public Subject, public Observer {
   void maybeAnnihilateRow();
 
   // Observer functions for block deletion
-  SubscriptionType subType() const override;
+  SubscriptionType subType() override;
   void notify(const Subject &whoNotified) override;
  
- private:
-  //stores information about the cells location, symbol, level generated, and block size
-  Info cellInfo;
-
   //cell content management
   void setContent(Cell *otherCell);
   void unsetContent();
 
  private:
+  // Cell Data
+  Info cellInfo;
+
   // Functions for row annihilation
   bool checkFill(bool echoRight);
   void annihilate(bool echoRight);
   void stealInfo();
-
-  // Cell data
-  char symbol;
-  int blockSize;
-  int levelGenerated;
-
-  // Cell coordinates
-  int row;
-  int col;
 
   // Neighbours
   Cell * leftNeighbour;

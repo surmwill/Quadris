@@ -7,9 +7,7 @@
 
 using namespace std;
 
-Cell::Cell(char symbol, int blockSize, int levelGenerated, int row, int col): symbol{symbol}, blockSize{blockSize},
-  levelGenerated{levelGenerated}, row{row}, col{col} {
-
+Cell::Cell(char symbol, int blockSize, int levelGenerated, int row, int col): cellInfo{symbol, blockSize, levelGenerated, row, col} {
   leftNeighbour = nullptr;
   rightNeighbour = nullptr;
   topNeighbour = nullptr;
@@ -23,12 +21,10 @@ void Cell::setNeighbours(Cell * left, Cell * right, Cell * top, Cell * bottom){
   bottomNeighbour = bottom;
 }
 
-bool Cell::filled() {return symbol != ' ';}
+bool Cell::filled() {return cellInfo.symbol != ' ';}
 
-Info & Cell::getInfo() const {
-  cellInfo.coords[0] = row;
-  cellInfo.coords[1] = col;
-  return &cellInfo;
+const Info & Cell::getInfo() const {
+  return cellInfo;
 }
 
 bool Cell::movableLeft(){
@@ -62,12 +58,12 @@ void Cell::moveRight(){
   unsetContent();
 }
 
-SubscriptionType Cell::subType() const{
+SubscriptionType Cell::subType(){
   return SubscriptionType::Cell;
 }
 
 void Cell::notify(const Subject &whoNotified){
-  blockSize--;
+  cellInfo.blockSize--;
 }
 
 void Cell::maybeAnnihilateRow(){
@@ -109,9 +105,9 @@ void Cell::stealInfo(){
 
 void Cell::setContent(Cell *otherCell) {
   // steal the content of otherCell
-  cellInfo.symbol = otherCell->symbol;
-  cellInfo.blockSize = otherCell->blockSize;
-  cellInfo.levelGenerated = otherCell->levelGenerated;
+  cellInfo.symbol = otherCell->cellInfo.symbol;
+  cellInfo.blockSize = otherCell->cellInfo.blockSize;
+  cellInfo.levelGenerated = otherCell->cellInfo.levelGenerated;
   notifyObservers(SubscriptionType::Display);
 }
 
