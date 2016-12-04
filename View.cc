@@ -18,6 +18,6 @@ int View::getLevel() {
   return level;
 }
 
-const BlockLib & getBlockLib() {
+BlockLib & getBlockLib() {
   return blockLib;
 }

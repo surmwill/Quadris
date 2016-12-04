@@ -3,8 +3,6 @@
 #include "Subscriptions.h"
 #include "Cell.h"
 
-#include <iostream>
-
 using namespace std;
 
 Subject::~Subject(){}

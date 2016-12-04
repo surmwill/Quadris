@@ -26,16 +26,17 @@ GraphicsDisplay::GraphicsDisplay(const int startLevel, const int rows, const int
 
 //Fill the cell that notified the display
 void GraphicsDisplay::notify(const Subject &whoNotified) {
-  int row = whoNotified.getCoords()[0];
-  int col = whoNotified.getCoords()[1];
+  int row = whoNotified.getInfo().getCoords[0];
+  int col = whoNotified.getInfo().getCoords[1];
   bool specialCell = false;
-  char cellSymbol = whoNotified.getSymbol();
   
   //If the row and column of the cell are not initialized (coords are -1, -1) the special cell is notifying us of our next block
   if(row == -1 && col == -1) specialCell = true;
 
+  char cellSymbol = whoNotified.getInfo().symbol; //the Cell's symbol
+
   if(specialCell) drawNextBlock(getBlockLib().getBlockLayout(cellSymbol), symbolToColour(cellSymbol)); //if its a special cell draw the next block
-  else fillCell(row, col, symbolToColour(whoNotified.getSymbol()); //otherwise draw in the corresponding cell in the grid
+  else fillCell(row, col, symbolToColour(cellSymbol)); //otherwise draw in the corresponding cell in the grid
 }
 
 //Draws the top section of the board. The grid is drawn through notifications
