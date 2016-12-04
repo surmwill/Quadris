@@ -1,5 +1,10 @@
 #include <string>
 #include "LevelController.h"
+#include "LevelZero.h"
+#include "LevelOne.h"
+#include "LevelTwo.h"
+#include "LevelThree.h"
+#include "LevelFour.h"
 
 using namespace std;
 
@@ -17,13 +22,13 @@ void LevelController::changeLevel(int levelNum){
       break;
     case 3: currentLevel = new LevelThree{};
       break;
-    case 4: currentLEvel = new LevelFour{};
+    case 4: currentLevel = new LevelFour{};
       break;
   }
 }
 
-void LevelController::setFileName(std::string fileName){
-  currentLevel->setFileName(fileName);
+void LevelController::setFilename(std::string fileName){
+  currentLevel->setFilename(fileName);
 }
 
 Level *const LevelController::getLevel(){
