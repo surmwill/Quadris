@@ -11,7 +11,7 @@
 
 using namespace std;
 
-CmdInterpreter::CmdInterpreter(istream * in, int argc, char *argv[]): stream{in}, textOnly{false} {
+CmdInterpreter::CmdInterpreter(istream * in, int argc, char *argv[]): stream{in}, textOnly{false}, newSeed{false}, seed{0}, startingLevel{0} {
   if(argc > 1) {
     for(int i = 1; i < argc; i++) {
       string arg1{argv[i]}; //store the first argument in a string
@@ -22,7 +22,7 @@ CmdInterpreter::CmdInterpreter(istream * in, int argc, char *argv[]): stream{in}
   }
   if(DEBUG) cout << "text only? " << textOnly << endl;
   if(DEBUG) cout << "constructing Quadris" << endl;
-  quadris = unique_ptr <Quadris> (new Quadris{seed, textOnly, startingSequence, startingLevel});
+  quadris = unique_ptr <Quadris> (new Quadris{seed, newSeed, textOnly, startingSequence, startingLevel});
   if(DEBUG) cout << "CmdInterpreter::CmdInterpreter" << endl;
 }
 
@@ -73,12 +73,9 @@ void CmdInterpreter::parseArgument(std::string arg1, std::string arg2) {
     textOnly = true;
   }
   else if(arg1 == "-seed") {
-    if(isNumber(arg2)) seed = stoi(arg2); //check that we have a valid second argument
-    else {
-      //otherwise randomly give them a seed
-      cerr << "not given a number for a seed, generating a seed for you" << endl;
-      srand(time(0));
-      seed = rand() % 100000;
+    if(isNumber(arg2)) { //check that we have a valid second argument
+       srand(stoi(arg2)); 
+       newSeed = true;
     }
   }
   else if(arg1 == "-scriptfile") {
