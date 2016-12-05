@@ -50,8 +50,8 @@ void BlockController::rotatecw() {
 }
 
 void BlockController::drop() {
-
   currBlock->drop();
+  genBlock();
 }
 
 void BlockController::nextBlockNotification() {

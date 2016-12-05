@@ -20,6 +20,7 @@ Cell::Cell(char symbol, int blockSize, int levelGenerated, int row, int col): ce
 }
 
 void Cell::setNeighbours(Cell * left, Cell * right, Cell * top, Cell * bottom){
+  // set pointers to adjacent cells
   leftNeighbour = left;
   rightNeighbour = right;
   topNeighbour = top;
@@ -27,6 +28,7 @@ void Cell::setNeighbours(Cell * left, Cell * right, Cell * top, Cell * bottom){
 }
 
 void Cell::setSymbol(const char symbol) {
+  // change the cell's symbol
   cellInfo.symbol = symbol;
   notifyObservers(SubscriptionType::Display); 
 }
@@ -41,6 +43,7 @@ bool Cell::movableLeft(){
   if (DEBUG == 1) cout << "Cell::movableLeft()" << endl;
   if (DEBUG == 1) cout << "Left Neighbour" << ((leftNeighbour == nullptr) ? "nullptr" : "Cell") << endl;
 
+  // check to see if the cell to the left is empty
   return (leftNeighbour != nullptr) && !(leftNeighbour->filled());
 }
 
@@ -48,6 +51,7 @@ bool Cell::movableRight(){
   if (DEBUG == 1) cout << "Cell::movableRight()" << endl;
   if (DEBUG == 1) cout << "Right Neighbour" << ((rightNeighbour == nullptr) ? "nullptr" : "Cell") << endl;
 
+  // check to see if the cell to the right is empty
   return (rightNeighbour != nullptr) && !(rightNeighbour->filled());
 }
 
@@ -55,6 +59,7 @@ bool Cell::droppable(){
   if (DEBUG == 1) cout << "Cell::droppable()" << endl;
   if (DEBUG == 1) cout << "Bottom Neighbour" << ((bottomNeighbour == nullptr) ? "nullptr" : "Cell") << endl;
 
+  // check to see if the below cell is empty
   return (bottomNeighbour != nullptr) && !(bottomNeighbour->filled());
 }
 
