@@ -27,7 +27,7 @@ class Block {
   enum class Direction { Left, Right, Down };
   int blockLen;
   std::vector <Cell*> blockCells;
-  bool shouldDrop;
+  bool shouldDrop = false;
 
   // helper functions
   bool memberCell(int index);
