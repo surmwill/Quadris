@@ -36,6 +36,10 @@ bool Block::autoDrop(){
 }
 
 void Block::rotate(bool cc, int mult) {
+  for(int i = 0; i < mult; i++) {rotate(cc);}
+}
+
+void Block::rotate(bool cc) {
   if (DEBUG == 1) cout << "Block::rotate()" << endl;
 
   // keep track of the new locations of filled cells
@@ -90,7 +94,11 @@ bool Block::memberCell(int index){
   return false;
 }
 
-void Block::down(int mult){
+void Block::down(int mult) {
+  for(int i = 0; i < mult; i++) {down();}
+}
+
+void Block::down(){
   if (DEBUG == 1) cout << "Block::down()" << endl;
   if (canBeMoved(Direction::Down)){
     if (DEBUG == 1) cout << "MOVE_DOWN" << endl;
@@ -116,6 +124,10 @@ void Block::down(int mult){
 }
 
 void Block::left(int mult) {
+  for(int i = 0; i < mult; i++) {left();}
+}
+
+void Block::left() {
   if (DEBUG == 1) cout << "Block::left()" << endl;
 
   // if the cell can move left
@@ -138,6 +150,10 @@ void Block::left(int mult) {
 }
 
 void Block::right(int mult) {
+  for(int i = 0; i < mult; i++) {right();}
+}
+
+void Block::right() {
   if (DEBUG == 1) cout << "Block::left()" << endl;
 
   // if the cell can move right
@@ -239,6 +255,10 @@ bool Block::movable(int index, int cellsToCheck, Block::Direction d){
 
 int Block::getBlockLen(){
   return blockLen;
+}
+
+void Block::drop(int mult) {
+  for(int i = 0; i < mult; i++) {drop();}
 }
 
 void Block::drop(){
