@@ -18,7 +18,7 @@ Block::Block(vector <char> blockDesign, int levelGenerated, int blockSize) {
   for(auto n:blockCells) {
     for(auto m:blockCells) {
       // if the coordinates of n and m are the same
-      if ((((n->getInfo()).coords[0]) != ((m->getInfo()).coords[0])) || (((n->getInfo()).coords[1]) != ((m->getInfo()).coords[1]))){
+      if ((((n->getInfo()).row) != ((m->getInfo()).row)) || (((n->getInfo()).row) != ((m->getInfo()).row))){
         n->attach(m);
       }
     }

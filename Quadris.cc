@@ -51,6 +51,7 @@ Quadris::Quadris(int seed, bool textOnly, std::string startingSequence, int star
   if(startingSequence.length() > 0) lc->setFilename(startingSequence);
  
   if(DEBUG == 1) cout << "Quadris::Quadris()" << endl;
+  vc->updateView();
 }
 
 void Quadris::left() {

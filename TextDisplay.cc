@@ -28,14 +28,22 @@ TextDisplay::TextDisplay(const int startLevel, const int rows, const int cols): 
 
 void TextDisplay::notify(const Subject &whoNotified) {
   if(DEBUG == 1) cout << "TextDisplay::notify()" << endl;
+
   bool specialCell = false;
-  int row = whoNotified.getInfo().coords[0];
-  int col = whoNotified.getInfo().coords[1];
+  int row = whoNotified.getInfo().row;
+  int col = whoNotified.getInfo().col;
   char symbol = whoNotified.getInfo().symbol;
 
+  //checl if we are being notified of what the next cell is
   if(row == -1 && col == -1) specialCell = true;
-
-  if(specialCell) nextBlock = getBlockLib().getBlockLayout(symbol);
+  if(specialCell) {
+    nextBlock.clear();
+    for(auto &n : getBlockLib().getBlockLayout(symbol)) {
+      nextBlock.emplace_back(n);
+    }
+    return;
+  }
+    
   textGrid[row][col] = symbol;
 }
 
@@ -64,8 +72,8 @@ void TextDisplay::display(const Score &score) {
   }
   printDashes(dashLength);
 
-  //next block
-  cout << "Next:";
+ // next block
+  cout << "Next:" << endl;
   for(auto &rows : nextBlock) {
     for(auto &cols : rows) {
       cout << cols;
