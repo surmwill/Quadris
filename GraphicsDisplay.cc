@@ -24,7 +24,7 @@ GraphicsDisplay::GraphicsDisplay(const int startLevel, const int rows, const int
   symToColour.emplace('D', Xwindow::Brown);
   symToColour.emplace('Z', Xwindow::Orange);
   symToColour.emplace('T', Xwindow::Blue);
-
+  symToColour.emplace('S', Xwindow::Black); 
   clear();
 
   if(DEBUG == 1) cout << "GraphicsDisplay::GraphicsDisplay()" << endl;
@@ -47,25 +47,28 @@ void GraphicsDisplay::notify(const Subject &whoNotified) {
 
 //Draws the top section of the board. The grid is drawn through notifications
 void GraphicsDisplay::display(const Score &score) {
-  int ySpacing = 10; //the Y spacing between the texts of level, score, highscore along with the spacing between level,and the top of the screen
+  int spacing = 20;
+  int ySpacing = spacing; //the Y spacing between the texts of level, score, highscore along with the spacing between level,and the top of the screen
   int xIndent = 5; //the X indent from the left side of the screen for level, score, and highscore text
   int valuexIndent = 80; //Indent from each of the texts to their associated value (ex highscore:      10)
-  int nextBlockIndent = (totalLength / 2) - 50; //Indent specifically for next block, the next block is displayed in the top right of the screen
+  int nextBlockIndent = (totalLength / 2); //Indent specifically for next block, the next block is displayed in the top right of the screen
+
+  win.fillRectangle(0, 0, totalLength / 2, topSpace, clearColour);
  
   //Drawing text for score, highscore, level, and next block
   win.drawString(xIndent, ySpacing, "Level:");
   win.drawString(valuexIndent, ySpacing, to_string(getLevel()));
  
   //special placement of next score
-  win.drawString(nextBlockIndent, ySpacing, "Next:");
+  win.drawString(nextBlockIndent, ySpacing + 20, "Next:");
 
   //we are moving down a row so double the spacing
-  ySpacing += ySpacing; 
+  ySpacing += spacing; 
   win.drawString(xIndent, ySpacing, "Score:");
   win.drawString(valuexIndent, ySpacing, to_string(score.getCurrScore()));
 
   //double the spacing
-  ySpacing += ySpacing;
+  ySpacing += spacing;
   win.drawString(xIndent, ySpacing, "Hi Score:");
   win.drawString(valuexIndent, ySpacing, to_string(score.getHighScore()));
 }
@@ -106,14 +109,15 @@ void GraphicsDisplay::fillCell(const int row, const int col, int colour) {
 
 //Draws the next block. Imagine a mini grid in the top right of the window in which we draw the next block
 void GraphicsDisplay::drawNextBlock(const vector <vector <char>> & layout, int colour) {
+  if(DEBUG) cout << "GraphicsDisplay::drawNextBlock" << endl;
   int nextBlockAreaLength = totalLength / 2; //The length of the top section of the mini grid
-  int nextBlockStartX = totalLength / 2; //The starting X pixel position for drawing next block
+  int nextBlockStartX = totalLength / 2 + 50; //The starting X pixel position for drawing next block
   int nextBlockAreaHeight = topSpace; //Y dimension of the top section of the grid
   int nextBlockStartY = 5; //The starting Y pixel position for drawing next block
 
   int numCellsX = 4, numCellsY = 4; //Our mini grid of 4x2 cells. Note all block designs only use the first 2 rows so no point in drawing 2 empty rows. Normally would be 4x4
-  int nextCellWidth = nextBlockAreaLength / numCellsX; //The width of each cell in next block
-  int nextCellHeight = nextBlockAreaHeight / numCellsY; //The height of each cell in next block
+  int nextCellWidth = nextBlockAreaLength / numCellsX - 30; //The width of each cell in next block
+  int nextCellHeight = nextCellWidth; //nextBlockAreaHeight / numCellsY; //The height of each cell in next block
   int border = 2; //the border between cells. Smaller because next block is drawn smaller
 
   //clears the previous drawing of next block
@@ -123,13 +127,14 @@ void GraphicsDisplay::drawNextBlock(const vector <vector <char>> & layout, int c
   for(int i = 0; i < numCellsX; i++) {
     for(int j = 0; j < numCellsY; j++) {
       if(layout[i][j] != ' ') { 
-        cout << "layout (i, j)" << layout[i][j] << endl;
+        if(DEBUG) cout << "layout (i, j): " << i << j << layout[i][j] << endl;
         int startX = nextBlockStartX + (j * nextCellWidth) + border;
         int fillWidth = nextCellWidth - (border * 2);
 
         int startY = nextBlockStartY + (i * nextCellHeight) + border;
         int fillHeight = nextCellHeight - (border * 2);
 
+        if(DEBUG) cout << " X: " << startX << " Y: " << startY << " fw: " << fillWidth << " fh: " << fillHeight << " col:" << colour;
         win.fillRectangle(startX, startY, fillWidth, fillHeight, colour);
       }
     }

@@ -64,7 +64,7 @@ void BlockController::nextBlockNotification() {
   for(int i = 0; i < blockWidth; i++) {
     for(int j = 0; j < blockHeight; j++) {
        char symbol = nextBlock->getCell(i, j)->getInfo().symbol;
-       if(DEBUG == 1)
+       if(DEBUG == 1) cout << symbol << endl;
        if(symbol != ' ') {
          specialCell->setSymbol(symbol);
          return;
@@ -88,17 +88,21 @@ void BlockController::genBlock() {
 }
 
 void BlockController::attachCurrBlockToGrid() {
-  if(DEBUG == 1 ) cout << "attachCurrBlockToGrid()" << endl;
+  if(DEBUG == 1) cout << "attachCurrBlockToGrid()" << endl;
+  if(DEBUG) cout << currBlock->blockLen;
+
   for (int i = 0; i < currBlock->blockLen; i++){
     for (int j = 0; j < currBlock->blockLen; j++){
       // get a Cell from the grid
       Cell * gridCell = grid->getCell(i, j);
 
+      if(DEBUG) cout << "reached" << endl;
       // fill the grid cell and replace the block cell
       gridCell->setContent(currBlock->getCell(i, j));
       currBlock->setCell(i, j, gridCell);
     }
   }
+  if(DEBUG) cout << "exited" << endl;
 }
 
 void BlockController::setBlock(char type){

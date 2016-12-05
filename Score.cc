@@ -23,6 +23,8 @@ int Score::getHighScore() const {
 }
 
 void Score::updateCurrScore() {
+  if(rowsCleared.size() < 1) return;
+
   currScore += (level + rowsCleared.size()) * (level + rowsCleared.size());
   if(currScore > highScore) highScore = currScore;
   rowsCleared.clear(); //resets the amount of rows cleared

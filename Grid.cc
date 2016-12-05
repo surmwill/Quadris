@@ -1,7 +1,7 @@
 #include "Grid.h"
 #include <iostream>
 
-#define DEBUG 0
+#define DEBUG 1
 
 using namespace std;
 
@@ -25,6 +25,8 @@ Grid::Grid(const vector <View*> & views, int row, int col){
   newRow.emplace_back(specialCell);
   grid.push_back(newRow);
   
+  if(DEBUG) cout << "row " << row << "col " << col;
+
   // add neighbour Cells as observers
   for (int i = 0; i < row; i++){
     for (int j = 0; j < col; j++){

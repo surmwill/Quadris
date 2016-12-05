@@ -6,7 +6,7 @@
 
 class DirectedBlock: public Block {
  public:
-  DirectedBlock(std::vector <char> blockDesign, int levelGenerated, int blockSize = 16);
+  DirectedBlock(std::vector <char> blockDesign, int levelGenerated, int blockSize = 4);
   bool autoDrop() override; 
 };
 
