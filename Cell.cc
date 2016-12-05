@@ -39,11 +39,15 @@ const Info & Cell::getInfo() const {
 
 bool Cell::movableLeft(){
   if (DEBUG == 1) cout << "Cell::movableLeft()" << endl;
+  if (DEBUG == 1) cout << "Left Neighbour" << ((leftNeighbour == nullptr) ? "nullptr" : "Cell") << endl;
+
   return (leftNeighbour != nullptr) && !(leftNeighbour->filled());
 }
 
 bool Cell::movableRight(){
   if (DEBUG == 1) cout << "Cell::movableRight()" << endl;
+  if (DEBUG == 1) cout << "Right Neighbour" << ((rightNeighbour == nullptr) ? "nullptr" : "Cell") << endl;
+
   return (rightNeighbour != nullptr) && !(rightNeighbour->filled());
 }
 

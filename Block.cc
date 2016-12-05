@@ -130,7 +130,7 @@ void Block::right() {
     if (DEBUG == 1) cout << "MOVE_RIGHT" << endl;
 
     // move all cells starting from the bottom right of the block
-    for (int i = 15; i > 0; i--){
+    for (int i = 15; i >= 0; i--){
       // Move the cell info and continue pointing at it
       blockCells[i] = (blockCells[i]->moveRight());
     }
@@ -162,7 +162,7 @@ bool Block::canBeMoved(Block::Direction d) {
      // all leftmost cells
       step = blockLen;
       start = 0;
-      end = (blockLen*(blockLen-1));
+      end = ((blockLen*(blockLen-1)) + 1);
       break;
     case (Direction::Right):
       if (DEBUG == 1) cout << "d == Direction::Right" << endl;
