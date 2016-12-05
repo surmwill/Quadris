@@ -15,6 +15,8 @@ class Cell: public Subject, public Observer {
   bool filled(); //not needed by View or Score. needed elsewhere?
   const Info & getInfo() const override;
 
+  void setSymbol(const char symbol); //sets the cell character to symbol
+
   // Functions for block info movement
   bool droppable();
   bool movableLeft();

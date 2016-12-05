@@ -43,15 +43,15 @@ void TextDisplay::display(const Score &score) {
   int dashLength = 15; //number of dashes to seperate the screen
 
   //Top of board
-  cout << "Level: ";
+  cout << "Level:    ";
   cout << setw(spacing);
   cout << getLevel() << endl;
-  cout << "Score: ";
+  cout << "Score:    ";
   cout << setw(spacing);
-  cout << score.getCurrScore();
+  cout << score.getCurrScore() << endl;
   cout << "Hi Score: ";
   cout << setw(spacing);
-  cout << score.getHighScore();
+  cout << score.getHighScore() << endl;
   printDashes(dashLength);
  
   //grid

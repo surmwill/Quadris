@@ -3,6 +3,7 @@
 #include "Level.h"
 #include "Grid.h"
 #include "Block.h"
+#include "Subscriptions.h"
 #include <iostream>
 
 #define DEBUG 1
@@ -11,13 +12,14 @@ using namespace std;
 
 BlockController::BlockController(Level *const level, Grid *grid): grid{grid},
   level{level}, currBlock{level->genBlock()}, nextBlock{level->genBlock()} {
-  for(int i = 0; i < 4; i++) {
-    for(int j = 0; j < 4; j++) {
+  for(int i = 0; i < blockHeight; i++) {
+    for(int j = 0; j < blockWidth; j++) {
       generatingArea.emplace_back(grid->getCell(i, j));
     }
   }
   
   if(DEBUG == 1) cout << "BlockController::BlockController()" << endl;
+  if(DEBUG == 1) cout << "returning new block" << endl;
 }
 
 void BlockController::left() {
@@ -44,12 +46,30 @@ void BlockController::drop() {
   currBlock->drop();
 }
 
+void BlockController::nextBlockNotification() {
+  int blockWidth = 4;
+  int blockHeight = 4;
+  Cell * specialCell = grid->getCell(-1, -1); //the special cell has unqiue dimensions -1, -1
+
+  for(int i = 0; i < blockWidth; i ++) {
+    for(int j = 0; j < blockHeight; j++) {
+       char symbol = nextBlock->getCell(i, j)->getInfo().symbol;
+       if(symbol != ' ') {
+         specialCell->setSymbol(symbol);
+         return;
+       }
+    }
+  }
+}
+
 void BlockController::genBlock() {
   delete currBlock;
   currBlock = nextBlock;
 
   if(nextBlock == nullptr) return; 
   nextBlock = level->genBlock();
+  nextBlockNotification();
+
   attachCurrBlockToGrid();
 }
 
