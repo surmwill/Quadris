@@ -64,7 +64,7 @@ void BlockController::nextBlockNotification() {
   for(int i = 0; i < blockWidth; i++) {
     for(int j = 0; j < blockHeight; j++) {
        char symbol = nextBlock->getCell(i, j)->getInfo().symbol;
-       if(DEBUG == 1) cout << "Cell's symbol" << endl;
+       if(DEBUG == 1)
        if(symbol != ' ') {
          specialCell->setSymbol(symbol);
          return;

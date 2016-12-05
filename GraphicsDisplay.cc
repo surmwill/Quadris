@@ -32,8 +32,8 @@ GraphicsDisplay::GraphicsDisplay(const int startLevel, const int rows, const int
 
 //Fill the cell that notified the display
 void GraphicsDisplay::notify(const Subject &whoNotified) {
-  int row = whoNotified.getInfo().coords[0];
-  int col = whoNotified.getInfo().coords[1];
+  int row = whoNotified.getInfo().row;
+  int col = whoNotified.getInfo().col;
   bool specialCell = false;
   
   //If the row and column of the cell are not initialized (coords are -1, -1) the special cell is notifying us of our next block
