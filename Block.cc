@@ -90,7 +90,7 @@ bool Block::memberCell(int index){
 void Block::down(){
   if (DEBUG == 1) cout << "Block::down()" << endl;
   if (canBeMoved(Direction::Down)){
-    if (DEBUG == 1) cout << "MOVE_DOWN" < endl;
+    if (DEBUG == 1) cout << "MOVE_DOWN" << endl;
 
     for (int i = ((blockLen*blockLen) - 1); i > 0; i--){
       blockCells[i]->drop();
@@ -179,6 +179,7 @@ bool Block::canBeMoved(Block::Direction d) {
   //check to see if the cells can move
   bool canBeMoved = true;
   for (int i = start; i < end; i += step){
+    cout << "CHECK ROW/COL" << endl;
     canBeMoved = (canBeMoved && movable(i, blockLen, d));
   }
 
@@ -197,7 +198,7 @@ bool Block::movable(int index, int cellsToCheck, Block::Direction d){
 
   // check movability
   if (blockCells[index]->filled()){
-    if (DEBUG == 1) cout << "    filled" << endl;
+    if (DEBUG == 1) cout << "Filled: " << index << endl;
 
     if (d == Direction::Down){
       return blockCells[index]->droppable();
@@ -213,7 +214,7 @@ bool Block::movable(int index, int cellsToCheck, Block::Direction d){
     if (DEBUG == 1) cout << "    empty" << endl;
 
     // set the step of Cells in the block
-    int step;
+    int step = 0;
     if (d == Direction::Down){
       step = -4;
     } else if (d == Direction::Left){
@@ -224,7 +225,6 @@ bool Block::movable(int index, int cellsToCheck, Block::Direction d){
 
     return movable(index += step, cellsToCheck - 1, d);
   }
-
 }
 
 int Block::getBlockLen(){
