@@ -5,7 +5,7 @@
 
 using namespace std;
 
-Grid::Grid(const vector <View*> & views, int row, int col){
+Grid::Grid(const vector <View*> & views, Observer * score, int row, int col){
   vector <Cell> newRow;
   // create Grid
   for (int r = 0; r < row; r++){
@@ -24,8 +24,6 @@ Grid::Grid(const vector <View*> & views, int row, int col){
   }
   newRow.emplace_back(specialCell);
   grid.push_back(newRow);
-  
-  if(DEBUG) cout << "row " << row << "col " << col;
 
   // add neighbour Cells as observers
   for (int r = 0; r < row; r++){
@@ -52,7 +50,12 @@ Grid::Grid(const vector <View*> & views, int row, int col){
         bottom = &grid[r+1][c];
       }
 
+      // add neighbours
       grid[r][c].setNeighbours(left, right, top, bottom);
+
+      // add observers
+      grid[r][c].attach(score);
+
       for(auto &v : views) {
         grid[r][c].attach(v);
       }
