@@ -17,8 +17,11 @@ Block::Block(vector <char> blockDesign, int levelGenerated, int blockSize) {
 
   for(auto n:blockCells) {
     for(auto m:blockCells) {
+
+      // Should Probably get rid of this ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
       // if the coordinates of n and m are the same
-      if ((((n->getInfo()).row) != ((m->getInfo()).row)) || (((n->getInfo()).row) != ((m->getInfo()).row))){
+      if ((((n->getInfo()).row) != ((m->getInfo()).row)) || (((n->getInfo()).col) != ((m->getInfo()).col))){
         n->attach(m);
       }
     }
@@ -92,11 +95,19 @@ void Block::down(){
   if (canBeMoved(Direction::Down)){
     if (DEBUG == 1) cout << "MOVE_DOWN" << endl;
 
-    for (int i = ((blockLen*blockLen) - 1); i >= 0; i--){
-      // Move the cell info and continue pointing at it
-      blockCells[i] = (blockCells[i]->drop());
-    }
+    // move content starting from the bottom right of the block
+    bool onBottom = false;
 
+    for (int i = ((blockLen*blockLen) - 1); i >= 0; i--){
+      // make sure we don't move the block off of the board
+      Cell * newLocation = (blockCells[i]->drop());
+
+      onBottom = (onBottom || (newLocation == nullptr));
+      if (!onBottom){
+        // point to new cell info location
+        blockCells[i] = newLocation;
+      }
+    }
   } else {
     if (DEBUG == 1) cout << "DON'T_MOVE_DOWN" << endl;
 
@@ -113,9 +124,17 @@ void Block::left() {
     if (DEBUG == 1) cout << "MOVE_LEFT" << endl;
 
     // move content starting from the top left of the block
+    bool onLeftEdge = false;
+
     for (int i = 0; i <= 15; i++){
-      // Move the cell info and continue pointing at it
-      blockCells[i] = (blockCells[i]->moveLeft());
+      // make sure we don't move the block off of the board
+      Cell * newLocation = (blockCells[i]->moveLeft());
+
+      onLeftEdge = (onLeftEdge || (newLocation == nullptr));
+      if (!onLeftEdge){
+        // point to new cell info location
+        blockCells[i] = newLocation;
+      }
     }
   } else {
     if (DEBUG == 1) cout << "DON'T_MOVE_LEFT" << endl;
@@ -129,10 +148,18 @@ void Block::right() {
   if (canBeMoved(Direction::Right)){
     if (DEBUG == 1) cout << "MOVE_RIGHT" << endl;
 
-    // move all cells starting from the bottom right of the block
+    // move content starting from the bottom right of the block
+    bool onRightEdge = false;
+
     for (int i = 15; i >= 0; i--){
-      // Move the cell info and continue pointing at it
-      blockCells[i] = (blockCells[i]->moveRight());
+      // make sure we don't move the block off of the board
+      Cell * newLocation = (blockCells[i]->moveRight());
+
+      onRightEdge = (onRightEdge || (newLocation == nullptr));
+      if (!onRightEdge){
+        // point to new cell info location
+        blockCells[i] = newLocation;
+      }
     }
   } else {
     if (DEBUG == 1) cout << "DON'T_MOVE_RIGHT" << endl;

@@ -6,7 +6,7 @@
 #include "Info.h"
 #include <iostream>
 
-#define DEBUG 0
+#define DEBUG 1
 
 using namespace std;
 
@@ -53,27 +53,26 @@ bool Cell::movableRight(){
 
 bool Cell::droppable(){
   if (DEBUG == 1) cout << "Cell::droppable()" << endl;
-  if (bottomNeighbour == nullptr) cout << "nullptr" << endl;
+  if (DEBUG == 1) cout << "Bottom Neighbour" << ((bottomNeighbour == nullptr) ? "nullptr" : "Cell") << endl;
+
   return (bottomNeighbour != nullptr) && !(bottomNeighbour->filled());
 }
 
 Cell * Cell::drop(){
   if (DEBUG == 1) cout << "Cell::drop()" << endl;
-  if (DEBUG == 1) cout << "x: " << cellInfo.coords[0] << " y: " << cellInfo.coords[1] << endl;
 
   //give the bottomNeighbour this cell's info. Unset this cell.
-  bottomNeighbour->setContent(this);
+  if (bottomNeighbour != nullptr) bottomNeighbour->setContent(this);
   unsetContent();
-
-  if (DEBUG == 1) cout << "x: " << cellInfo.coords[0] << "y: " << cellInfo.coords[1] << endl;
 
   return bottomNeighbour;
 }
 
 Cell * Cell::moveLeft(){
   if (DEBUG == 1) cout << "Cell::moveLeft()" << endl;
+
   //give the leftNeighbour this cell's info. Unset this cell.
-  leftNeighbour->setContent(this);
+  if (leftNeighbour != nullptr) leftNeighbour->setContent(this);
   unsetContent();
 
   return leftNeighbour;
@@ -81,8 +80,9 @@ Cell * Cell::moveLeft(){
 
 Cell * Cell::moveRight(){
   if (DEBUG == 1) cout << "Cell::moveRight()" << endl;
+
   //give the rightNeighbour this cell's info. Unset this cell.
-  rightNeighbour->setContent(this);
+  if (rightNeighbour != nullptr) rightNeighbour->setContent(this);
   unsetContent();
 
   return rightNeighbour;
