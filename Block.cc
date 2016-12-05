@@ -90,10 +90,14 @@ bool Block::memberCell(int index){
 void Block::down(){
   if (DEBUG == 1) cout << "Block::down()" << endl;
   if (canBeMoved(Direction::Down)){
+    if (DEBUG == 1) cout << "MOVE_DOWN" < endl;
+
     for (int i = ((blockLen*blockLen) - 1); i > 0; i--){
       blockCells[i]->drop();
     }
   } else {
+    if (DEBUG == 1) cout << "DON'T_MOVE_DOWN" << endl;
+
     // mark the block as having been placed
     shouldDrop = true;
   }
@@ -104,10 +108,14 @@ void Block::left() {
 
   // if the cell can move left
   if (canBeMoved(Direction::Left)){
+    if (DEBUG == 1) cout << "MOVE_LEFT" << endl;
+
     // move all cells starting from the top left of the block
     for (int i = 0; i < 15; i++){
       blockCells[i]->moveLeft();
     }
+  } else {
+    if (DEBUG == 1) cout << "DON'T_MOVE_LEFT" << endl;
   }
 }
 
@@ -116,10 +124,14 @@ void Block::right() {
 
   // if the cell can move right
   if (canBeMoved(Direction::Right)){
+    if (DEBUG == 1) cout << "MOVE_RIGHT" << endl;
+
     // move all cells starting from the bottom right of the block
     for (int i = 15; i > 0; i--){
       blockCells[i]->moveRight();
     }
+  } else {
+    if (DEBUG == 1) cout << "DON'T_MOVE_RIGHT" << endl;
   }
 }
 
