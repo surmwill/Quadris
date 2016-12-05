@@ -7,7 +7,7 @@
 #include <memory>
 #include <iostream>
 
-#define DEBUG 1
+#define DEBUG 0
 
 using namespace std;
 
@@ -16,6 +16,7 @@ ViewController::ViewController(const vector <View *> & viewsToAdd, const int sta
     views.emplace_back(unique_ptr <View> (v));
   }
   if(DEBUG == 1) cout << "ViewController::ViewController()" << endl; 
+  updateView();
 }
 
 void ViewController::updateView() {

@@ -26,6 +26,11 @@ void Cell::setNeighbours(Cell * left, Cell * right, Cell * top, Cell * bottom){
   bottomNeighbour = bottom;
 }
 
+void Cell::setSymbol(const char symbol) {
+  cellInfo.symbol = symbol;
+  notifyObservers(SubscriptionType::Display); 
+}
+
 bool Cell::filled() {return cellInfo.symbol != ' ';}
 
 const Info & Cell::getInfo() const {

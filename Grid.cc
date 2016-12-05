@@ -6,16 +6,25 @@
 using namespace std;
 
 Grid::Grid(const vector <View*> & views, int row, int col){
+  vector <Cell> newRow;
   // create Grid
   for (int r = 0; r < row; r++){
-    vector<Cell> newRow;
     for (int c = 0; c < col; c++){
-      Cell newCell{0, -1, r, c};
+      Cell newCell{' ', 0 , -1, r, c};
       newRow.push_back(newCell);
     }
     grid.push_back(newRow);
+    newRow.clear();
   }
 
+  //A special cell used to notify the Views of what the next block is. Has coordinates (-1, -1)
+  Cell specialCell{' ', -100, -100, -1, -1};
+  for(auto &v: views) {
+    specialCell.attach(v);
+  }
+  newRow.emplace_back(specialCell);
+  grid.push_back(newRow);
+  
   // add neighbour Cells as observers
   for (int i = 0; i < row; i++){
     for (int j = 0; j < col; j++){
