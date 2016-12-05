@@ -21,7 +21,7 @@ vector <vector <char>> BlockLib::getBlockLayout(char blockType) const {
     case 'Z' : return zBlock();
     case 'T' : return tBlock();
   };
-  
+   
   int randNum = rand() % 7 + 1;
   switch(randNum) {
    case 1 : return getBlockLayout('I');
@@ -112,8 +112,9 @@ vector <vector <char>> BlockLib::lBlock() const {
   vector <char> designRow;
   int i = 0;
   
-  for(i = 0; i < 3; i++) {designRow.emplace_back(' ');}
+  for(i = 0; i < 2; i++) {designRow.emplace_back(' ');}
   designRow.emplace_back('L');
+  designRow.emplace_back(' ');
   design.emplace_back(designRow);
   designRow.clear();
 
@@ -167,8 +168,9 @@ vector <vector <char>> BlockLib::sBlock() const {
 
   int i = 0;
 
-  for(i = 0; i < 2; i++) {designRow.emplace_back(' ');}
+  designRow.emplace_back(' ');
   for(i = 0; i < 2; i++) {designRow.emplace_back('S');}
+  designRow.emplace_back(' ');
   design.emplace_back(designRow);
   designRow.clear();
 
@@ -200,8 +202,9 @@ vector <vector <char>> BlockLib::zBlock() const {
   design.emplace_back(designRow);
   designRow.clear();
 
-  for(i = 0; i < 2; i++) {designRow.emplace_back(' ');}
+  designRow.emplace_back(' ');
   for(i = 0; i < 2; i++) {designRow.emplace_back('Z');} 
+  designRow.emplace_back(' ');
   design.emplace_back(designRow);
   designRow.clear();
 
@@ -229,17 +232,17 @@ vector <vector <char>> BlockLib::tBlock() const {
 
   designRow.emplace_back(' ');
   designRow.emplace_back('T');
-  for(i = 0; i < 2; i++) {designRow.emplace_back(' ');}
+  for(i = 0; i < 2; i++) designRow.emplace_back(' ');
   design.emplace_back(designRow);
   designRow.clear();
 
-  for(i = 0; i < 4; i++) {design.emplace_back(' ');}
+  for(i = 0; i < 4; i++) designRow.emplace_back(' ');
   design.emplace_back(designRow);
   designRow.clear();
 
-  for(i = 0; i < 4; i++) {design.emplace_back(' ');}
+  for(i = 0; i < 4; i++) designRow.emplace_back(' ');
   design.emplace_back(designRow);
   designRow.clear();
-
+  
   return design;
 }

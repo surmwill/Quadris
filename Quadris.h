@@ -10,7 +10,7 @@
 
 class Quadris {
  public:
-   Quadris(int seed, bool textOnly = false, std::string startingSequence = "", int level = 0); //constructs all parts of the program wit the given command line arguments
+   Quadris(int seed, bool newSeed = false, bool textOnly = false, std::string startingSequence = "", int level = 0); //constructs all parts of the program wit the given command line arguments
    void left(); //calls BlockController's left fn
    void right(); //calls BlockController's right fn
    void down(); //calls BlockController's down fn

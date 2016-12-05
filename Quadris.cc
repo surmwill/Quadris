@@ -11,6 +11,7 @@
 #include <vector>
 #include <cstdlib>
 #include <iostream>
+#include <ctime>
 
 #define DEBUG 1
 
@@ -18,13 +19,17 @@ using namespace std;
 
 class Grid;
 
-Quadris::Quadris(int seed, bool textOnly, std::string startingSequence, int startLevel): level{startLevel}, 
+Quadris::Quadris(int seed, bool newSeed, bool textOnly, std::string startingSequence, int startLevel): level{startLevel}, 
   lc{new LevelController{startLevel}} { 
+
+  if(DEBUG) cout << "new seed?" << newSeed << endl;
+
   //sets the seed
-  srand(seed);
+  if(!newSeed) srand(time(0));
 
   if(DEBUG == 1) cout << "constructing the Views" << endl;
   if(DEBUG) cout << "Text only? " << textOnly << endl;
+
   //construct the views and view controller
   vector <View *> views;
   views.emplace_back(new TextDisplay{startLevel, 18, 11});

@@ -9,9 +9,10 @@ class CmdInterpreter {
 
     //These 4 values store command line arguments to pass to the Quadris constructor
     bool textOnly; //Text only mode
+    bool newSeed; //If the user enetered a new seed
     int seed; //Seed for random number generation
-    std::string startingSequence = ""; //Intial file to read input from
-    int startingLevel = 0; //The starting level
+    std::string startingSequence; //Intial file to read input from
+    int startingLevel; //The starting level
     
 
     void interpretCommand(std::string cmd); //Determines what part of the program to call with a given command
