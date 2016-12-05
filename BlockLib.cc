@@ -21,7 +21,7 @@ vector <vector <char>> BlockLib::getBlockLayout(char blockType) const {
     case 'Z' : return zBlock();
     case 'T' : return tBlock();
   };
-   
+
   int randNum = rand() % 7 + 1;
   switch(randNum) {
    case 1 : return getBlockLayout('I');

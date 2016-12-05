@@ -28,33 +28,33 @@ Grid::Grid(const vector <View*> & views, int row, int col){
   if(DEBUG) cout << "row " << row << "col " << col;
 
   // add neighbour Cells as observers
-  for (int i = 0; i < row; i++){
-    for (int j = 0; j < col; j++){
+  for (int r = 0; r < row; r++){
+    for (int c = 0; c < col; c++){
       // Create Cells and set them to nullptr by default
       Cell * left = nullptr;
       Cell * right = nullptr;
       Cell * top = nullptr;
       Cell * bottom = nullptr;
 
-      if (j > 0){
-        left = &grid[i][j-1];
+      if (c > 0){
+        left = &grid[r][c-1];
       }
 
-      if (j < row){
-        right = &grid[i][j+1];
+      if (c < col-1){
+        right = &grid[r][c+1];
       }
 
-      if (i > 0){
-        top = &grid[i-1][j];
+      if (r > 0){
+        top = &grid[r-1][c];
       }
 
-      if (i < col){
-        bottom = &grid[i+1][j];
+      if (r < row-1){
+        bottom = &grid[r+1][c];
       }
 
-      grid[i][j].setNeighbours(left, right, top, bottom);
+      grid[r][c].setNeighbours(left, right, top, bottom);
       for(auto &v : views) {
-        grid[i][j].attach(v);
+        grid[r][c].attach(v);
       }
     }
   }

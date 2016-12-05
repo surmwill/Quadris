@@ -21,9 +21,9 @@ class Cell: public Subject, public Observer {
   bool droppable();
   bool movableLeft();
   bool movableRight();
-  void drop();
-  void moveLeft();
-  void moveRight();
+  Cell * drop(); // returns a pointer to the new location of the cell info
+  Cell * moveLeft(); // returns a pointer to the new location of the cell info
+  Cell * moveRight();// returns a pointer to the new location of the cell info
 
   // Function for possible row annihilation
   void maybeAnnihilateRow();
@@ -35,6 +35,7 @@ class Cell: public Subject, public Observer {
   //cell content management
   void setContent(Cell *otherCell);
   void unsetContent();
+  void setInPlace();
 
  private:
   // Cell Data

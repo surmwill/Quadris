@@ -17,8 +17,11 @@ Block::Block(vector <char> blockDesign, int levelGenerated, int blockSize) {
 
   for(auto n:blockCells) {
     for(auto m:blockCells) {
+
+      // Should Probably get rid of this ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
       // if the coordinates of n and m are the same
-      if ((((n->getInfo()).row) != ((m->getInfo()).row)) || (((n->getInfo()).row) != ((m->getInfo()).row))){
+      if ((((n->getInfo()).row) != ((m->getInfo()).row)) || (((n->getInfo()).col) != ((m->getInfo()).col))){
         n->attach(m);
       }
     }
@@ -90,10 +93,23 @@ bool Block::memberCell(int index){
 void Block::down(){
   if (DEBUG == 1) cout << "Block::down()" << endl;
   if (canBeMoved(Direction::Down)){
-    for (int i = ((blockLen*blockLen) - 1); i > 0; i--){
-      blockCells[i]->drop();
+    if (DEBUG == 1) cout << "MOVE_DOWN" << endl;
+
+    // move content starting from the bottom right of the block
+    bool onBottom = false;
+
+    for (int i = ((blockLen*blockLen) - 1); i >= 0; i--){
+      // make sure we don't move the block off of the board
+      Cell * newLocation = (blockCells[i]->drop());
+      onBottom = (onBottom || (newLocation == nullptr));
+      if (!onBottom){
+        // point to new cell info location
+        blockCells[i] = newLocation;
+      }
     }
   } else {
+    if (DEBUG == 1) cout << "DON'T_MOVE_DOWN" << endl;
+
     // mark the block as having been placed
     shouldDrop = true;
   }
@@ -104,23 +120,43 @@ void Block::left() {
 
   // if the cell can move left
   if (canBeMoved(Direction::Left)){
-    // move all cells starting from the top left of the block
-    for (int i = 0; i < 15; i++){
-      blockCells[i]->moveLeft();
+    if (DEBUG == 1) cout << "MOVE_LEFT" << endl;
+
+    // move content starting from the top left of the block
+    bool onLeftEdge = false;
+
+    for (int i = 0; i <= 15; i++){
+      // make sure we don't move the block off of the board
+      Cell * newLocation = (blockCells[i]->moveLeft());
+      onLeftEdge = (onLeftEdge || (newLocation == nullptr));
+      if (!onLeftEdge){
+        // point to new cell info location
+        blockCells[i] = newLocation;
+      }
     }
-  }
+  } else if (DEBUG == 1) cout << "DON'T_MOVE_LEFT" << endl;
 }
 
 void Block::right() {
-  if (DEBUG == 1) cout << "Block::left()" << endl;
+  if (DEBUG == 1) cout << "Block::right()" << endl;
 
   // if the cell can move right
   if (canBeMoved(Direction::Right)){
-    // move all cells starting from the bottom right of the block
-    for (int i = 15; i > 0; i--){
-      blockCells[i]->moveRight();
+    if (DEBUG == 1) cout << "MOVE_RIGHT" << endl;
+
+    // move content starting from the bottom right of the block
+    bool onRightEdge = false;
+
+    for (int i = 15; i >= 0; i--){
+      // make sure we don't move the block off of the board
+      Cell * newLocation = (blockCells[i]->moveRight());
+      onRightEdge = (onRightEdge || (newLocation == nullptr));
+      if (!onRightEdge){
+        // point to new cell info location
+        blockCells[i] = newLocation;
+      }
     }
-  }
+  } else if (DEBUG == 1) cout << "DON'T_MOVE_RIGHT" << endl;
 }
 
 bool Block::canBeMoved(Block::Direction d) {
@@ -133,24 +169,18 @@ bool Block::canBeMoved(Block::Direction d) {
 
   switch(d) {
     case (Direction::Down):
-      if (DEBUG == 1) cout << "d == Direction::Down" << endl;
-
       // all bottom cells
       step = 1;
       start = (blockLen*(blockLen-1));
       end = (blockLen*blockLen);
       break;
     case (Direction::Left):
-      if (DEBUG == 1) cout << "d == Direction::Left" << endl;
-
      // all leftmost cells
       step = blockLen;
       start = 0;
-      end = (blockLen*(blockLen-1));
+      end = ((blockLen*(blockLen-1)) + 1);
       break;
     case (Direction::Right):
-      if (DEBUG == 1) cout << "d == Direction::Right" << endl;
-
      // all rightmost cells
       step = blockLen;
       start = blockLen-1;
@@ -158,19 +188,12 @@ bool Block::canBeMoved(Block::Direction d) {
       break;
   }
 
-  if (DEBUG == 1){
-    cout << "    step = " << step << endl;
-    cout << "    start = " << start << endl;
-    cout << "    end = " << end << endl;
-  }
-
   //check to see if the cells can move
   bool canBeMoved = true;
   for (int i = start; i < end; i += step){
+    cout << "CHECK ROW/COL" << endl;
     canBeMoved = (canBeMoved && movable(i, blockLen, d));
   }
-
-  if (DEBUG == 1) cout << "--end" << endl;
 
   return canBeMoved;
 }
@@ -184,8 +207,8 @@ bool Block::movable(int index, int cellsToCheck, Block::Direction d){
   }
 
   // check movability
-  if (blockCells[index]->filled()){
-    if (DEBUG == 1) cout << "    filled" << endl;
+  if ((blockCells[index]->filled()) && (!(blockCells[index]->getInfo()).set)){
+    if (DEBUG == 1) cout << "Filled: " << index << endl;
 
     if (d == Direction::Down){
       return blockCells[index]->droppable();
@@ -201,7 +224,7 @@ bool Block::movable(int index, int cellsToCheck, Block::Direction d){
     if (DEBUG == 1) cout << "    empty" << endl;
 
     // set the step of Cells in the block
-    int step;
+    int step = 0;
     if (d == Direction::Down){
       step = -4;
     } else if (d == Direction::Left){
@@ -212,15 +235,23 @@ bool Block::movable(int index, int cellsToCheck, Block::Direction d){
 
     return movable(index += step, cellsToCheck - 1, d);
   }
+}
 
+int Block::getBlockLen(){
+  return blockLen;
 }
 
 void Block::drop(){
   if (DEBUG == 1) cout << "Block::drop()" << endl;
 
   // move down until you can no longer
-  while (autoDrop()){
+  while (!autoDrop()){
     down();
+  }
+
+  // set all block cells in place
+  for (Cell * c: blockCells){
+    c->setInPlace();
   }
 }
 

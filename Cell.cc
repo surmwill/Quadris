@@ -6,7 +6,7 @@
 #include "Info.h"
 #include <iostream>
 
-#define DEBUG 0
+#define DEBUG 1
 
 using namespace std;
 
@@ -20,6 +20,7 @@ Cell::Cell(char symbol, int blockSize, int levelGenerated, int row, int col): ce
 }
 
 void Cell::setNeighbours(Cell * left, Cell * right, Cell * top, Cell * bottom){
+  // set pointers to adjacent cells
   leftNeighbour = left;
   rightNeighbour = right;
   topNeighbour = top;
@@ -27,6 +28,7 @@ void Cell::setNeighbours(Cell * left, Cell * right, Cell * top, Cell * bottom){
 }
 
 void Cell::setSymbol(const char symbol) {
+  // change the cell's symbol
   cellInfo.symbol = symbol;
   notifyObservers(SubscriptionType::Display); 
 }
@@ -39,39 +41,56 @@ const Info & Cell::getInfo() const {
 
 bool Cell::movableLeft(){
   if (DEBUG == 1) cout << "Cell::movableLeft()" << endl;
-  return leftNeighbour->filled();
+  if (DEBUG == 1) cout << "Left Neighbour" << ((leftNeighbour == nullptr) ? "nullptr" : "Cell") << endl;
+
+  // check to see if the cell to the left is empty
+  return (leftNeighbour != nullptr) && !(leftNeighbour->filled());
 }
 
 bool Cell::movableRight(){
   if (DEBUG == 1) cout << "Cell::movableRight()" << endl;
-  return rightNeighbour->filled();
+  if (DEBUG == 1) cout << "Right Neighbour" << ((rightNeighbour == nullptr) ? "nullptr" : "Cell") << endl;
+
+  // check to see if the cell to the right is empty
+  return (rightNeighbour != nullptr) && !(rightNeighbour->filled());
 }
 
 bool Cell::droppable(){
   if (DEBUG == 1) cout << "Cell::droppable()" << endl;
-  if (bottomNeighbour == nullptr) cout << "nullptr" << endl;
-  return bottomNeighbour->filled();
+  if (DEBUG == 1) cout << "Bottom Neighbour" << ((bottomNeighbour == nullptr) ? "nullptr" : "Cell") << endl;
+
+  // check to see if the below cell is empty
+  return (bottomNeighbour != nullptr) && !(bottomNeighbour->filled());
 }
 
-void Cell::drop(){
+Cell * Cell::drop(){
   if (DEBUG == 1) cout << "Cell::drop()" << endl;
-  //give the bottomNeighbour this cell's info. Unset this cell.
-  bottomNeighbour->setContent(this);
-  unsetContent();
+
+  // give the bottomNeighbour this cell's info. Unset this cell.
+  if ((filled()) && (!(cellInfo.set))) bottomNeighbour->setContent(this);
+  if (!(filled() && cellInfo.set)) unsetContent();
+
+  return bottomNeighbour;
 }
 
-void Cell::moveLeft(){
+Cell * Cell::moveLeft(){
   if (DEBUG == 1) cout << "Cell::moveLeft()" << endl;
-  //give the leftNeighbour this cell's info. Unset this cell.
-  leftNeighbour->setContent(this);
-  unsetContent();
+
+  // give the leftNeighbour this cell's info. Unset this cell.
+  if ((filled()) && (!(cellInfo.set))) leftNeighbour->setContent(this);
+  if (!(filled() && cellInfo.set)) unsetContent();
+
+  return leftNeighbour;
 }
 
-void Cell::moveRight(){
+Cell * Cell::moveRight(){
   if (DEBUG == 1) cout << "Cell::moveRight()" << endl;
-  //give the rightNeighbour this cell's info. Unset this cell.
-  rightNeighbour->setContent(this);
-  unsetContent();
+
+  // give the rightNeighbour this cell's info. Unset this cell.
+  if ((filled()) && (!(cellInfo.set))) rightNeighbour->setContent(this);
+  if (!(filled() && cellInfo.set))unsetContent();
+
+  return rightNeighbour;
 }
 
 SubscriptionType Cell::subType(){
@@ -124,6 +143,7 @@ void Cell::setContent(Cell *otherCell) {
   cellInfo.symbol = otherCell->cellInfo.symbol;
   cellInfo.blockSize = otherCell->cellInfo.blockSize;
   cellInfo.levelGenerated = otherCell->cellInfo.levelGenerated;
+  cellInfo.set = otherCell->cellInfo.set;
   notifyObservers(SubscriptionType::Display);
 }
 
@@ -132,3 +152,5 @@ void Cell::unsetContent() {
   removeObservers(SubscriptionType::Cell);
   notifyObservers(SubscriptionType::Display);
 }
+
+void Cell::setInPlace() {cellInfo.set = true;}
