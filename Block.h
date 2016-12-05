@@ -9,11 +9,11 @@ class Block {
  public:
   Block(std::vector <char> blockDesign, int levelGenerated, int blockSize = 4);
   virtual ~Block();
-  virtual void left();
-  virtual void right();
-  virtual void rotate(bool cc);
+  virtual void left(int mult);
+  virtual void right(int mult);
+  virtual void rotate(bool cc, int mult);
   virtual void drop();
-  virtual void down();
+  virtual void down(int);
   virtual bool autoDrop();
   virtual Cell * getCell(int row, int col);
   virtual void setCell(int row, int col, Cell * newCell);
