@@ -5,7 +5,9 @@
 #include "LevelTwo.h"
 #include "LevelThree.h"
 #include "LevelFour.h"
-#include <cstdlib>
+#include <iostream>
+
+#define DEBUG 1
 
 using namespace std;
 
@@ -17,7 +19,7 @@ void LevelController::changeLevel(const int levelNum) {
   if (currentLevel) delete currentLevel;
 
   switch(levelNum) {
-    case 0: currentLevel = new LevelZero{"sequence.txt"};
+    case 0: currentLevel = new LevelZero{"sequence2.txt"};
       break;
     case 1: currentLevel = new LevelOne{};
       break;
@@ -31,6 +33,7 @@ void LevelController::changeLevel(const int levelNum) {
 }
 
 void LevelController::setFilename(const std::string fileName){
+  if(DEBUG) cout << "setting filename" << endl;
   currentLevel->setFilename(fileName);
 }
 

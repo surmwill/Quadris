@@ -11,7 +11,6 @@
 #include <vector>
 #include <cstdlib>
 #include <iostream>
-#include <ctime>
 
 #define DEBUG 1
 
@@ -24,8 +23,11 @@ Quadris::Quadris(int seed, bool newSeed, bool textOnly, std::string startingSequ
 
   if(DEBUG) cout << "new seed?" << newSeed << endl;
 
+  if(DEBUG) cout << startingSequence << endl;
+  if(startingSequence.length() > 0) lc->setFilename(startingSequence);
+
   //sets the seed
-  if(!newSeed) srand(time(0));
+  if(!newSeed) srand(124325);
 
   if(DEBUG == 1) cout << "constructing the Views" << endl;
   if(DEBUG) cout << "Text only? " << textOnly << endl;
@@ -90,11 +92,13 @@ void Quadris::rotatecw() {
 void Quadris::levelup() {
   level == 4 ? level = 0 : level++;
   lc->changeLevel(level);
+  vc->setLevel(level);
 }
 
 void Quadris::leveldown() {
   level == 0 ? level = 4 : level--;
   lc->changeLevel(level);
+  vc->setLevel(level);
 }
 
 void Quadris::setSequence(string filename) {

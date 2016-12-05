@@ -2,7 +2,6 @@
 #include <iostream>
 #include <locale> //needed for isdigit()
 #include <cstdlib> //needed for rand()
-#include <ctime> //needed for time(0)
 #include <fstream>
 #include <string>
 #include "cmdInterpreter.h"
@@ -78,22 +77,15 @@ void CmdInterpreter::parseArgument(std::string arg1, std::string arg2) {
        newSeed = true;
     }
   }
-  else if(arg1 == "-scriptfile") {
-    if(goodFile(arg2)) startingSequence = arg2; //check that we have a valid second argument
-    else cerr << "could not read scriptfile" << endl;
-  }
+  else if(arg1 == "-scriptfile") startingSequence = arg2; 
   else if(arg1 == "-startlevel") {
-    if(isNumber(arg2)) startingLevel = std::stoi(arg2); //check that we have a valid second argument
+    if(isNumber(arg2)) { //check that we have a valid second argument
+      startingLevel = std::stoi(arg2); 
+      if(startingLevel < 0) startingLevel = 0;
+      if(startingLevel > 4) startingLevel = 4;
+    }
     else cerr << "not given a number for level, starting at level 0" << endl;
   }
-}
-
-bool CmdInterpreter::goodFile(std::string filename) {
-  if(filename.length() < 1) return false;
-
-  ofstream myfile{filename};
-  if(myfile.is_open()) return true;
-  else return false;
 }
 
 bool CmdInterpreter::isNumber(std::string s) {

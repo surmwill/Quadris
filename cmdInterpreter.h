@@ -17,7 +17,6 @@ class CmdInterpreter {
 
     void interpretCommand(std::string cmd); //Determines what part of the program to call with a given command
     void parseArgument(std::string arg1, std::string arg2); //Parses command line arguments
-    bool goodFile(std::string s); //checks if a file with name s can be opened
     bool isNumber(std::string s); //checks if string s is a valid number
 
   public:

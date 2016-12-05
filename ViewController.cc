@@ -17,7 +17,6 @@ ViewController::ViewController(const vector <View *> & viewsToAdd, const int sta
     views.emplace_back(unique_ptr <View> (v));
   }
   if(DEBUG == 1) cout << "ViewController::ViewController()" << endl; 
-  updateView();
 }
 
 void ViewController::updateView() {
@@ -40,6 +39,8 @@ void ViewController::setLevel(const int level) {
   for(auto &n : views) {
     n->setLevel(level);
   }
+  updateView();
+  
 }
 
 void ViewController::restart() {
@@ -48,4 +49,5 @@ void ViewController::restart() {
   for(auto &n : views) {
     n->clear();
   }
+  updateView();
 }
