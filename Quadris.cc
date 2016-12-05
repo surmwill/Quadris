@@ -42,7 +42,7 @@ Quadris::Quadris(int seed, bool newSeed, bool textOnly, std::string startingSequ
    
   if(DEBUG == 1) cout << "constructing the Grid" << endl;
   //constructs the grid
-  Grid * grid = new Grid{views}; 
+  Grid * grid = new Grid{views, new Score()};
 
   if(DEBUG == 1) cout << "constructing the BlockController" << endl;
   //constructs the block controller
