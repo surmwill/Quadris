@@ -102,5 +102,7 @@ void BlockController::attachCurrBlockToGrid() {
 }
 
 void BlockController::setBlock(char type){
-
+  delete currBlock;
+  currBlock = level->genBlock(type);
+  attachCurrBlockToGrid();
 }

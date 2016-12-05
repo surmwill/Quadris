@@ -109,12 +109,12 @@ void GraphicsDisplay::drawNextBlock(const vector <vector <char>> & layout, int c
   int nextBlockAreaLength = totalLength / 2; //The length of the top section of the mini grid
   int nextBlockStartX = totalLength / 2; //The starting X pixel position for drawing next block
   int nextBlockAreaHeight = topSpace; //Y dimension of the top section of the grid
-  int nextBlockStartY = 0; //The starting Y pixel position for drawing next block
+  int nextBlockStartY = 5; //The starting Y pixel position for drawing next block
 
-  int numCellsX = 4, numCellsY = 2; //Our mini grid of 4x2 cells. Note all block designs only use the first 2 rows so no point in drawing 2 empty rows. Normally would be 4x4
+  int numCellsX = 4, numCellsY = 4; //Our mini grid of 4x2 cells. Note all block designs only use the first 2 rows so no point in drawing 2 empty rows. Normally would be 4x4
   int nextCellWidth = nextBlockAreaLength / numCellsX; //The width of each cell in next block
   int nextCellHeight = nextBlockAreaHeight / numCellsY; //The height of each cell in next block
-  int border = 1; //the border between cells. Smaller because next block is drawn smaller
+  int border = 2; //the border between cells. Smaller because next block is drawn smaller
 
   //clears the previous drawing of next block
   win.fillRectangle(nextBlockStartX, nextBlockStartY, nextBlockAreaLength, nextBlockAreaHeight, clearColour);
@@ -123,6 +123,7 @@ void GraphicsDisplay::drawNextBlock(const vector <vector <char>> & layout, int c
   for(int i = 0; i < numCellsX; i++) {
     for(int j = 0; j < numCellsY; j++) {
       if(layout[i][j] != ' ') { 
+        cout << "layout (i, j)" << layout[i][j] << endl;
         int startX = nextBlockStartX + (j * nextCellWidth) + border;
         int fillWidth = nextCellWidth - (border * 2);
 

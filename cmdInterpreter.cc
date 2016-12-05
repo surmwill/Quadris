@@ -11,7 +11,7 @@
 
 using namespace std;
 
-CmdInterpreter::CmdInterpreter(istream * in, int argc, char *argv[]): stream{in}{
+CmdInterpreter::CmdInterpreter(istream * in, int argc, char *argv[]): stream{in}, textOnly{false} {
   if(argc > 1) {
     for(int i = 1; i < argc; i++) {
       string arg1{argv[i]}; //store the first argument in a string
@@ -20,8 +20,9 @@ CmdInterpreter::CmdInterpreter(istream * in, int argc, char *argv[]): stream{in}
       parseArgument(arg1, arg2); //parse the arguments
     }
   }
+  if(DEBUG) cout << "text only? " << textOnly << endl;
   if(DEBUG) cout << "constructing Quadris" << endl;
-  quadris = unique_ptr <Quadris> (new Quadris{textOnly, seed, startingSequence, startingLevel});
+  quadris = unique_ptr <Quadris> (new Quadris{seed, textOnly, startingSequence, startingLevel});
   if(DEBUG) cout << "CmdInterpreter::CmdInterpreter" << endl;
 }
 
@@ -67,7 +68,10 @@ void CmdInterpreter::startGame(){
 }
 
 void CmdInterpreter::parseArgument(std::string arg1, std::string arg2) {
-  if(arg1 == "-text") textOnly = true;
+  if(arg1 == "-text") {
+    if(DEBUG) cout << "text only" << endl;
+    textOnly = true;
+  }
   else if(arg1 == "-seed") {
     if(isNumber(arg2)) seed = stoi(arg2); //check that we have a valid second argument
     else {

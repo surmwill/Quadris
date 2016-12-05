@@ -23,10 +23,8 @@ Quadris::Quadris(int seed, bool textOnly, std::string startingSequence, int star
   //sets the seed
   srand(seed);
 
-  textOnly = true;
-
   if(DEBUG == 1) cout << "constructing the Views" << endl;
-
+  if(DEBUG) cout << "Text only? " << textOnly << endl;
   //construct the views and view controller
   vector <View *> views;
   views.emplace_back(new TextDisplay{startLevel, 18, 11});
@@ -100,6 +98,7 @@ void Quadris::setSequence(string filename) {
 
 void Quadris::setBlock(char type) {
   bc->setBlock(type);
+  vc->updateView();
 }
 
 void Quadris::hint() {
