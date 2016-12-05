@@ -49,7 +49,7 @@ void BlockController::drop() {
 void BlockController::nextBlockNotification() {
   int blockWidth = 4;
   int blockHeight = 4;
-  Cell * specialCell = grid->getCell(-1, -1);
+  Cell * specialCell = grid->getCell(-1, -1); //the special cell has unqiue dimensions -1, -1
 
   for(int i = 0; i < blockWidth; i ++) {
     for(int j = 0; j < blockHeight; j++) {
