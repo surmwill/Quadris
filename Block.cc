@@ -207,7 +207,7 @@ bool Block::movable(int index, int cellsToCheck, Block::Direction d){
   }
 
   // check movability
-  if (blockCells[index]->filled()){
+  if ((blockCells[index]->filled()) && (!(blockCells[index]->getInfo()).set)){
     if (DEBUG == 1) cout << "Filled: " << index << endl;
 
     if (d == Direction::Down){
@@ -247,6 +247,11 @@ void Block::drop(){
   // move down until you can no longer
   while (!autoDrop()){
     down();
+  }
+
+  // set all block cells in place
+  for (Cell * c: blockCells){
+    c->setInPlace();
   }
 }
 

@@ -35,6 +35,7 @@ class Cell: public Subject, public Observer {
   //cell content management
   void setContent(Cell *otherCell);
   void unsetContent();
+  void setInPlace();
 
  private:
   // Cell Data
