@@ -35,7 +35,7 @@ bool Block::autoDrop(){
   return shouldDrop;
 }
 
-void Block::rotate(bool cc) {
+void Block::rotate(bool cc, int mult) {
   if (DEBUG == 1) cout << "Block::rotate()" << endl;
 
   // keep track of the new locations of filled cells
@@ -90,7 +90,7 @@ bool Block::memberCell(int index){
   return false;
 }
 
-void Block::down(){
+void Block::down(int mult){
   if (DEBUG == 1) cout << "Block::down()" << endl;
   if (canBeMoved(Direction::Down)){
     if (DEBUG == 1) cout << "MOVE_DOWN" << endl;
@@ -115,7 +115,7 @@ void Block::down(){
   }
 }
 
-void Block::left() {
+void Block::left(int mult) {
   if (DEBUG == 1) cout << "Block::left()" << endl;
 
   // if the cell can move left
@@ -137,8 +137,8 @@ void Block::left() {
   } else if (DEBUG == 1) cout << "DON'T_MOVE_LEFT" << endl;
 }
 
-void Block::right() {
-  if (DEBUG == 1) cout << "Block::right()" << endl;
+void Block::right(int mult) {
+  if (DEBUG == 1) cout << "Block::left()" << endl;
 
   // if the cell can move right
   if (canBeMoved(Direction::Right)){
@@ -245,8 +245,8 @@ void Block::drop(){
   if (DEBUG == 1) cout << "Block::drop()" << endl;
 
   // move down until you can no longer
-  while (!autoDrop()){
-    down();
+  while (autoDrop()){
+    down(1);
   }
 
   // set all block cells in place

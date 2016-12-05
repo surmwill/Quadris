@@ -22,7 +22,7 @@ class GraphicsDisplay: public View {
    int cols; //cols of cells we want for the grid
    int cellWidth = 40; //the width in pixels of a cell in the display
    int cellHeight = 40; //the height in pixels of a cell in the display
-   int topSpace = 50; //space reserved for the top portion of the screen(displays level, score, hi score, next block)
+   int topSpace = 70; //space reserved for the top portion of the screen(displays level, score, hi score, next block)
    int totalLength; //the total length in pixels of the window
    int totalHeight; //the total height in pixels of the window
    int clearColour = Xwindow::White; //the colour of a clear portion of the board

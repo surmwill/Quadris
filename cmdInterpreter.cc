@@ -2,8 +2,8 @@
 #include <iostream>
 #include <locale> //needed for isdigit()
 #include <cstdlib> //needed for rand()
-#include <fstream>
 #include <string>
+#include <fstream>
 #include "cmdInterpreter.h"
 
 #define DEBUG 1
@@ -26,24 +26,28 @@ CmdInterpreter::CmdInterpreter(istream * in, int argc, char *argv[]): stream{in}
 }
 
 void CmdInterpreter::interpretCommand(string cmd) {
-  if (cmd == "left") quadris->left();
-  else if (cmd == "right") quadris->right();
-  else if (cmd == "down") quadris->down();
-  else if (cmd == "clockwise") quadris->rotatecw();
-  else if (cmd == "counterclockwise") quadris->rotatecc();
-  else if (cmd == "drop") quadris->drop();
-  else if (cmd == "levelup") quadris->levelup();
-  else if (cmd == "leveldown") quadris->leveldown();
+  int mult = extractInt(&cmd);
+
+  if (cmd == "left") quadris->left(mult);
+  else if (cmd == "right") quadris->right(mult);
+  else if (cmd == "down") quadris->down(mult);
+  else if (cmd == "clockwise") quadris->rotatecw(mult);
+  else if (cmd == "counterclockwise") quadris->rotatecc(mult);
+  else if (cmd == "drop") quadris->drop(mult);
+  else if (cmd == "levelup") quadris->levelup(mult);
+  else if (cmd == "leveldown") quadris->leveldown(mult);
   else if (cmd == "norandom") {
-    if(*stream >> cmd)  quadris->setSequence(cmd);
+    if(*stream >> cmd) quadris->setSequence(cmd);
     else cerr << "couldn't read in filename" << endl;
   }
   else if (cmd == "random") quadris->setSequence("");
   else if (cmd == "sequence") { //Note: possible infinite looping if a file "f" calls "sequence f"
-    if (*stream >> cmd) {
-      ifstream file{cmd, ifstream::in};
-      string fileCommand;
-      while (file >> fileCommand){ interpretCommand(fileCommand);}
+    if(*stream >> cmd) { 
+      for(int i = 0; i < mult; i++) {
+        ifstream file{cmd, ifstream::in};
+        string fileCommand;
+        while (file >> fileCommand){ interpretCommand(fileCommand);}
+      }
     }
     else cerr <<"couldn't read in filename" << endl;
   } 
@@ -66,7 +70,7 @@ void CmdInterpreter::startGame(){
   }
 }
 
-void CmdInterpreter::parseArgument(std::string arg1, std::string arg2) {
+void CmdInterpreter::parseArgument(const string arg1, const string arg2) {
   if(arg1 == "-text") {
     if(DEBUG) cout << "text only" << endl;
     textOnly = true;
@@ -88,7 +92,22 @@ void CmdInterpreter::parseArgument(std::string arg1, std::string arg2) {
   }
 }
 
-bool CmdInterpreter::isNumber(std::string s) {
+int CmdInterpreter::extractInt(string * s) {
+  string toConvert;
+  int deleted = 0;
+
+  for(auto &n: *s) {
+    if(!isdigit(n)) break;
+    toConvert += n;
+    deleted++;
+  }
+  *s = s->substr(deleted);
+  
+  if(toConvert.length() == 0) return 0;
+  else return stoi(toConvert);
+}
+
+bool CmdInterpreter::isNumber(const string s) {
   if(s.length() < 1) return false;
 
   for(auto &n: s) {

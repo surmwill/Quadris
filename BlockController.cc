@@ -24,29 +24,29 @@ BlockController::BlockController(Level *const level, Grid *grid): grid{grid},
   if(DEBUG == 1) cout << "BlockController::BlockController()" << endl;
 }
 
-void BlockController::left() {
+void BlockController::left(int mult) {
   if(DEBUG == 1) cout << "BlockController::left()"<< endl;
-  currBlock->left();
+  currBlock->left(mult);
 }
 
-void BlockController::right() {
+void BlockController::right(int mult) {
   if(DEBUG == 1) cout << "BlockController::right()" << endl;
-  currBlock->right();
+  currBlock->right(mult);
 }
 
-void BlockController::down() {
+void BlockController::down(int mult) {
   if(DEBUG == 1) cout << "BlockController::down()" << endl;
-  currBlock->down();
+  currBlock->down(mult);
 }
 
-void BlockController::rotatecc() {
+void BlockController::rotatecc(int mult) {
   if(DEBUG == 1) cout << "BlockController::rotatecc()" << endl;
-  currBlock->rotate(true);
+  currBlock->rotate(true, mult);
 }
 
-void BlockController::rotatecw() {
+void BlockController::rotatecw(int mult) {
   if(DEBUG == 1) cout << "BlockController::rotatecc()" << endl;
-  currBlock->rotate(false);
+  currBlock->rotate(false, mult);
 }
 
 void BlockController::drop() {
