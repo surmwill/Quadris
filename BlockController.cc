@@ -81,18 +81,16 @@ void BlockController::genBlock() {
   //if(nextBlock == nullptr) return;
   nextBlock = level->genBlock();
   if(DEBUG == 1) cout << "notification" << endl;
-  nextBlockNotification();
+//  nextBlockNotification();
   if(DEBUG == 1) cout << "BlockController::genBlock()" << endl;
 
   attachCurrBlockToGrid();
 }
 
 void BlockController::attachCurrBlockToGrid() {
-  if(DEBUG == 1) cout << "attachCurrBlockToGrid()" << endl;
-  if(DEBUG) cout << currBlock->blockLen;
-
-  for (int i = 0; i < currBlock->blockLen; i++){
-    for (int j = 0; j < currBlock->blockLen; j++){
+  if(DEBUG == 1 ) cout << "attachCurrBlockToGrid()" << endl;
+  for (int i = 0; i < currBlock->getBlockLen(); i++){
+    for (int j = 0; j < currBlock->getBlockLen(); j++){
       // get a Cell from the grid
       Cell * gridCell = grid->getCell(i, j);
 

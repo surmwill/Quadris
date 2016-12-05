@@ -215,6 +215,10 @@ bool Block::movable(int index, int cellsToCheck, Block::Direction d){
 
 }
 
+int Block::getBlockLen(){
+  return blockLen;
+}
+
 void Block::drop(){
   if (DEBUG == 1) cout << "Block::drop()" << endl;
 

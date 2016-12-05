@@ -17,7 +17,7 @@ class Block {
   virtual bool autoDrop();
   virtual Cell * getCell(int row, int col);
   virtual void setCell(int row, int col, Cell * newCell);
-  int blockLen;
+  int getBlockLen();
 
  protected:
   std::vector <Cell*> *getBlockCells();
@@ -25,7 +25,7 @@ class Block {
 
  private:
   enum class Direction { Left, Right, Down };
-
+  int blockLen;
   std::vector <Cell*> blockCells;
   bool shouldDrop;
 
