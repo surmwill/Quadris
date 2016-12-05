@@ -81,7 +81,7 @@ void BlockController::genBlock() {
   //if(nextBlock == nullptr) return;
   nextBlock = level->genBlock();
   if(DEBUG == 1) cout << "notification" << endl;
-//  nextBlockNotification();
+  nextBlockNotification();
   if(DEBUG == 1) cout << "BlockController::genBlock()" << endl;
 
   attachCurrBlockToGrid();

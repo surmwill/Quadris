@@ -77,8 +77,8 @@ void Quadris::down(int mult) {
 void Quadris::drop(int mult) {
   for(int i = 0; i < mult; i++) {
     bc->drop();
-    vc->updateView();
   }
+  vc->updateView();
 }
 
 void Quadris::rotatecc(int mult) {
