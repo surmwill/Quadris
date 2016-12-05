@@ -38,30 +38,37 @@ const Info & Cell::getInfo() const {
 }
 
 bool Cell::movableLeft(){
+  if (DEBUG == 1) cout << "Cell::movableLeft()" << endl;
   return leftNeighbour->filled();
 }
 
 bool Cell::movableRight(){
+  if (DEBUG == 1) cout << "Cell::movableRight()" << endl;
   return rightNeighbour->filled();
 }
 
 bool Cell::droppable(){
+  if (DEBUG == 1) cout << "Cell::droppable()" << endl;
+  if (bottomNeighbour == nullptr) cout << "nullptr" << endl;
   return bottomNeighbour->filled();
 }
 
 void Cell::drop(){
+  if (DEBUG == 1) cout << "Cell::drop()" << endl;
   //give the bottomNeighbour this cell's info. Unset this cell.
   bottomNeighbour->setContent(this);
   unsetContent();
 }
 
 void Cell::moveLeft(){
+  if (DEBUG == 1) cout << "Cell::moveLeft()" << endl;
   //give the leftNeighbour this cell's info. Unset this cell.
   leftNeighbour->setContent(this);
   unsetContent();
 }
 
 void Cell::moveRight(){
+  if (DEBUG == 1) cout << "Cell::moveRight()" << endl;
   //give the rightNeighbour this cell's info. Unset this cell.
   rightNeighbour->setContent(this);
   unsetContent();

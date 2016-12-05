@@ -33,6 +33,8 @@ bool Block::autoDrop(){
 }
 
 void Block::rotate(bool cc) {
+  if (DEBUG == 1) cout << "Block::rotate()" << endl;
+
   // keep track of the new locations of filled cells
   vector<int> newMembers;
 
@@ -47,7 +49,7 @@ void Block::rotate(bool cc) {
       // Keep track of indices
       int currentIndex = (blockLen*i) + j;
       int oldLocation = (((blockLen*(blockLen - 1))+i) - (blockLen*j));
-      if (cc){ oldLocation = (((blockLen^2) - 1) - oldLocation); }
+      if (cc){ oldLocation = (((blockLen*blockLen) - 1) - oldLocation); }
 
       // make sure that the rotation is valid
       if (memberCell(oldLocation)){
@@ -86,8 +88,9 @@ bool Block::memberCell(int index){
 }
 
 void Block::down(){
+  if (DEBUG == 1) cout << "Block::down()" << endl;
   if (canBeMoved(Direction::Down)){
-    for (int i = ((blockLen^2) - 1); i > 0; i--){
+    for (int i = ((blockLen*blockLen) - 1); i > 0; i--){
       blockCells[i]->drop();
     }
   } else {
@@ -97,6 +100,8 @@ void Block::down(){
 }
 
 void Block::left() {
+  if (DEBUG == 1) cout << "Block::left()" << endl;
+
   // if the cell can move left
   if (canBeMoved(Direction::Left)){
     // move all cells starting from the top left of the block
@@ -107,6 +112,8 @@ void Block::left() {
 }
 
 void Block::right() {
+  if (DEBUG == 1) cout << "Block::left()" << endl;
+
   // if the cell can move right
   if (canBeMoved(Direction::Right)){
     // move all cells starting from the bottom right of the block
@@ -117,39 +124,60 @@ void Block::right() {
 }
 
 bool Block::canBeMoved(Block::Direction d) {
+  if (DEBUG == 1) cout << "Block::canBeMoved()" << endl;
+
   // get proper loop bounds to capture the right cells
-  int step;
-  int start;
-  int end;
+  int step = 0;
+  int start = 0;
+  int end = 0;
 
   switch(d) {
     case (Direction::Down):
+      if (DEBUG == 1) cout << "d == Direction::Down" << endl;
+
       // all bottom cells
       step = 1;
       start = (blockLen*(blockLen-1));
-      end = blockLen^2;
+      end = (blockLen*blockLen);
+      break;
     case (Direction::Left):
-      // all leftmost cells
+      if (DEBUG == 1) cout << "d == Direction::Left" << endl;
+
+     // all leftmost cells
       step = blockLen;
       start = 0;
       end = (blockLen*(blockLen-1));
+      break;
     case (Direction::Right):
-      // all rightmost cells
+      if (DEBUG == 1) cout << "d == Direction::Right" << endl;
+
+     // all rightmost cells
       step = blockLen;
       start = blockLen-1;
-      end = blockLen^2;
+      end = (blockLen*blockLen);
+      break;
+  }
+
+  if (DEBUG == 1){
+    cout << "    step = " << step << endl;
+    cout << "    start = " << start << endl;
+    cout << "    end = " << end << endl;
   }
 
   //check to see if the cells can move
   bool canBeMoved = true;
-  for (int col = start; col < end; col += step){
-    canBeMoved = (canBeMoved && movable(col, blockLen, d));
+  for (int i = start; i < end; i += step){
+    canBeMoved = (canBeMoved && movable(i, blockLen, d));
   }
+
+  if (DEBUG == 1) cout << "--end" << endl;
 
   return canBeMoved;
 }
 
 bool Block::movable(int index, int cellsToCheck, Block::Direction d){
+  if (DEBUG == 1) cout << "Block::movable(index: " << index << ", cell Total: " << blockCells.size() << ")" << endl;
+
   // if there is no filled cell in this row or column
   if (cellsToCheck <= 0){
     return true;
@@ -157,6 +185,8 @@ bool Block::movable(int index, int cellsToCheck, Block::Direction d){
 
   // check movability
   if (blockCells[index]->filled()){
+    if (DEBUG == 1) cout << "    filled" << endl;
+
     if (d == Direction::Down){
       return blockCells[index]->droppable();
     } else if (d == Direction::Left){
@@ -168,6 +198,8 @@ bool Block::movable(int index, int cellsToCheck, Block::Direction d){
       return false;
     }
   } else {
+    if (DEBUG == 1) cout << "    empty" << endl;
+
     // set the step of Cells in the block
     int step;
     if (d == Direction::Down){
@@ -184,6 +216,8 @@ bool Block::movable(int index, int cellsToCheck, Block::Direction d){
 }
 
 void Block::drop(){
+  if (DEBUG == 1) cout << "Block::drop()" << endl;
+
   // move down until you can no longer
   while (autoDrop()){
     down();
@@ -195,8 +229,8 @@ Cell * Block::getCell(int row, int col){
 }
 
 void Block::setCell(int row, int col, Cell * newCell){
-  Cell * changeCell = blockCells[(blockLen*row) + col];
-  changeCell->setContent(newCell);
+  delete blockCells[(blockLen*row) + col];
+  blockCells[(blockLen*row) + col] = newCell;
 }
 
 vector <Cell*>* Block::getBlockCells() {
