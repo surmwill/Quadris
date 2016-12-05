@@ -153,4 +153,7 @@ void Cell::unsetContent() {
   notifyObservers(SubscriptionType::Display);
 }
 
-void Cell::setInPlace() {cellInfo.set = true;}
+void Cell::setInPlace() {
+  cellInfo.set = true;
+  maybeAnnihilateRow();
+}
