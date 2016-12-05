@@ -40,7 +40,7 @@ Grid::Grid(const vector <View*> & views, int row, int col){
         left = &grid[r][c-1];
       }
 
-      if (c < col){
+      if (c < col-1){
         right = &grid[r][c+1];
       }
 
@@ -48,7 +48,7 @@ Grid::Grid(const vector <View*> & views, int row, int col){
         top = &grid[r-1][c];
       }
 
-      if (r < row){
+      if (r < row-1){
         bottom = &grid[r+1][c];
       }
 
