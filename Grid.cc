@@ -61,6 +61,7 @@ Grid::Grid(const vector <View*> & views, int row, int col){
 }
 
 Cell * Grid::getCell(int row, int col){
-  return &grid[row][col];
+  if(row == -1 && col == -1) return &grid[grid.size() - 1][0];
+  else return &grid[row][col];
 }
 

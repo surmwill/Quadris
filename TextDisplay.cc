@@ -27,6 +27,7 @@ TextDisplay::TextDisplay(const int startLevel, const int rows, const int cols): 
 }
 
 void TextDisplay::notify(const Subject &whoNotified) {
+  if(DEBUG == 1) cout << "TextDisplay::notify()" << endl;
   bool specialCell = false;
   int row = whoNotified.getInfo().coords[0];
   int col = whoNotified.getInfo().coords[1];

@@ -3,6 +3,7 @@
 #include "Level.h"
 #include "Grid.h"
 #include "Block.h"
+#include "Info.h"
 #include "Subscriptions.h"
 #include <iostream>
 
@@ -11,7 +12,9 @@
 using namespace std;
 
 BlockController::BlockController(Level *const level, Grid *grid): grid{grid},
-  level{level}, currBlock{level->genBlock()}, nextBlock{level->genBlock()} {
+  level{level}, nextBlock{level->genBlock()} {
+  genBlock(); //intializes currBlock based on nextBlocks value
+
   for(int i = 0; i < blockHeight; i++) {
     for(int j = 0; j < blockWidth; j++) {
       generatingArea.emplace_back(grid->getCell(i, j));
@@ -19,7 +22,6 @@ BlockController::BlockController(Level *const level, Grid *grid): grid{grid},
   }
   
   if(DEBUG == 1) cout << "BlockController::BlockController()" << endl;
-  if(DEBUG == 1) cout << "returning new block" << endl;
 }
 
 void BlockController::left() {
@@ -51,9 +53,12 @@ void BlockController::nextBlockNotification() {
   int blockHeight = 4;
   Cell * specialCell = grid->getCell(-1, -1); //the special cell has unqiue dimensions -1, -1
 
-  for(int i = 0; i < blockWidth; i ++) {
+  if(DEBUG == 1) cout << "got grid->nextCell" << endl;
+
+  for(int i = 0; i < blockWidth; i++) {
     for(int j = 0; j < blockHeight; j++) {
        char symbol = nextBlock->getCell(i, j)->getInfo().symbol;
+       if(DEBUG == 1) cout << "Cell's symbol" << endl;
        if(symbol != ' ') {
          specialCell->setSymbol(symbol);
          return;
@@ -63,17 +68,19 @@ void BlockController::nextBlockNotification() {
 }
 
 void BlockController::genBlock() {
-  delete currBlock;
   currBlock = nextBlock;
 
   if(nextBlock == nullptr) return; 
   nextBlock = level->genBlock();
+  if(DEBUG == 1) cout << "notification" << endl;
   nextBlockNotification();
+  if(DEBUG == 1) cout << "BlockController::genBlock()" << endl;
 
   attachCurrBlockToGrid();
 }
 
 void BlockController::attachCurrBlockToGrid() {
+  if(DEBUG == 1 ) cout << "attachCurrBlockToGrid()" << endl;
   for (int i = 0; i < currBlock->blockLen; i++){
     for (int j = 0; j < currBlock->blockLen; j++){
       // get a Cell from the grid
