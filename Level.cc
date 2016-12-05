@@ -15,8 +15,8 @@ void Level::setFilename(const string filename) {
   }
 }
 
-BlockLib * Level::getBlockLib() {
-  return &blockLib;
+const BlockLib & Level::getBlockLib() {
+  return blockLib;
 }
 
 bool Level::goodFile(const std::string filename) {

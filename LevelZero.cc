@@ -4,14 +4,19 @@
 #include <string> 
 #include <fstream>
 #include "Block.h"
+#include <iostream>
+
+#define DEBUG 1
 
 using namespace std;
 
 LevelZero::LevelZero(std::string fileName) {
+  if(DEBUG == 1) cout << "LevelZero::LevelZero" << endl;
   setFilename(fileName);
 }
 
 Block* LevelZero::genBlock() {
+  if(DEBUG == 1) cout << "LevelZero::genBlock()" << endl;
   if(!getSeqFile().is_open() || getSeqFile().eof()) return nullptr;
   
   string symbol;
@@ -21,5 +26,12 @@ Block* LevelZero::genBlock() {
 }
 
 Block* LevelZero::genBlock(const char type) {
-  return new Block{getBlockLib()->getFlattenedBlockLayout(type), levelGenerated};
+  if(DEBUG == 1) {
+    cout << "getting the flattened block" << endl;
+    vector <char> temp = getBlockLib().getFlattenedBlockLayout(type);
+    for(auto &n : temp) cout << n << endl;
+  }
+  Block * b = new Block{getBlockLib().getFlattenedBlockLayout(type), levelGenerated};
+  if(DEBUG == 1) cout << "returning new block" << endl;
+  return b;
 }

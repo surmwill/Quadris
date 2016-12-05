@@ -2,31 +2,38 @@
 #include <vector>
 #include <map>
 #include <utility>
+#include <iostream>
+
+#define DEBUG 1
 
 using namespace std;
 
-BlockLib::BlockLib() {
-  layoutMap.emplace('I', &BlockLib::iBlock);
-  layoutMap.emplace('J', &BlockLib::jBlock);
-  layoutMap.emplace('L', &BlockLib::lBlock);
-  layoutMap.emplace('O', &BlockLib::oBlock);
-  layoutMap.emplace('S', &BlockLib::sBlock);
-  layoutMap.emplace('Z', &BlockLib::zBlock); 
-}
+BlockLib::BlockLib() {}
 
 vector <vector <char>> BlockLib::getBlockLayout(char blockType) const {
-  auto iter = layoutMap.find(blockType);
-  return (this->*iter->second)();
+  switch(blockType) {
+    case 'I' : return iBlock();
+    case 'J' : return jBlock();
+    case 'L' : return lBlock();
+    case 'O' : return oBlock();
+    case 'S' : return sBlock();
+    case 'Z' : return zBlock();
+    default : return iBlock();
+  };
 } 
 
 vector <char> BlockLib::getFlattenedBlockLayout(char blockType) const {
-  vector <char> design;
-  for(auto &row: getBlockLayout(blockType)) {
+  if(DEBUG == 1) cout << "BlockLib::getFlattenedBlockLayout()" << endl;
+  vector <char> flatDesign;
+  vector <vector <char>> design = getBlockLayout(blockType);
+
+  for(auto &row: design) {
     for(auto &col: row) {
-      design.emplace_back(col);
+      if(DEBUG == 1) cout << col << endl;
+      flatDesign.emplace_back(col);
     }
   }
-  return design;
+  return flatDesign;
 }
 
 vector <vector <char>> BlockLib::iBlock() const {

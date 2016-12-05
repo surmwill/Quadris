@@ -8,6 +8,7 @@
 using namespace std;
 
 Block::Block(vector <char> blockDesign, int levelGenerated, int blockSize) {
+  if(DEBUG == 1) cout << "Block construction started" << endl;
   blockLen = blockSize;
   for(auto bd:blockDesign) {
     // set the coordinates to (-1, -1) since the content will be taken and the cells discarded

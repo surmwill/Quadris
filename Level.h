@@ -18,7 +18,7 @@ class Level{
  	
   protected:
     std::ifstream & getSeqFile(); //returns the seqFile
-    BlockLib * getBlockLib();  //returns the BlockLib
+    const BlockLib & getBlockLib();  //returns the BlockLib
 
   public:
     virtual Block* genBlock() = 0; //generates a random block based on the rules of the level/game
