@@ -41,11 +41,11 @@ Block* LevelFour::genBlock() {
 
 Block* LevelFour::genBlock(const char type) {
   if ((blockNum % 5) == 0){
-    DirectedBlock *dBlock = new DirectedBlock((getBlockLib()->getFlattenedBlockLayout(type)), 4);
+    DirectedBlock *dBlock = new DirectedBlock((getBlockLib().getFlattenedBlockLayout(type)), 4);
     return dBlock;
   }
 
-  HeavyBlock *hBlock = new HeavyBlock((getBlockLib()->getFlattenedBlockLayout(type)), 4);
+  HeavyBlock *hBlock = new HeavyBlock((getBlockLib().getFlattenedBlockLayout(type)), 4);
   return hBlock;
 }
 

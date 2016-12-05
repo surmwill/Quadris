@@ -37,6 +37,6 @@ Block* LevelTwo::genBlock() {
  }
 
 Block* LevelTwo::genBlock(const char type) {
-  Block *block = new Block((getBlockLib()->getFlattenedBlockLayout(type)), 2);
+  Block *block = new Block((getBlockLib().getFlattenedBlockLayout(type)), 2);
   return block;
 }

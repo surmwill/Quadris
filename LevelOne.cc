@@ -29,5 +29,5 @@ Block* LevelOne::genBlock() {
 }
 
 Block* LevelOne::genBlock(const char type) {
-  return new Block{getBlockLib()->getFlattenedBlockLayout(type), levelGenerated};
+  return new Block{getBlockLib().getFlattenedBlockLayout(type), levelGenerated};
 }
