@@ -15,17 +15,6 @@ Block::Block(vector <char> blockDesign, int levelGenerated, int blockSize) {
     blockCells.emplace_back(new Cell{bd, blockSize, levelGenerated, -1, -1});
   }
 
-  for(auto n:blockCells) {
-    for(auto m:blockCells) {
-
-      // Should Probably get rid of this ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-      // if the coordinates of n and m are the same
-      if ((((n->getInfo()).row) != ((m->getInfo()).row)) || (((n->getInfo()).col) != ((m->getInfo()).col))){
-        n->attach(m);
-      }
-    }
-  }
   if(DEBUG == 1) cout << "Block::Block()" << endl;
 }
 
@@ -267,6 +256,17 @@ void Block::drop(){
   // move down until you can no longer
   while (autoDrop()){
     down(1);
+  }
+
+  // add block observers for scoring
+  for(auto n:blockCells) {
+    for(auto m:blockCells) {
+      // make sure that n and m are both filled members of the block
+      if (((n->filled()) && (!((n->getInfo()).set))) && ((m->filled()) && (!((m->getInfo()).set)))){
+        // add m as an observer to n
+        n->attach(m);
+      }
+    }
   }
 
   // set all block cells in place
