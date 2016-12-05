@@ -9,8 +9,6 @@
 #include <iomanip> //setw
 #include <vector>
 
-#define DEBUG 1
-
 using namespace std;
 
 TextDisplay::TextDisplay(const int startLevel, const int rows, const int cols): View{startLevel} {
@@ -23,12 +21,9 @@ TextDisplay::TextDisplay(const int startLevel, const int rows, const int cols): 
     textGrid.emplace_back(charRow);
     charRow.clear();
   }
-  if(DEBUG == 1) cout << "TextDisplay::TextDisplay" << endl;
 }
 
 void TextDisplay::notify(const Subject &whoNotified) {
-  if(DEBUG == 1) cout << "TextDisplay::notify()" << endl;
-
   bool specialCell = false;
   int row = whoNotified.getInfo().row;
   int col = whoNotified.getInfo().col;

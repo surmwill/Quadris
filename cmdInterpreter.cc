@@ -6,8 +6,6 @@
 #include <string>
 #include "cmdInterpreter.h"
 
-#define DEBUG 1
-
 using namespace std;
 
 CmdInterpreter::CmdInterpreter(istream * in, int argc, char *argv[]): stream{in}, textOnly{false}, newSeed{false}, seed{0}, startingLevel{0} {
@@ -19,10 +17,7 @@ CmdInterpreter::CmdInterpreter(istream * in, int argc, char *argv[]): stream{in}
       parseArgument(arg1, arg2); //parse the arguments
     }
   }
-  if(DEBUG) cout << "text only? " << textOnly << endl;
-  if(DEBUG) cout << "constructing Quadris" << endl;
   quadris = unique_ptr <Quadris> (new Quadris{seed, newSeed, textOnly, startingSequence, startingLevel});
-  if(DEBUG) cout << "CmdInterpreter::CmdInterpreter" << endl;
 }
 
 void CmdInterpreter::interpretCommand(string cmd) {
@@ -68,7 +63,6 @@ void CmdInterpreter::startGame(){
 
 void CmdInterpreter::parseArgument(std::string arg1, std::string arg2) {
   if(arg1 == "-text") {
-    if(DEBUG) cout << "text only" << endl;
     textOnly = true;
   }
   else if(arg1 == "-seed") {

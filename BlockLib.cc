@@ -5,8 +5,6 @@
 #include <iostream>
 #include <cstdlib>
 
-#define DEBUG 0
-
 using namespace std;
 
 BlockLib::BlockLib() {}
@@ -36,13 +34,11 @@ vector <vector <char>> BlockLib::getBlockLayout(char blockType) const {
 } 
 
 vector <char> BlockLib::getFlattenedBlockLayout(char blockType) const {
-  if(DEBUG == 1) cout << "BlockLib::getFlattenedBlockLayout()" << endl;
   vector <char> flatDesign;
   vector <vector <char>> design = getBlockLayout(blockType);
 
   for(auto &row: design) {
     for(auto &col: row) {
-      if(DEBUG == 1) cout << col << endl;
       flatDesign.emplace_back(col);
     }
   }

@@ -7,8 +7,6 @@
 #include "LevelFour.h"
 #include <iostream>
 
-#define DEBUG 1
-
 using namespace std;
 
 LevelController::LevelController(const int level) {;
@@ -33,7 +31,6 @@ void LevelController::changeLevel(const int levelNum) {
 }
 
 void LevelController::setFilename(const std::string fileName){
-  if(DEBUG) cout << "setting filename" << endl;
   currentLevel->setFilename(fileName);
 }
 

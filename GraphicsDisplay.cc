@@ -10,8 +10,6 @@
 #include <vector>
 #include <iostream>
 
-#define DEBUG 1 
-
 using namespace std;
 
 GraphicsDisplay::GraphicsDisplay(const int startLevel, const int rows, const int cols): View{startLevel}, rows{rows}, cols{cols}, totalLength{cols * cellWidth}, 
@@ -26,8 +24,6 @@ GraphicsDisplay::GraphicsDisplay(const int startLevel, const int rows, const int
   symToColour.emplace('T', Xwindow::Blue);
   symToColour.emplace('S', Xwindow::Black); 
   clear();
-
-  if(DEBUG == 1) cout << "GraphicsDisplay::GraphicsDisplay()" << endl;
 }
 
 //Fill the cell that notified the display
@@ -109,7 +105,6 @@ void GraphicsDisplay::fillCell(const int row, const int col, int colour) {
 
 //Draws the next block. Imagine a mini grid in the top right of the window in which we draw the next block
 void GraphicsDisplay::drawNextBlock(const vector <vector <char>> & layout, int colour) {
-  if(DEBUG) cout << "GraphicsDisplay::drawNextBlock" << endl;
   int nextBlockAreaLength = totalLength / 2; //The length of the top section of the mini grid
   int nextBlockStartX = totalLength / 2 + 50; //The starting X pixel position for drawing next block
   int nextBlockAreaHeight = topSpace; //Y dimension of the top section of the grid
@@ -127,14 +122,10 @@ void GraphicsDisplay::drawNextBlock(const vector <vector <char>> & layout, int c
   for(int i = 0; i < numCellsX; i++) {
     for(int j = 0; j < numCellsY; j++) {
       if(layout[i][j] != ' ') { 
-        if(DEBUG) cout << "layout (i, j): " << i << j << layout[i][j] << endl;
         int startX = nextBlockStartX + (j * nextCellWidth) + border;
         int fillWidth = nextCellWidth - (border * 2);
-
         int startY = nextBlockStartY + (i * nextCellHeight) + border;
         int fillHeight = nextCellHeight - (border * 2);
-
-        if(DEBUG) cout << " X: " << startX << " Y: " << startY << " fw: " << fillWidth << " fh: " << fillHeight << " col:" << colour;
         win.fillRectangle(startX, startY, fillWidth, fillHeight, colour);
       }
     }

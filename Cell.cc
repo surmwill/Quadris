@@ -6,8 +6,6 @@
 #include "Info.h"
 #include <iostream>
 
-#define DEBUG 1
-
 using namespace std;
 
 Cell::Cell(char symbol, int blockSize, int levelGenerated, int row, int col): cellInfo{symbol, blockSize, levelGenerated, row, col} {
@@ -15,8 +13,6 @@ Cell::Cell(char symbol, int blockSize, int levelGenerated, int row, int col): ce
   rightNeighbour = nullptr;
   topNeighbour = nullptr;
   bottomNeighbour = nullptr;
-
-  if(DEBUG == 1) cout << "Cell::Cell()" << endl;
 }
 
 void Cell::setNeighbours(Cell * left, Cell * right, Cell * top, Cell * bottom){
@@ -40,56 +36,38 @@ const Info & Cell::getInfo() const {
 }
 
 bool Cell::movableLeft(){
-  if (DEBUG == 1) cout << "Cell::movableLeft()" << endl;
-  if (DEBUG == 1) cout << "Left Neighbour" << ((leftNeighbour == nullptr) ? "nullptr" : "Cell") << endl;
-
   // check to see if the cell to the left is empty
   return (leftNeighbour != nullptr) && !(leftNeighbour->filled());
 }
 
 bool Cell::movableRight(){
-  if (DEBUG == 1) cout << "Cell::movableRight()" << endl;
-  if (DEBUG == 1) cout << "Right Neighbour" << ((rightNeighbour == nullptr) ? "nullptr" : "Cell") << endl;
-
   // check to see if the cell to the right is empty
   return (rightNeighbour != nullptr) && !(rightNeighbour->filled());
 }
 
 bool Cell::droppable(){
-  if (DEBUG == 1) cout << "Cell::droppable()" << endl;
-  if (DEBUG == 1) cout << "Bottom Neighbour" << ((bottomNeighbour == nullptr) ? "nullptr" : "Cell") << endl;
-
   // check to see if the below cell is empty
   return (bottomNeighbour != nullptr) && !(bottomNeighbour->filled());
 }
 
 Cell * Cell::drop(){
-  if (DEBUG == 1) cout << "Cell::drop()" << endl;
-
   // give the bottomNeighbour this cell's info. Unset this cell.
   if ((filled()) && (!(cellInfo.set))) bottomNeighbour->setContent(this);
   if (!(filled() && cellInfo.set)) unsetContent();
-
   return bottomNeighbour;
 }
 
 Cell * Cell::moveLeft(){
-  if (DEBUG == 1) cout << "Cell::moveLeft()" << endl;
-
   // give the leftNeighbour this cell's info. Unset this cell.
   if ((filled()) && (!(cellInfo.set))) leftNeighbour->setContent(this);
   if (!(filled() && cellInfo.set)) unsetContent();
-
   return leftNeighbour;
 }
 
 Cell * Cell::moveRight(){
-  if (DEBUG == 1) cout << "Cell::moveRight()" << endl;
-
   // give the rightNeighbour this cell's info. Unset this cell.
   if ((filled()) && (!(cellInfo.set))) rightNeighbour->setContent(this);
   if (!(filled() && cellInfo.set))unsetContent();
-
   return rightNeighbour;
 }
 

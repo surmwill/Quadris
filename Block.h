@@ -30,7 +30,6 @@ class Block {
   bool shouldDrop = false;
 
   // helper functions
-  bool memberCell(int index);
   bool movable(int index, int cellsToCheck, Direction d);
   bool canBeMoved(Direction d);
 };

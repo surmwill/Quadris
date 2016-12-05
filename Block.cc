@@ -3,30 +3,15 @@
 #include "Cell.h"
 #include <iostream>
 
-#define DEBUG 1
-
 using namespace std;
 
 Block::Block(vector <char> blockDesign, int levelGenerated, int blockSize) {
-  if(DEBUG == 1) cout << "Block construction started" << endl;
   blockLen = blockSize;
   for(auto bd:blockDesign) {
     // set the coordinates to (-1, -1) since the content will be taken and the cells discarded
     blockCells.emplace_back(new Cell{bd, blockSize, levelGenerated, -1, -1});
   }
 
-  for(auto n:blockCells) {
-    for(auto m:blockCells) {
-
-      // Should Probably get rid of this ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-      // if the coordinates of n and m are the same
-      if ((((n->getInfo()).row) != ((m->getInfo()).row)) || (((n->getInfo()).col) != ((m->getInfo()).col))){
-        n->attach(m);
-      }
-    }
-  }
-  if(DEBUG == 1) cout << "Block::Block()" << endl;
 }
 
 Block::~Block(){}
@@ -36,18 +21,13 @@ bool Block::autoDrop(){
 }
 
 void Block::rotate(bool cc) {
-  if (DEBUG == 1) cout << "Block::rotate()" << endl;
-
-  // keep track of the new locations of filled cells
-  vector<int> newMembers;
-
   // make a rotated block
   vector<Cell> rotatedBlock;
 
   for (int i = 0; i < blockLen; i++){
     for (int j = 0; j < blockLen; j++){
       // create new cell
-      Cell newCell {' ', 0, -1}; // level set to -1, not a filled part of the block
+      Cell newCell {' ', 0, -1}; // level set to -1, empty part of the block does not need level
 
       // Keep track of indices
       int currentIndex = (blockLen*i) + j;
@@ -55,14 +35,11 @@ void Block::rotate(bool cc) {
       if (cc){ oldLocation = (((blockLen*blockLen) - 1) - oldLocation); }
 
       // make sure that the rotation is valid
-      if (memberCell(oldLocation)){
+      if ((blockCells[oldLocation]->getInfo()).set){
         // if the destination of the cell at oldLocation is blocked, cancel rotation
-        if (blockCells[currentIndex]->filled() && !memberCell(currentIndex)){
+        if (blockCells[currentIndex]->filled() && ((blockCells[currentIndex]->getInfo()).set)){
           return;
         }
-
-        // add the current location as a filled cell
-        newMembers.push_back(currentIndex);
 
         // set new cell content, fill current cell
         newCell.setContent(blockCells[oldLocation]);
@@ -74,27 +51,13 @@ void Block::rotate(bool cc) {
   }
 
   // set the block cells to their rotated configuration
-  filledIndices = newMembers;
   for (int i = 0; i < blockLen; i++){
     blockCells[i]->setContent(&rotatedBlock[i]);
   }
 }
 
-bool Block::memberCell(int index){
-  // check list of member indices
-  for (int i: filledIndices){
-    if (index == i){
-      return true;
-    }
-  }
-  return false;
-}
-
 void Block::down(){
-  if (DEBUG == 1) cout << "Block::down()" << endl;
   if (canBeMoved(Direction::Down)){
-    if (DEBUG == 1) cout << "MOVE_DOWN" << endl;
-
     // move content starting from the bottom right of the block
     bool onBottom = false;
 
@@ -108,20 +71,14 @@ void Block::down(){
       }
     }
   } else {
-    if (DEBUG == 1) cout << "DON'T_MOVE_DOWN" << endl;
-
     // mark the block as having been placed
     shouldDrop = true;
   }
 }
 
 void Block::left() {
-  if (DEBUG == 1) cout << "Block::left()" << endl;
-
   // if the cell can move left
   if (canBeMoved(Direction::Left)){
-    if (DEBUG == 1) cout << "MOVE_LEFT" << endl;
-
     // move content starting from the top left of the block
     bool onLeftEdge = false;
 
@@ -134,16 +91,12 @@ void Block::left() {
         blockCells[i] = newLocation;
       }
     }
-  } else if (DEBUG == 1) cout << "DON'T_MOVE_LEFT" << endl;
+  }
 }
 
 void Block::right() {
-  if (DEBUG == 1) cout << "Block::right()" << endl;
-
   // if the cell can move right
   if (canBeMoved(Direction::Right)){
-    if (DEBUG == 1) cout << "MOVE_RIGHT" << endl;
-
     // move content starting from the bottom right of the block
     bool onRightEdge = false;
 
@@ -156,12 +109,10 @@ void Block::right() {
         blockCells[i] = newLocation;
       }
     }
-  } else if (DEBUG == 1) cout << "DON'T_MOVE_RIGHT" << endl;
+  }
 }
 
 bool Block::canBeMoved(Block::Direction d) {
-  if (DEBUG == 1) cout << "Block::canBeMoved()" << endl;
-
   // get proper loop bounds to capture the right cells
   int step = 0;
   int start = 0;
@@ -191,7 +142,6 @@ bool Block::canBeMoved(Block::Direction d) {
   //check to see if the cells can move
   bool canBeMoved = true;
   for (int i = start; i < end; i += step){
-    cout << "CHECK ROW/COL" << endl;
     canBeMoved = (canBeMoved && movable(i, blockLen, d));
   }
 
@@ -199,8 +149,6 @@ bool Block::canBeMoved(Block::Direction d) {
 }
 
 bool Block::movable(int index, int cellsToCheck, Block::Direction d){
-  if (DEBUG == 1) cout << "Block::movable(index: " << index << ", cell Total: " << blockCells.size() << ")" << endl;
-
   // if there is no filled cell in this row or column
   if (cellsToCheck <= 0){
     return true;
@@ -208,8 +156,6 @@ bool Block::movable(int index, int cellsToCheck, Block::Direction d){
 
   // check movability
   if ((blockCells[index]->filled()) && (!(blockCells[index]->getInfo()).set)){
-    if (DEBUG == 1) cout << "Filled: " << index << endl;
-
     if (d == Direction::Down){
       return blockCells[index]->droppable();
     } else if (d == Direction::Left){
@@ -221,8 +167,6 @@ bool Block::movable(int index, int cellsToCheck, Block::Direction d){
       return false;
     }
   } else {
-    if (DEBUG == 1) cout << "    empty" << endl;
-
     // set the step of Cells in the block
     int step = 0;
     if (d == Direction::Down){
@@ -242,8 +186,6 @@ int Block::getBlockLen(){
 }
 
 void Block::drop(){
-  if (DEBUG == 1) cout << "Block::drop()" << endl;
-
   // move down until you can no longer
   while (!autoDrop()){
     down();
