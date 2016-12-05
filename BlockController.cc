@@ -12,7 +12,7 @@
 using namespace std;
 
 BlockController::BlockController(Level *const level, Grid *grid): grid{grid},
-  level{level}, nextBlock{level->genBlock()} {
+  level{level}, currBlock{nullptr}, nextBlock{level->genBlock()} {
   genBlock(); //intializes currBlock based on nextBlocks value
 
   for(int i = 0; i < blockHeight; i++) {
@@ -25,26 +25,32 @@ BlockController::BlockController(Level *const level, Grid *grid): grid{grid},
 }
 
 void BlockController::left() {
+  if(DEBUG == 1) cout << "BlockController::left()"<< endl;
   currBlock->left();
 }
 
 void BlockController::right() {
+  if(DEBUG == 1) cout << "BlockController::right()" << endl;
   currBlock->right();
 }
 
 void BlockController::down() {
+  if(DEBUG == 1) cout << "BlockController::down()" << endl;
   currBlock->down();
 }
 
 void BlockController::rotatecc() {
+  if(DEBUG == 1) cout << "BlockController::rotatecc()" << endl;
   currBlock->rotate(true);
 }
 
 void BlockController::rotatecw() {
+  if(DEBUG == 1) cout << "BlockController::rotatecc()" << endl;
   currBlock->rotate(false);
 }
 
 void BlockController::drop() {
+
   currBlock->drop();
 }
 
@@ -68,9 +74,11 @@ void BlockController::nextBlockNotification() {
 }
 
 void BlockController::genBlock() {
+  // free and replace the old currBlock
+  delete currBlock;
   currBlock = nextBlock;
 
-  if(nextBlock == nullptr) return; 
+  //if(nextBlock == nullptr) return;
   nextBlock = level->genBlock();
   if(DEBUG == 1) cout << "notification" << endl;
   nextBlockNotification();
@@ -86,14 +94,6 @@ void BlockController::attachCurrBlockToGrid() {
       // get a Cell from the grid
       Cell * gridCell = grid->getCell(i, j);
 
-      // check to make sure that the game is not over
-      if (gridCell->filled()){
-        // replace this with something better
-        // BlockController whould not output to the user
-        cout << "GAME OVER" << endl;
-        exit(0);
-      }
-
       // fill the grid cell and replace the block cell
       gridCell->setContent(currBlock->getCell(i, j));
       currBlock->setCell(i, j, gridCell);
@@ -101,6 +101,6 @@ void BlockController::attachCurrBlockToGrid() {
   }
 }
 
-void BlockController::setBlock(char type) {
-  // what is this for?
+void BlockController::setBlock(char type){
+
 }

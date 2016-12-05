@@ -19,7 +19,7 @@ class BlockController {
    void rotatecw();
    void drop();
    void genBlock();
-   void setBlock(char type); //replaces the current block with block of type char
+   void setBlock(char type);
 
  private:
    int blockWidth = 4; //the possible width of a block
