@@ -53,7 +53,7 @@ bool Cell::droppable(){
   return (bottomNeighbour != nullptr) && !(bottomNeighbour->filled());
 }
 
-void Cell::drop(){
+Cell * Cell::drop(){
   if (DEBUG == 1) cout << "Cell::drop()" << endl;
   if (DEBUG == 1) cout << "x: " << cellInfo.coords[0] << " y: " << cellInfo.coords[1] << endl;
 
@@ -62,20 +62,26 @@ void Cell::drop(){
   unsetContent();
 
   if (DEBUG == 1) cout << "x: " << cellInfo.coords[0] << "y: " << cellInfo.coords[1] << endl;
+
+  return bottomNeighbour;
 }
 
-void Cell::moveLeft(){
+Cell * Cell::moveLeft(){
   if (DEBUG == 1) cout << "Cell::moveLeft()" << endl;
   //give the leftNeighbour this cell's info. Unset this cell.
   leftNeighbour->setContent(this);
   unsetContent();
+
+  return leftNeighbour;
 }
 
-void Cell::moveRight(){
+Cell * Cell::moveRight(){
   if (DEBUG == 1) cout << "Cell::moveRight()" << endl;
   //give the rightNeighbour this cell's info. Unset this cell.
   rightNeighbour->setContent(this);
   unsetContent();
+
+  return rightNeighbour;
 }
 
 SubscriptionType Cell::subType(){

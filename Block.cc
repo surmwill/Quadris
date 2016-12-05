@@ -93,8 +93,10 @@ void Block::down(){
     if (DEBUG == 1) cout << "MOVE_DOWN" << endl;
 
     for (int i = ((blockLen*blockLen) - 1); i > 0; i--){
-      blockCells[i]->drop();
+      // Move the cell info and continue pointing at it
+      blockCells[i] = (blockCells[i]->drop());
     }
+
   } else {
     if (DEBUG == 1) cout << "DON'T_MOVE_DOWN" << endl;
 
@@ -110,9 +112,10 @@ void Block::left() {
   if (canBeMoved(Direction::Left)){
     if (DEBUG == 1) cout << "MOVE_LEFT" << endl;
 
-    // move all cells starting from the top left of the block
+    // move content starting from the top left of the block
     for (int i = 0; i < 15; i++){
-      blockCells[i]->moveLeft();
+      // Move the cell info and continue pointing at it
+      blockCells[i] = (blockCells[i]->moveLeft());
     }
   } else {
     if (DEBUG == 1) cout << "DON'T_MOVE_LEFT" << endl;
@@ -128,7 +131,8 @@ void Block::right() {
 
     // move all cells starting from the bottom right of the block
     for (int i = 15; i > 0; i--){
-      blockCells[i]->moveRight();
+      // Move the cell info and continue pointing at it
+      blockCells[i] = (blockCells[i]->moveRight());
     }
   } else {
     if (DEBUG == 1) cout << "DON'T_MOVE_RIGHT" << endl;
