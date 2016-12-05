@@ -13,6 +13,7 @@ using namespace std;
 
 ViewController::ViewController(const vector <View *> & viewsToAdd, const int startLevel): score{startLevel} { 
   for(auto &v: viewsToAdd) {
+    if(DEBUG) cout << viewsToAdd.size() << endl;
     views.emplace_back(unique_ptr <View> (v));
   }
   if(DEBUG == 1) cout << "ViewController::ViewController()" << endl; 

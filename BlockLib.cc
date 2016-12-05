@@ -3,6 +3,7 @@
 #include <map>
 #include <utility>
 #include <iostream>
+#include <cstdlib>
 
 #define DEBUG 0
 
@@ -18,8 +19,20 @@ vector <vector <char>> BlockLib::getBlockLayout(char blockType) const {
     case 'O' : return oBlock();
     case 'S' : return sBlock();
     case 'Z' : return zBlock();
-    default : return iBlock();
+    case 'T' : return tBlock();
   };
+  
+  int randNum = rand() % 7 + 1;
+  switch(randNum) {
+   case 1 : return getBlockLayout('I');
+   case 2 : return getBlockLayout('J');
+   case 3 : return getBlockLayout('L');
+   case 4 : return getBlockLayout('O');
+   case 5 : return getBlockLayout('S');
+   case 6 : return getBlockLayout('Z');
+   case 7 : return getBlockLayout('T');
+   default : return getBlockLayout('T'); //to silnce the warnings, this will never be called
+ };
 } 
 
 vector <char> BlockLib::getFlattenedBlockLayout(char blockType) const {

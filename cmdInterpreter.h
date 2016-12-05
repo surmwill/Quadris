@@ -8,7 +8,7 @@ class CmdInterpreter {
     std::istream *stream; //The input stream
 
     //These 4 values store command line arguments to pass to the Quadris constructor
-    bool textOnly = false; //Text only mode
+    bool textOnly; //Text only mode
     int seed; //Seed for random number generation
     std::string startingSequence = ""; //Intial file to read input from
     int startingLevel = 0; //The starting level

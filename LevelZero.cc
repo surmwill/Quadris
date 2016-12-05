@@ -17,11 +17,11 @@ LevelZero::LevelZero(std::string fileName) {
 
 Block* LevelZero::genBlock() {
   if(DEBUG == 1) cout << "LevelZero::genBlock()" << endl;
-  if(!getSeqFile().is_open() || getSeqFile().eof()) return nullptr;
+  if(!getSeqFile().is_open() || getSeqFile().eof()) return genBlock('Q'); //Q is a dummy value. Since we have no Q block our Block lib will generate a random block we do have instead
   
   string symbol;
   getSeqFile() >> symbol;
-  if(symbol.length() > 1) return nullptr;
+  if(symbol.length() > 1) return genBlock('Q');
   else return genBlock(symbol[0]); 
 }
 
