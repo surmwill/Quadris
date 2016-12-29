@@ -20,24 +20,24 @@ BlockController::BlockController(Level *const level, Grid *grid): grid{grid},
   }
 }
 
-void BlockController::left() {
-  currBlock->left();
+void BlockController::left(int multi) {
+  currBlock->left(multi);
 }
 
-void BlockController::right() {
-  currBlock->right();
+void BlockController::right(int multi) {
+  currBlock->right(multi);
 }
 
-void BlockController::down() {
-  currBlock->down();
+void BlockController::down(int multi) {
+  currBlock->down(multi);
 }
 
-void BlockController::rotatecc() {
-  currBlock->rotate(true);
+void BlockController::rotatecc(int multi) {
+  currBlock->rotate(true, multi);
 }
 
-void BlockController::rotatecw() {
-  currBlock->rotate(false);
+void BlockController::rotatecw(int multi) {
+  currBlock->rotate(false, multi);
 }
 
 void BlockController::drop() {

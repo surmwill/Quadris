@@ -20,7 +20,7 @@ bool Block::autoDrop(){
   return shouldDrop;
 }
 
-void Block::rotate(bool cc) {
+void Block::rotate(bool cc, int multi) {
   // make a rotated block
   vector<Cell> rotatedBlock;
 
@@ -56,57 +56,63 @@ void Block::rotate(bool cc) {
   }
 }
 
-void Block::down(){
-  if (canBeMoved(Direction::Down)){
-    // move content starting from the bottom right of the block
-    bool onBottom = false;
-
-    for (int i = ((blockLen*blockLen) - 1); i >= 0; i--){
-      // make sure we don't move the block off of the board
-      Cell * newLocation = (blockCells[i]->drop());
-      onBottom = (onBottom || (newLocation == nullptr));
-      if (!onBottom){
-        // point to new cell info location
-        blockCells[i] = newLocation;
+void Block::down(int multi){
+  for(int i = 0; i < multi; i++) {
+    if (canBeMoved(Direction::Down)){
+      // move content starting from the bottom right of the block
+      bool onBottom = false;
+  
+      for (int i = ((blockLen*blockLen) - 1); i >= 0; i--){
+        // make sure we don't move the block off of the board
+        Cell * newLocation = (blockCells[i]->drop());
+        onBottom = (onBottom || (newLocation == nullptr));
+        if (!onBottom){
+          // point to new cell info location
+          blockCells[i] = newLocation;
+        }
       }
-    }
-  } else {
-    // mark the block as having been placed
-    shouldDrop = true;
-  }
-}
-
-void Block::left() {
-  // if the cell can move left
-  if (canBeMoved(Direction::Left)){
-    // move content starting from the top left of the block
-    bool onLeftEdge = false;
-
-    for (int i = 0; i <= 15; i++){
-      // make sure we don't move the block off of the board
-      Cell * newLocation = (blockCells[i]->moveLeft());
-      onLeftEdge = (onLeftEdge || (newLocation == nullptr));
-      if (!onLeftEdge){
-        // point to new cell info location
-        blockCells[i] = newLocation;
-      }
+    } else {
+      // mark the block as having been placed
+      shouldDrop = true;
     }
   }
 }
 
-void Block::right() {
-  // if the cell can move right
-  if (canBeMoved(Direction::Right)){
-    // move content starting from the bottom right of the block
-    bool onRightEdge = false;
+void Block::left(int multi) {
+  for(int i = 0; i < multi; i++) {
+    // if the cell can move left
+    if (canBeMoved(Direction::Left)){
+      // move content starting from the top left of the block
+      bool onLeftEdge = false;
 
-    for (int i = 15; i >= 0; i--){
-      // make sure we don't move the block off of the board
-      Cell * newLocation = (blockCells[i]->moveRight());
-      onRightEdge = (onRightEdge || (newLocation == nullptr));
-      if (!onRightEdge){
-        // point to new cell info location
-        blockCells[i] = newLocation;
+      for (int i = 0; i <= 15; i++){
+        // make sure we don't move the block off of the board
+        Cell * newLocation = (blockCells[i]->moveLeft());
+        onLeftEdge = (onLeftEdge || (newLocation == nullptr));
+        if (!onLeftEdge){
+          // point to new cell info location
+          blockCells[i] = newLocation;
+        }
+      }
+    }
+  }
+}
+
+void Block::right(int multi) {
+  for(int i = 0; i < multi; i++) {
+    // if the cell can move right
+    if (canBeMoved(Direction::Right)){
+      // move content starting from the bottom right of the block
+      bool onRightEdge = false;
+
+      for (int i = 15; i >= 0; i--){
+        // make sure we don't move the block off of the board
+        Cell * newLocation = (blockCells[i]->moveRight());
+        onRightEdge = (onRightEdge || (newLocation == nullptr));
+        if (!onRightEdge){
+          // point to new cell info location
+          blockCells[i] = newLocation;
+        }
       }
     }
   }
@@ -188,7 +194,7 @@ int Block::getBlockLen(){
 void Block::drop(){
   // move down until you can no longer
   while (!autoDrop()){
-    down();
+    down(1);
   }
 
   // set all block cells in place

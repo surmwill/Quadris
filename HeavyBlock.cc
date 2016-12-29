@@ -9,23 +9,23 @@ HeavyBlock::HeavyBlock(vector <char> blockDesign, int levelGenerated, int blockS
 
 // The below functions do not account for the command multiplier
 
-void HeavyBlock::left() {
-  Block::left();
-  Block::down();
+void HeavyBlock::left(int multi) {
+  for(int i = 0; i < multi; i++) { Block::left(1); }
+  Block::down(1);
 }
 
-void HeavyBlock::right() {
-  Block::right();
-  Block::down();
+void HeavyBlock::right(int multi) {
+  for(int i = 0; i < multi; i++) { Block::right(1); }
+  Block::down(1);
 }
 
-void HeavyBlock::rotate(bool cc) {
-  Block::rotate(cc);
-  Block::down();
+void HeavyBlock::rotate(bool cc, int multi) {
+  for(int i = 0; i < multi; i++) { Block::rotate(cc, 1); }
+  Block::down(1);
 }
 
-void HeavyBlock::down() {
-  Block::down();
-  Block::down();
+void HeavyBlock::down(int multi) {
+  for(int i = 0; i < multi; i++) { Block::down(1); }
+  Block::down(1);
 }
 

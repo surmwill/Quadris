@@ -12,11 +12,11 @@ class Cell;
 class BlockController {
  public:
    BlockController(Level *const level, Grid *grid); 
-   void left();
-   void right();
-   void down();
-   void rotatecc();
-   void rotatecw();
+   void left(int multi);
+   void right(int multi);
+   void down(int multi);
+   void rotatecc(int multi);
+   void rotatecw(int multi);
    void drop();
    void genBlock();
    void setBlock(char type);

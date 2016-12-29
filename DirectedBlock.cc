@@ -11,7 +11,7 @@ bool DirectedBlock::autoDrop() {
   int moveNum = 5; // moves the block into the middle of the board
 
   for (int i = 0; i < moveNum; i++){
-    Block::left();
+    Block::left(1);
   }
 
   Block::drop();

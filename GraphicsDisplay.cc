@@ -3,7 +3,7 @@
 #include "Score.h"
 #include "View.h"
 #include "Subject.h"
-#include "Window.h"
+//#include "Window.h"
 #include "BlockLib.h"
 #include "Info.h"
 #include <map>
@@ -13,8 +13,8 @@
 using namespace std;
 
 GraphicsDisplay::GraphicsDisplay(const int startLevel, const int rows, const int cols): View{startLevel}, rows{rows}, cols{cols}, totalLength{cols * cellWidth}, 
-  totalHeight{(rows * cellHeight) + topSpace}, win{totalLength, totalHeight} {
-  symToColour.emplace(' ', Xwindow::White);
+  totalHeight{(rows * cellHeight) + topSpace}/*, win{totalLength, totalHeight}*/ {
+/*  symToColour.emplace(' ', Xwindow::White);
   symToColour.emplace('I', Xwindow::Magenta); 
   symToColour.emplace('J', Xwindow::Red);
   symToColour.emplace('L', Xwindow::Green);
@@ -24,10 +24,12 @@ GraphicsDisplay::GraphicsDisplay(const int startLevel, const int rows, const int
   symToColour.emplace('T', Xwindow::Blue);
   symToColour.emplace('S', Xwindow::Black); 
   clear();
+*/
 }
 
 //Fill the cell that notified the display
 void GraphicsDisplay::notify(const Subject &whoNotified) {
+/*
   int row = whoNotified.getInfo().row;
   int col = whoNotified.getInfo().col;
   bool specialCell = false;
@@ -38,11 +40,12 @@ void GraphicsDisplay::notify(const Subject &whoNotified) {
   char cellSymbol = whoNotified.getInfo().symbol; //the Cell's symbol
 
   if(specialCell) drawNextBlock(getBlockLib().getBlockLayout(cellSymbol), symbolToColour(cellSymbol)); //if its a special cell draw the next block
-  else fillCell(row, col, symbolToColour(cellSymbol)); //otherwise draw in the corresponding cell in the grid
+  else fillCell(row, col, symbolToColour(cellSymbol)); //otherwise draw in the corresponding cell in the grid */
 }
 
 //Draws the top section of the board. The grid is drawn through notifications
 void GraphicsDisplay::display(const Score &score) {
+/*
   int spacing = 20;
   int ySpacing = spacing; //the Y spacing between the texts of level, score, highscore along with the spacing between level,and the top of the screen
   int xIndent = 5; //the X indent from the left side of the screen for level, score, and highscore text
@@ -66,33 +69,41 @@ void GraphicsDisplay::display(const Score &score) {
   //double the spacing
   ySpacing += spacing;
   win.drawString(xIndent, ySpacing, "Hi Score:");
-  win.drawString(valuexIndent, ySpacing, to_string(score.getHighScore()));
+  win.drawString(valuexIndent, ySpacing, to_string(score.getHighScore()));*/
 }
 
 //draws the hint
 void GraphicsDisplay::showHint(const vector <vector <int>> &coords) {
+/*
   for(auto &n : coords) {
     int row = n[0];
     int col = n[1];
     fillCell(row, col, Xwindow::Black);
   }
+*/
 }
 
 void GraphicsDisplay::clear() {
+/*
   //wipes the entire display
   win.fillRectangle(0, 0, totalLength, totalHeight, clearColour);
+*/
 } 
 
 //returns the proper colour, or black otherwise
 int GraphicsDisplay::symbolToColour(const char symbol) {
-  auto iter = symToColour.find(symbol);
+/*  auto iter = symToColour.find(symbol);
   if(iter == symToColour.end()) return Xwindow::White;
   else return iter->second;
+*/
+
+  //silences a warning 
+  return 1;
 }
 
 //Each Cell has a white border outline and a filled coloured center
 void GraphicsDisplay::fillCell(const int row, const int col, int colour) {
-  int border = 3; //how thick the white border between cells are
+/*  int border = 3; //how thick the white border between cells are
 
   int startX = col * cellWidth + border; //the starting X pixel position for filling the cell
   int startY = row * cellHeight + border + topSpace; //the starting Y pixel position for filling the cell
@@ -100,11 +111,11 @@ void GraphicsDisplay::fillCell(const int row, const int col, int colour) {
   int fillWidth = cellWidth - (border * 2); //only fills the center of the cell with colour (leaves a border)
   int fillHeight = cellHeight - (border * 2); //only fills the center of the cell with colour (leaves a border)
 
-  win.fillRectangle(startX, startY, fillWidth, fillHeight, colour); //draws the rectangle
+  win.fillRectangle(startX, startY, fillWidth, fillHeight, colour); //draws the rectangle*/
 }
 
 //Draws the next block. Imagine a mini grid in the top right of the window in which we draw the next block
-void GraphicsDisplay::drawNextBlock(const vector <vector <char>> & layout, int colour) {
+void GraphicsDisplay::drawNextBlock(const vector <vector <char>> & layout, int colour) {/*
   int nextBlockAreaLength = totalLength / 2; //The length of the top section of the mini grid
   int nextBlockStartX = totalLength / 2 + 50; //The starting X pixel position for drawing next block
   int nextBlockAreaHeight = topSpace; //Y dimension of the top section of the grid
@@ -130,5 +141,6 @@ void GraphicsDisplay::drawNextBlock(const vector <vector <char>> & layout, int c
       }
     }
   }
+*/
 }
 

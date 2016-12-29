@@ -46,46 +46,52 @@ Quadris::Quadris(int seed, bool newSeed, bool textOnly, std::string startingSequ
   vc->updateView();
 }
 
-void Quadris::left() {
-  bc->left();
+void Quadris::left(int multi) {
+  bc->left(multi);
   vc->updateView();
 }
 
-void Quadris::right() {
-  bc->right();
+void Quadris::right(int multi) {
+  bc->right(multi);
   vc->updateView();
 }
 
-void Quadris::down() {
-  bc->down();
+void Quadris::down(int multi) {
+  bc->down(multi);
   vc->updateView();
 }
 
-void Quadris::drop() {
-  bc->drop();
+void Quadris::drop(int multi) {
+  for(int i = 0; i < multi; i++) {
+    bc->drop();
+    vc->updateView();
+  }
+}
+
+void Quadris::rotatecc(int multi) {
+  bc->rotatecc(multi);
   vc->updateView();
 }
 
-void Quadris::rotatecc() {
-  bc->rotatecc();
+void Quadris::rotatecw(int multi) {
+  bc->rotatecw(multi);
   vc->updateView();
 }
 
-void Quadris::rotatecw() {
-  bc->rotatecw();
-  vc->updateView();
+void Quadris::levelup(int multi) {
+  for(int i = 0; i < multi; i++) { 
+    level == 4 ? level = 0 : level++;
+    lc->changeLevel(level);
+    vc->setLevel(level);
+  }
 }
 
-void Quadris::levelup() {
-  level == 4 ? level = 0 : level++;
-  lc->changeLevel(level);
-  vc->setLevel(level);
-}
-
-void Quadris::leveldown() {
-  level == 0 ? level = 4 : level--;
-  lc->changeLevel(level);
-  vc->setLevel(level);
+void Quadris::leveldown(int multi) {
+  for(int i = 0; i < multi; i++) {
+    level == 0 ? level = 4 : level--;
+    lc->changeLevel(level);
+    vc->setLevel(level);
+  }
 }
 
 void Quadris::setSequence(string filename) {

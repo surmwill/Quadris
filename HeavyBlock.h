@@ -7,10 +7,10 @@
 class HeavyBlock: public Block {
  public:
   HeavyBlock(std::vector <char> blockDesign, int levelGenerated, int blockSize = 4);
-  void left() override;
-  void right() override;
-  void rotate(bool cc) override;
-  void down() override;
+  void left(int multi) override;
+  void right(int multi) override;
+  void rotate(bool cc, int multi) override;
+  void down(int multi) override;
 };
 
 #endif 

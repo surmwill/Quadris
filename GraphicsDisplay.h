@@ -2,7 +2,7 @@
 #define GRAPHICS_H 1
 
 #include "View.h"
-#include "Window.h"
+//#include "Window.h"
 #include <vector>
 #include <map>
 
@@ -25,8 +25,8 @@ class GraphicsDisplay: public View {
    int topSpace = 100; //space reserved for the top portion of the screen(displays level, score, hi score, next block)
    int totalLength; //the total length in pixels of the window
    int totalHeight; //the total height in pixels of the window
-   int clearColour = Xwindow::White; //the colour of a clear portion of the board
-   Xwindow win; //the Xwindow object that allows us to display and update graphics
+  // int clearColour = Xwindow::White; //the colour of a clear portion of the board
+  // Xwindow win; //the Xwindow object that allows us to display and update graphics
    std::map <char, int> symToColour; //maps a char symbol key to an Xwindow::Color
    int symbolToColour(const char symbol); //Returns the Xwindow colour correspoinding to the symbol, black otherwise
    void fillCell(const int row, const int col, int colour); //fills the cell at (row,col) with colour

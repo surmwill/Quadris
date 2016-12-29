@@ -6,9 +6,13 @@
 #include <string>
 #include "cmdInterpreter.h"
 
+#define DEBUG 1
+
 using namespace std;
 
 CmdInterpreter::CmdInterpreter(istream * in, int argc, char *argv[]): stream{in}, textOnly{false}, newSeed{false}, seed{0}, startingLevel{0} {
+  if(DEBUG == 1) cout << "cmdInterpreterDebug" << endl;
+
   if(argc > 1) {
     for(int i = 1; i < argc; i++) {
       string arg1{argv[i]}; //store the first argument in a string
@@ -18,17 +22,42 @@ CmdInterpreter::CmdInterpreter(istream * in, int argc, char *argv[]): stream{in}
     }
   }
   quadris = unique_ptr <Quadris> (new Quadris{seed, newSeed, textOnly, startingSequence, startingLevel});
-}
+
+  //creates of vector of all known commands to the program (maybe change to text file)
+  commands.emplace_back("left");
+  commands.emplace_back("right");
+  commands.emplace_back("down");
+  commands.emplace_back("clockwise");
+  commands.emplace_back("counterclockwise");
+  commands.emplace_back("drop");
+  commands.emplace_back("levelup");
+  commands.emplace_back("leveldown");
+  commands.emplace_back("norandom");
+  commands.emplace_back("random");
+  commands.emplace_back("sequence");
+  commands.emplace_back("restart");
+  commands.emplace_back("hint");
+  commands.emplace_back("I");
+  commands.emplace_back("J");
+  commands.emplace_back("L");
+  commands.emplace_back("O");
+  commands.emplace_back("S");
+  commands.emplace_back("Z");
+  commands.emplace_back("T");
+} 
 
 void CmdInterpreter::interpretCommand(string cmd) {
-  if (cmd == "left") quadris->left();
-  else if (cmd == "right") quadris->right();
-  else if (cmd == "down") quadris->down();
-  else if (cmd == "clockwise") quadris->rotatecw();
-  else if (cmd == "counterclockwise") quadris->rotatecc();
-  else if (cmd == "drop") quadris->drop();
-  else if (cmd == "levelup") quadris->levelup();
-  else if (cmd == "leveldown") quadris->leveldown();
+  int multi = determineMultiplicity(&cmd);
+  cmd = completeCommand(cmd);
+
+  if (cmd == "left") quadris->left(multi);
+  else if (cmd == "right") quadris->right(multi);
+  else if (cmd == "down") quadris->down(multi);
+  else if (cmd == "clockwise") quadris->rotatecw(multi);
+  else if (cmd == "counterclockwise") quadris->rotatecc(multi);
+  else if (cmd == "drop") quadris->drop(multi);
+  else if (cmd == "levelup") quadris->levelup(multi);
+  else if (cmd == "leveldown") quadris->leveldown(multi);
   else if (cmd == "norandom") {
     if(*stream >> cmd)  quadris->setSequence(cmd);
     else cerr << "couldn't read in filename" << endl;
@@ -59,6 +88,43 @@ void CmdInterpreter::startGame(){
   while (*stream >> cmd){
     interpretCommand(cmd);
   }
+}
+
+string CmdInterpreter::completeCommand(string userCommand) {
+  string finalCommand = "";
+  
+  for(auto &m: commands) {
+     if(userCommand.length() > m.length()) continue;
+     size_t found = m.find(userCommand);
+
+     if(found == 0 && (finalCommand.length() == 0 || m.length() < finalCommand.length())) finalCommand = m;
+  }
+
+  return finalCommand;
+}
+
+int CmdInterpreter::determineMultiplicity(std::string * userCommand) {
+  int multi = 1;
+  string stringMulti = "";
+
+  for(auto &n: *userCommand) {
+    if(!isdigit(n)) break;
+    stringMulti += n;
+  }
+
+  if(stringMulti.length() > 0) {
+    multi = stoi(stringMulti);
+
+    int stringCut = stringMulti.length();
+    *userCommand = (*userCommand).substr(stringCut);
+  }
+
+  if(DEBUG == 1) {
+    cout << "cut command: " << *userCommand << endl;
+    cout << "multiplicity: " << multi << endl;
+  }
+
+  return multi;
 }
 
 void CmdInterpreter::parseArgument(std::string arg1, std::string arg2) {
