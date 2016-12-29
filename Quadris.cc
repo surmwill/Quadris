@@ -19,6 +19,7 @@ class Grid;
 Quadris::Quadris(int seed, bool newSeed, bool textOnly, std::string startingSequence, int startLevel): level{startLevel}, 
   lc{new LevelController{startLevel}} { 
 
+  //Sets the starting sequence if neccessary
   if(startingSequence.length() > 0) lc->setFilename(startingSequence);
 
   //sets the seed
@@ -39,9 +40,6 @@ Quadris::Quadris(int seed, bool newSeed, bool textOnly, std::string startingSequ
 
   //constructs the hint engine
   hintEngine = unique_ptr <HintEngine> (new HintEngine{bc});
-
-  //Sets the starting sequence if neccessary
-  if(startingSequence.length() > 0) lc->setFilename(startingSequence);
  
   vc->updateView();
 }
@@ -108,5 +106,6 @@ void Quadris::hint() {
 }
 
 void Quadris::restart() {
-  vc->restart();
+  bc->restart();
+  vc->updateView();
 }

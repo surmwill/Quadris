@@ -39,6 +39,6 @@ Block* LevelThree::genBlock() {
  }
 
 Block* LevelThree::genBlock(const char type) {
-  Block *hBlock = new HeavyBlock{(getBlockLib().getFlattenedBlockLayout(type)), 3, 4};
+  Block *hBlock = new HeavyBlock{(getBlockLib().getFlattenedBlockLayout(type)), 3};
   return hBlock;
 }

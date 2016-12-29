@@ -44,9 +44,10 @@ void TextDisplay::notify(const Subject &whoNotified) {
 
 void TextDisplay::display(const Score &score) {
   int spacing = 4; //number of digits reserved for displaying the score number, high score number, and level number
-  int dashLength = 15; //number of dashes to seperate the screen
+  int dashLength = 11; //number of dashes to seperate the screen
 
   //Top of board
+  cout << "\n";
   cout << "Level:    ";
   cout << setw(spacing);
   cout << getLevel() << endl;

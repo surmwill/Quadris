@@ -89,3 +89,8 @@ void BlockController::setBlock(char type){
   currBlock = level->genBlock(type);
   attachCurrBlockToGrid();
 }
+
+void BlockController::restart() {
+  grid->reset();
+  genBlock();
+}

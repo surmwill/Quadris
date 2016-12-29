@@ -20,6 +20,7 @@ class BlockController {
    void drop();
    void genBlock();
    void setBlock(char type);
+   void restart();
 
  private:
    int blockWidth = 4; //the possible width of a block

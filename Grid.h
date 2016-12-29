@@ -10,4 +10,5 @@ class Grid{
  public:
   Grid(const std::vector <View*> & views, Observer * score, int row = 18, int col = 11);
   Cell * getCell(int row, int col);
+  void reset();
 };

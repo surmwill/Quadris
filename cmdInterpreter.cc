@@ -6,13 +6,9 @@
 #include <string>
 #include "cmdInterpreter.h"
 
-#define DEBUG 1
-
 using namespace std;
 
 CmdInterpreter::CmdInterpreter(istream * in, int argc, char *argv[]): stream{in}, textOnly{false}, newSeed{false}, seed{0}, startingLevel{0} {
-  if(DEBUG == 1) cout << "cmdInterpreterDebug" << endl;
-
   if(argc > 1) {
     for(int i = 1; i < argc; i++) {
       string arg1{argv[i]}; //store the first argument in a string
@@ -117,11 +113,6 @@ int CmdInterpreter::determineMultiplicity(std::string * userCommand) {
 
     int stringCut = stringMulti.length();
     *userCommand = (*userCommand).substr(stringCut);
-  }
-
-  if(DEBUG == 1) {
-    cout << "cut command: " << *userCommand << endl;
-    cout << "multiplicity: " << multi << endl;
   }
 
   return multi;

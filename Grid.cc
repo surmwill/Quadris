@@ -66,3 +66,10 @@ Cell * Grid::getCell(int row, int col){
   else return &grid[row][col];
 }
 
+void Grid::reset() {
+  for(unsigned int i = 0; i < grid.size() - 1; i++) {
+    for(unsigned int j = 0; j < grid[i].size(); j++) {
+      grid[i][j].unsetContent();
+    }
+  }
+}
