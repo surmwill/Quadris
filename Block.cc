@@ -2,6 +2,8 @@
 #include <vector>
 #include "Cell.h"
 #include <iostream>
+#include <cmath>
+#include "Grid.h"
 
 using namespace std;
 
@@ -20,10 +22,65 @@ bool Block::autoDrop(){
   return shouldDrop;
 }
 
-void Block::rotate(bool cc, int multi) {
-  // make a rotated block
-  vector<Cell> rotatedBlock;
+void Block::printBlockInfo() {
+  for(unsigned int i = 0; i < blockCells.size(); i++) {
+    cout << "cell: " << i << " row: " << blockCells[i]->getInfo().row << " col: " << blockCells[i]->getInfo().col << endl;
+    if(blockCells[i]->getInfo().symbol != ' ') cout << "symbol : " << blockCells[i]->getInfo().symbol << endl;
+   // cout << "set: " << blockCells[i]->getInfo().set << endl;  
+  }
+}
 
+void Block::rotate(bool cc, int multi) {
+  int blockDim = 4;
+  vector <Cell*> temp;
+  vector <vector <Cell*>> coords;
+ 
+  printBlockInfo();
+  
+  for(int i = 0; i < blockDim; i++) {
+    for(int j = 0; j < blockDim; j++) {
+      temp.emplace_back(blockCells[i * blockDim + j]);
+    }
+    coords.emplace_back(temp);
+    temp.clear();
+  }
+
+  Cell * pivotCell = coords[blockDim - 1][0];
+
+  cout << "pivotX: " << pivotCell->getInfo().row << " pivotY: " << pivotCell->getInfo().col << endl;
+  int toOriginX = pivotCell->getInfo().row;
+  int toOriginY = pivotCell->getInfo().col;
+
+  for(auto &n: coords) {
+    for(auto &cell: n) {
+      int cellRow = cell->getInfo().row;
+      int cellCol = cell->getInfo().col;
+
+      int newCellRow = cellRow;
+      newCellRow -= toOriginX;
+      newCellRow = cellCol;
+      newCellRow += toOriginX;
+      cell->setRow(newCellRow);  
+ 
+      int newCellCol = cellCol;
+      newCellCol -= toOriginY;
+      newCellCol = cellRow;
+      newCellCol += toOriginY;
+      cell->setCol(newCellCol);
+
+/*
+      Cell newCell{' ', 0, -1};
+      newCell.setContent(cell);
+      newCell.setRow(newCellRow);
+      newCell.setCol(newCellCol);
+      cell->unsetContent();
+*/
+    }
+  } 
+
+  printBlockInfo();
+
+/*
   for (int i = 0; i < blockLen; i++){
     for (int j = 0; j < blockLen; j++){
       // create new cell
@@ -53,6 +110,18 @@ void Block::rotate(bool cc, int multi) {
   // set the block cells to their rotated configuration
   for (int i = 0; i < blockLen; i++){
     blockCells[i]->setContent(&rotatedBlock[i]);
+  }
+*/
+}
+
+void Block::updateGridRotation(Grid * g) {
+  for(auto &cell: blockCells) {
+    int row = cell->getInfo().row;
+    int col = cell->getInfo().col;
+    cout << "row: " << row << " col: " << col << endl;
+
+    g->getCell(row, col)->setContent(cell);
+    cell = g->getCell(row, col);
   }
 }
 

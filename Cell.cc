@@ -29,6 +29,14 @@ void Cell::setSymbol(const char symbol) {
   notifyObservers(SubscriptionType::Display); 
 }
 
+void Cell::setRow(const int row) {
+  cellInfo.row = row;
+}
+
+void Cell::setCol(const int col) {
+  cellInfo.col = col;
+}
+
 bool Cell::filled() {return cellInfo.symbol != ' ';}
 
 const Info & Cell::getInfo() const {

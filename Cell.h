@@ -37,6 +37,9 @@ class Cell: public Subject, public Observer {
   void unsetContent();
   void setInPlace();
 
+  void setRow(const int row);
+  void setCol(const int col);
+
  private:
   // Cell Data
   Info cellInfo;

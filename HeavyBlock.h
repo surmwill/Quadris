@@ -4,6 +4,8 @@
 #include "Block.h"
 #include <vector>
 
+class Cell;
+
 class HeavyBlock: public Block {
  public:
   HeavyBlock(std::vector <char> blockDesign, int levelGenerated, int blockSize = 4);

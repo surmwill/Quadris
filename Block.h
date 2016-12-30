@@ -4,6 +4,7 @@
 #include <vector>
 
 class Cell;
+class Grid;
 
 class Block {
  public:
@@ -18,6 +19,8 @@ class Block {
   virtual Cell * getCell(int row, int col);
   virtual void setCell(int row, int col, Cell * newCell);
   int getBlockLen();
+  void printBlockInfo();
+  void updateGridRotation(Grid * g);
 
  protected:
   std::vector <Cell*> *getBlockCells();

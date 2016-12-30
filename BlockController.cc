@@ -34,10 +34,12 @@ void BlockController::down(int multi) {
 
 void BlockController::rotatecc(int multi) {
   currBlock->rotate(true, multi);
+  currBlock->updateGridRotation(grid);
 }
 
 void BlockController::rotatecw(int multi) {
   currBlock->rotate(false, multi);
+  currBlock->updateGridRotation(grid);
 }
 
 void BlockController::drop() {
