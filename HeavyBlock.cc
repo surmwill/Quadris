@@ -1,6 +1,7 @@
 #include "HeavyBlock.h"
 #include "Block.h"
 #include <vector>
+#include "Grid.h"
 
 using namespace std;
 
@@ -19,8 +20,8 @@ void HeavyBlock::right(int multi) {
   Block::down(1);
 }
 
-void HeavyBlock::rotate(bool cc, int multi) {
-  for(int i = 0; i < multi; i++) { Block::rotate(cc, 1); }
+void HeavyBlock::rotate(bool cc, int multi, Grid * g) {
+  for(int i = 0; i < multi; i++) { Block::rotate(cc, 1, g); }
   Block::down(1);
 }
 

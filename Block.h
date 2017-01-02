@@ -12,7 +12,7 @@ class Block {
   virtual ~Block();
   virtual void left(int multi);
   virtual void right(int multi);
-  virtual void rotate(bool cc, int multi);
+  virtual void rotate(bool cc, int multi, Grid * g);
   virtual void drop();
   virtual void down(int multi);
   virtual bool autoDrop();
@@ -20,7 +20,6 @@ class Block {
   virtual void setCell(int row, int col, Cell * newCell);
   int getBlockLen();
   void printBlockInfo();
-  void updateGridRotation(Grid * g);
 
  protected:
   std::vector <Cell*> *getBlockCells();

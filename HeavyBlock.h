@@ -5,13 +5,14 @@
 #include <vector>
 
 class Cell;
+class Grid;
 
 class HeavyBlock: public Block {
  public:
   HeavyBlock(std::vector <char> blockDesign, int levelGenerated, int blockSize = 4);
   void left(int multi) override;
   void right(int multi) override;
-  void rotate(bool cc, int multi) override;
+  void rotate(bool cc, int multi, Grid * g) override;
   void down(int multi) override;
 };
 

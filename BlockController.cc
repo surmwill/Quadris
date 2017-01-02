@@ -33,13 +33,11 @@ void BlockController::down(int multi) {
 }
 
 void BlockController::rotatecc(int multi) {
-  currBlock->rotate(true, multi);
-  currBlock->updateGridRotation(grid);
+  currBlock->rotate(true, multi, grid);
 }
 
 void BlockController::rotatecw(int multi) {
-  currBlock->rotate(false, multi);
-  currBlock->updateGridRotation(grid);
+  currBlock->rotate(false, multi, grid);
 }
 
 void BlockController::drop() {

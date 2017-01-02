@@ -16,6 +16,7 @@ class Cell: public Subject, public Observer {
   const Info & getInfo() const override;
 
   void setSymbol(const char symbol); //sets the cell character to symbol
+  void setNeighbours(Cell * otherCell);
 
   // Functions for block info movement
   bool droppable();

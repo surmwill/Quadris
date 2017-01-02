@@ -25,12 +25,15 @@ bool Block::autoDrop(){
 void Block::printBlockInfo() {
   for(unsigned int i = 0; i < blockCells.size(); i++) {
     cout << "cell: " << i << " row: " << blockCells[i]->getInfo().row << " col: " << blockCells[i]->getInfo().col << endl;
-    if(blockCells[i]->getInfo().symbol != ' ') cout << "symbol : " << blockCells[i]->getInfo().symbol << endl;
+   // if(blockCells[i]->getInfo().symbol != ' ') cout << "symbol : " << blockCells[i]->getInfo().symbol << endl;
    // cout << "set: " << blockCells[i]->getInfo().set << endl;  
   }
 }
 
-void Block::rotate(bool cc, int multi) {
+void Block::rotate(bool cc, int multi, Grid * g) {
+  //take copy
+  //set each cell contents of each cell to the copy while iterating
+  //then move the cell
   int blockDim = 4;
   vector <Cell*> temp;
   vector <vector <Cell*>> coords;
@@ -60,14 +63,28 @@ void Block::rotate(bool cc, int multi) {
       newCellRow -= toOriginX;
       newCellRow = cellCol;
       newCellRow += toOriginX;
-      cell->setRow(newCellRow);  
+     // cell->setRow(newCellRow);  
  
       int newCellCol = cellCol;
       newCellCol -= toOriginY;
       newCellCol = cellRow;
       newCellCol += toOriginY;
-      cell->setCol(newCellCol);
 
+      cout << "new row: " << newCellRow << " new col: " << newCellCol << endl;
+     // cell->setCol(newCellCol);
+     while(cellRow < newCellRow) {
+       cell = cell->drop();
+       cellRow++;
+     }
+    // while(cellRow > newCellRow)
+     while(cellCol < newCellCol) {
+       cell = cell->moveRight();
+       cellCol++;
+     }
+     while(cellCol > newCellCol) {
+       cell = cell->moveLeft();
+       cellCol--;
+     }
 /*
       Cell newCell{' ', 0, -1};
       newCell.setContent(cell);
@@ -79,50 +96,6 @@ void Block::rotate(bool cc, int multi) {
   } 
 
   printBlockInfo();
-
-/*
-  for (int i = 0; i < blockLen; i++){
-    for (int j = 0; j < blockLen; j++){
-      // create new cell
-      Cell newCell {' ', 0, -1}; // level set to -1, empty part of the block does not need level
-
-      // Keep track of indices
-      int currentIndex = (blockLen*i) + j;
-      int oldLocation = (((blockLen*(blockLen - 1))+i) - (blockLen*j));
-      if (cc){ oldLocation = (((blockLen*blockLen) - 1) - oldLocation); }
-
-      // make sure that the rotation is valid
-      if ((blockCells[oldLocation]->getInfo()).set){
-        // if the destination of the cell at oldLocation is blocked, cancel rotation
-        if (blockCells[currentIndex]->filled() && ((blockCells[currentIndex]->getInfo()).set)){
-          return;
-        }
-
-        // set new cell content, fill current cell
-        newCell.setContent(blockCells[oldLocation]);
-      }
-
-      // add the new cell to the rotated block
-      rotatedBlock.push_back(newCell);
-    }
-  }
-
-  // set the block cells to their rotated configuration
-  for (int i = 0; i < blockLen; i++){
-    blockCells[i]->setContent(&rotatedBlock[i]);
-  }
-*/
-}
-
-void Block::updateGridRotation(Grid * g) {
-  for(auto &cell: blockCells) {
-    int row = cell->getInfo().row;
-    int col = cell->getInfo().col;
-    cout << "row: " << row << " col: " << col << endl;
-
-    g->getCell(row, col)->setContent(cell);
-    cell = g->getCell(row, col);
-  }
 }
 
 void Block::down(int multi){

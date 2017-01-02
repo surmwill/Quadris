@@ -19,24 +19,32 @@ int Score::getHighScore() const {
 }
 
 void Score::updateCurrScore() {
+  cout << "score updated" << endl;
+  cout << "num rows cleared: " << rowsCleared.size() << endl;
   if(rowsCleared.size() < 1) return;
 
   currScore += (level + rowsCleared.size()) * (level + rowsCleared.size());
   if(currScore > highScore) highScore = currScore;
   rowsCleared.clear(); //resets the amount of rows cleared
+  cout << "curr score: " << currScore << endl;
 } 
 
 void Score::notify(const Subject &whoNotified) {
-  //check for unique rows, increase the amount of rows cleared if a unqiue row is found
-  for(unsigned int i = 0; i < rowsCleared.size(); i++) {
-    int cellRow = whoNotified.getInfo().row;
+  unsigned int i = 0;
+  int cellRow = whoNotified.getInfo().row;
 
-    if(cellRow == rowsCleared[i]) return;
-    else if(i == rowsCleared.size() - 1) rowsCleared.emplace_back(cellRow);
+  cout << "score notified" << endl;
+  //check for unique rows, increase the amount of rows cleared if a unqiue row is found
+  for(i = 0; i < rowsCleared.size(); i++) {
+    if(cellRow == rowsCleared[i]) break;
   }
-  
+
+  if(i == rowsCleared.size()) rowsCleared.emplace_back(cellRow);
+  cout << "blockSize: " << whoNotified.getInfo().blockSize;
+  //cout << "num rows cleared: " << rowsCleared.size() << endl;
   //checks if we are deleting the last Cell of a block
-  if(whoNotified.getInfo().blockSize == 1) {
+  if(whoNotified.getInfo().blockSize == 0) {
+    cout << "block size is 1" << endl;
     currScore += pow((whoNotified.getInfo().levelGenerated + 1), 2);
   }
 }
@@ -46,6 +54,7 @@ void Score::setLevel(const int level) {
 }
 
 void Score::clear() {
+  cout << "cleared" << endl;
   currScore = 0;
   rowsCleared.clear(); //cleared as to not affect the next score update
 }

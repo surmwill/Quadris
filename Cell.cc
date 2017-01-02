@@ -106,6 +106,7 @@ void Cell::annihilate(bool echoRight){
   // recursively annihilate either left or right neighbours
   Cell * targetCell = (echoRight ? rightNeighbour: leftNeighbour);
   if (targetCell != nullptr){
+    cellInfo.blockSize--;
     notifyObservers(SubscriptionType::Annihilation);
     notifyObservers(SubscriptionType::Cell);
     targetCell->annihilate(echoRight);
@@ -122,6 +123,13 @@ void Cell::stealInfo(){
     // unset info if there is nothing to steal
     unsetContent();
   }
+}
+
+void Cell::setNeighbours(Cell *otherCell) {
+  leftNeighbour = otherCell->leftNeighbour;
+  rightNeighbour = otherCell->rightNeighbour;
+  topNeighbour = otherCell->topNeighbour;
+  bottomNeighbour = otherCell->bottomNeighbour;
 }
 
 void Cell::setContent(Cell *otherCell) {

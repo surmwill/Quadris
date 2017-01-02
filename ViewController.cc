@@ -9,17 +9,17 @@
 
 using namespace std;
 
-ViewController::ViewController(const vector <View *> & viewsToAdd, const int startLevel): score{startLevel} { 
+ViewController::ViewController(const vector <View *> & viewsToAdd, Score * score): score{score} { 
   for(auto &v: viewsToAdd) {
     views.emplace_back(unique_ptr <View> (v));
   }
 }
 
 void ViewController::updateView() {
-  score.updateCurrScore();
+  score->updateCurrScore();
 
   for(auto &n : views) {
-    n->display(score);
+    n->display(*score);
   }
 }
 
@@ -30,7 +30,7 @@ void ViewController::showHint(const vector <vector <int>> & coords) {
 }
 
 void ViewController::setLevel(const int level) {
-  score.setLevel(level);
+  score->setLevel(level);
  
   for(auto &n : views) {
     n->setLevel(level);
@@ -40,7 +40,7 @@ void ViewController::setLevel(const int level) {
 }
 
 void ViewController::restart() {
-  score.clear();
+  score->clear();
 
   for(auto &n : views) {
     n->clear();

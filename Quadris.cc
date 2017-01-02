@@ -17,23 +17,25 @@ using namespace std;
 class Grid;
 
 Quadris::Quadris(int seed, bool newSeed, bool textOnly, std::string startingSequence, int startLevel): level{startLevel}, 
-  lc{new LevelController{startLevel}} { 
-
+  lc{new LevelController{startLevel}} {
   //Sets the starting sequence if neccessary
   if(startingSequence.length() > 0) lc->setFilename(startingSequence);
 
   //sets the seed
   if(!newSeed) srand(124325);
 
+  //constructs the score
+  Score * score = new Score;
+
   //construct the views and view controller
   vector <View *> views;
   views.emplace_back(new TextDisplay{startLevel, 18, 11});
   if(!textOnly) views.emplace_back(new GraphicsDisplay{startLevel});
 
-  vc = unique_ptr <ViewController> (new ViewController {views, startLevel});
+  vc = unique_ptr <ViewController> (new ViewController {views, score});
    
   //constructs the grid
-  Grid * grid = new Grid{views, new Score()};
+  Grid * grid = new Grid{views, score};
 
   //constructs the block controller
   bc = unique_ptr <BlockController> (new BlockController {lc->getLevel(), grid});
@@ -60,6 +62,7 @@ void Quadris::down(int multi) {
 }
 
 void Quadris::drop(int multi) {
+  cout << "droppped" << endl;
   for(int i = 0; i < multi; i++) {
     bc->drop();
     vc->updateView();
